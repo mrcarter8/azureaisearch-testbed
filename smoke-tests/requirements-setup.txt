@@ -1,0 +1,5 @@
+# Additional packages for setup_resources.py (resource provisioning + data seeding)
+# Install with: pip install -r requirements-setup.txt
+
+azure-cosmos>=4.7,<5
+pyodbc>=5.0,<6

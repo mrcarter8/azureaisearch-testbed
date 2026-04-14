@@ -1,0 +1,6 @@
+inn, lodge, hotel
+pool, swimming pool
+spa, wellness center, retreat
+fancy, luxury, upscale
+budget, cheap, affordable
+apartment => suite

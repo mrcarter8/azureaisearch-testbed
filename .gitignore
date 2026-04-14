@@ -1,0 +1,39 @@
+# ── Secrets ──────────────────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual environments ────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+
+# ── Pytest ──────────────────────────────────────────────────────────────────
+.pytest_cache/
+
+# ── Test runtime outputs ────────────────────────────────────────────────────
+smoke-tests/results/junit.xml
+smoke-tests/results/test_results.json
+smoke-tests/results/failure_report.json
+smoke-tests/results/failure_summary.md
+
+# ── IDE / Editor ────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── OS ──────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
