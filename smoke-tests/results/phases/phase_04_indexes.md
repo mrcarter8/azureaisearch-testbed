@@ -212,7 +212,7 @@
 | **Request** | `GET /aliases?api-version=2025-11-01-preview` |
 | **Body** | None |
 | **Expected Response** | `200` |
-| **Verified** | Status 200; `value` array has length 0 (serverless quota = 0 aliases) |
+| **Verified** | Status 200; `value` array has length 0 (configured SKU quota = 0 aliases) |
 | **Result** | PASS |
 
 ---

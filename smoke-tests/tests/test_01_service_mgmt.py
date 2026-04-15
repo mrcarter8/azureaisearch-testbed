@@ -22,7 +22,7 @@ pytestmark = [pytest.mark.service_mgmt]
 # ---------------------------------------------------------------------------
 class TestServiceProvisioning:
 
-    def test_svc_01_create_serverless_minimal(self, rest, disposable_service_name, search_location, search_sku):
+    def test_svc_01_create_service_minimal(self, rest, disposable_service_name, search_location, search_sku):
         """SVC-01: Create search service with minimal payload."""
         url = (
             f"https://management.azure.com/subscriptions/{rest.subscription_id}"
@@ -40,7 +40,7 @@ class TestServiceProvisioning:
         state = data.get("properties", {}).get("provisioningState", "")
         assert state in ("Provisioning", "Succeeded"), f"Unexpected provisioningState: {state}"
 
-    def test_svc_02_create_serverless_with_options(self, rest, search_location, search_sku):
+    def test_svc_02_create_service_with_options(self, rest, search_location, search_sku):
         """SVC-02: Create service with auth options and semantic search."""
         # Uses the primary service — this is an update/validate rather than a new create
         resp = rest.mgmt_get()

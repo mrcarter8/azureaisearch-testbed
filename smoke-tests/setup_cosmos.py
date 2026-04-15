@@ -1,11 +1,11 @@
 """
-setup_cosmos.py — Provision Cosmos DB for NoSQL (serverless) and seed hotel data.
+setup_cosmos.py — Provision Cosmos DB for NoSQL and seed hotel data.
 
 Usage:
     python setup_cosmos.py
 
 Reads AZURE_SUBSCRIPTION_ID and AZURE_RESOURCE_GROUP from .env.
-Creates a Cosmos DB account with serverless capacity mode, a database, and a container,
+Creates a Cosmos DB account, a database, and a container,
 then inserts 10 hotel documents matching the search index schema.
 """
 
@@ -71,10 +71,10 @@ def _poll_provisioning(token: str, timeout: int = 600) -> None:
     raise TimeoutError(f"Cosmos DB account did not provision within {timeout}s")
 
 
-# ── Step 1: Create Cosmos DB account (serverless NoSQL) ─────────────────────
+# ── Step 1: Create Cosmos DB account (NoSQL) ─────────────────────────────────
 
 def create_account(token: str) -> dict:
-    """Create or update the Cosmos DB account with serverless capacity."""
+    """Create or update the Cosmos DB account."""
     print(f"Creating Cosmos DB account '{ACCOUNT_NAME}' in {LOCATION}...")
     url = f"{_account_url()}?api-version={COSMOS_API_VERSION}"
     body = {

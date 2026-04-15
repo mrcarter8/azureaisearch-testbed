@@ -117,7 +117,7 @@
 | **Operation** | Trigger 404 and 400 errors, validate response structure |
 | **Request** | `GET /indexes/nonexistent-index-smoke-test` and `POST .../docs/search` with invalid filter |
 | **Expected Response** | `error.message` present and descriptive |
-| **Verified** | 404 returns descriptive message. Note: serverless PPE returns empty string for `error.code` — message is still descriptive |
+| **Verified** | 404 returns descriptive message. Note: PPE returns empty string for `error.code` — message is still descriptive |
 | **Result** | PASS |
 
 ---
@@ -129,7 +129,7 @@
 | **Operation** | Check for request tracking header on multiple endpoints |
 | **Request** | `GET /servicestats`, `GET /indexes` |
 | **Expected Response** | `request-id` or `x-ms-request-id` header present |
-| **Verified** | All responses include `request-id` header (serverless PPE uses `request-id` rather than `x-ms-request-id`) |
+| **Verified** | All responses include `request-id` header (PPE uses `request-id` rather than `x-ms-request-id`) |
 | **Result** | PASS |
 
 ---
@@ -151,5 +151,5 @@
 - **Concurrent operations stable**: 5 parallel index creates completed without 5xx errors (SLS-05).
 - **Rapid sequential ops work**: Create → upload → search → delete completes within seconds (SLS-08). Search may not immediately find all docs due to eventual consistency, but returns 200.
 - **Older API versions accepted**: Versions back to `2023-11-01` return 200 or clean errors, not 500s (SLS-09).
-- **Error response quality**: Messages are descriptive but `error.code` is often an empty string on serverless PPE. Not a functional issue but differs from standard SKU behavior.
-- **Request tracking header**: Serverless PPE uses `request-id` header instead of the standard `x-ms-request-id`. Tests check both.
+- **Error response quality**: Messages are descriptive but `error.code` is often an empty string on PPE. Not a functional issue but differs from standard SKU behavior.
+- **Request tracking header**: PPE uses `request-id` header instead of the standard `x-ms-request-id`. Tests check both.

@@ -19,7 +19,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-FUNCTION_APP = os.environ.get("CUSTOM_SKILL_FUNCTION_APP", "mcarter-serverless-func")
+FUNCTION_APP = os.environ.get("CUSTOM_SKILL_FUNCTION_APP", "smoke-func")
 RESOURCE_GROUP = os.environ.get("CUSTOM_SKILL_RESOURCE_GROUP", "SSS3PT_mcarter_azs")
 SKILL_DIR = os.path.join(os.path.dirname(__file__), "custom_skill")
 

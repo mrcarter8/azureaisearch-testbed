@@ -52,8 +52,8 @@ PHASE_MAP: dict[str, tuple[int, str]] = {
 
 TEST_METADATA: dict[str, tuple[str, str]] = {
     # ── Phase 1: Control Plane ───────────────────────────────────────────
-    "test_svc_01_create_serverless_minimal":      ("PUT",               "Create service (minimal)"),
-    "test_svc_02_create_serverless_with_options":  ("GET",              "Read service (validate SKU)"),
+    "test_svc_01_create_service_minimal":          ("PUT",               "Create service (minimal)"),
+    "test_svc_02_create_service_with_options":       ("GET",              "Read service (validate SKU)"),
     "test_svc_03_get_service":                     ("GET",              "Read service"),
     "test_svc_04_list_services_in_rg":             ("GET",              "List services in resource group"),
     "test_svc_05_list_services_in_subscription":   ("GET",              "List services in subscription (paginated)"),
@@ -75,7 +75,7 @@ TEST_METADATA: dict[str, tuple[str, str]] = {
     "test_neg_04_invalid_location":                ("PUT",              "Create service in invalid region (rejected)"),
     "test_neg_05_duplicate_service_name":          ("PUT",              "Create service with existing name (idempotent)"),
     "test_neg_06_invalid_auth_options":            ("PATCH",            "Update with invalid authOptions"),
-    "test_neg_07_serverless_quotas_present":       ("GET",              "Read service (check quotas)"),
+    "test_neg_07_quotas_present":                   ("GET",              "Read service (check quotas)"),
     "test_neg_08_delete_disposable_service":       ("PUT GET DELETE GET", "Create + wait + delete + verify service"),
     "test_neg_09_ip_firewall_rules":               ("PATCH",            "Update IP firewall rules (discover + restore)"),
     "test_neg_10_private_endpoint":                ("GET",              "List shared private link resources"),
@@ -201,7 +201,7 @@ TEST_METADATA: dict[str, tuple[str, str]] = {
     "test_msc_07_if_none_match":                   ("PUT",              "PUT with If-None-Match:* (rejected 412)"),
     "test_msc_08_invalid_json":                    ("POST",             "Malformed JSON body (rejected 400)"),
     "test_msc_09_unknown_field_in_select":         ("POST",             "Select nonexistent field (rejected)"),
-    "test_msc_10_serverless_stats_limits":         ("GET",              "Service stats limits check"),
+    "test_msc_10_stats_limits":                     ("GET",              "Service stats limits check"),
     # ── Phase 9: Indexers ────────────────────────────────────────────────
     "test_ixr_01_create_datasource_blob":          ("PUT",              "Create Blob data source"),
     "test_ixr_02_create_datasource_cosmos":        ("PUT",              "Create Cosmos DB data source"),

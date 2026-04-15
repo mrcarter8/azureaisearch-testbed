@@ -14,8 +14,8 @@ What gets created:
     1. Resource groups (search + supporting)
     2. Azure AI Search service (SKU-parameterized, system-assigned MSI)
     3. Storage account + blob container + 10 hotel JSON files
-    4. Cosmos DB account (serverless NoSQL) + database + container + 10 hotels
-    5. Azure SQL server (+ serverless DB + Hotels table w/ change tracking + 10 hotels)
+    4. Cosmos DB account (NoSQL) + database + container + 10 hotels
+    5. Azure SQL server (+ database + Hotels table w/ change tracking + 10 hotels)
     6. Azure Function app + custom skill deployment
     7. Key Vault RBAC grant for CMK
     8. Azure OpenAI account + embeddings + chat deployments
@@ -64,13 +64,13 @@ def _d(key: str, fallback: str = "") -> str:
 # ═══════════════════════════════════════════════════════════════════════════════
 
 SUBSCRIPTION     = _d("AZURE_SUBSCRIPTION_ID", "c4a547de-4411-4447-964d-1edbc72cf116")
-SEARCH_RG        = _d("AZURE_RESOURCE_GROUP", "Serverless-bugbash")
+SEARCH_RG        = _d("AZURE_RESOURCE_GROUP", "search-testbed")
 SUPPORT_RG       = _d("SUPPORT_RESOURCE_GROUP", "SSS3PT_mcarter_azs")
 SEARCH_LOCATION  = _d("SEARCH_LOCATION", "centraluseuap")
 SUPPORT_LOCATION = _d("SUPPORT_LOCATION", "eastus2")
-SEARCH_SKU       = _d("SEARCH_SKU", "serverless")
+SEARCH_SKU       = _d("SEARCH_SKU", "basic")
 
-SEARCH_NAME      = _d("SEARCH_SERVICE_NAME", "mcarter-serverless")
+SEARCH_NAME      = _d("SEARCH_SERVICE_NAME", "smoke-search")
 SEARCH_API_VER   = "2025-11-01-preview"
 MGMT_API_VER     = "2026-03-01-Preview"
 PPE_SUFFIX       = "search-ppe.windows-int.net"
@@ -87,7 +87,7 @@ SQL_DATABASE     = _d("SQL_DATABASE_NAME", "hotelsdb")
 SQL_ADMIN        = _d("SQL_ADMIN_USER", "smokeadmin")
 SQL_TABLE        = _d("AZURE_SQL_TABLE", "Hotels")
 
-FUNCTION_APP     = _d("CUSTOM_SKILL_FUNCTION_APP", "mcarter-serverless-func")
+FUNCTION_APP     = _d("CUSTOM_SKILL_FUNCTION_APP", "smoke-func")
 SKILL_DIR        = SCRIPT_DIR / "custom_skill"
 
 CMK_VAULT_URI    = _d("CMK_KEY_VAULT_URI", "https://cmkprereqs-kv.vault.azure.net/")
@@ -378,12 +378,12 @@ def setup_cosmos() -> str:
     """Returns Cosmos connection string."""
     print(f"\n[4/9] Cosmos DB ({COSMOS_ACCOUNT})...")
 
-    # Create account (serverless NoSQL) — this is the slowest step (~5 min)
+    # Create account (NoSQL) — this is the slowest step (~5 min)
     r = _az("cosmosdb", "show", "-g", SUPPORT_RG, "-n", COSMOS_ACCOUNT)
     if r.returncode == 0:
         print(f"  Account exists")
     else:
-        print(f"  Creating serverless NoSQL account in {SUPPORT_LOCATION}... (5-10 min)")
+        print(f"  Creating Cosmos NoSQL account in {SUPPORT_LOCATION}... (5-10 min)")
         _az("cosmosdb", "create",
             "-g", SUPPORT_RG, "-n", COSMOS_ACCOUNT, "-l", SUPPORT_LOCATION,
             "--capabilities", "EnableServerless",
@@ -449,12 +449,12 @@ def setup_sql() -> tuple[str, str]:
             "--admin-password", password, check=True)
         print(f"  Server created")
 
-    # Create database (serverless Gen5, 1 vCore)
+    # Create database (General Purpose Gen5, 1 vCore, auto-pause)
     r = _az("sql", "db", "show", "-g", SUPPORT_RG, "-s", SQL_SERVER, "-n", SQL_DATABASE)
     if r.returncode == 0:
         print(f"  Database '{SQL_DATABASE}' exists")
     else:
-        print(f"  Creating database '{SQL_DATABASE}' (serverless Gen5)...")
+        print(f"  Creating database '{SQL_DATABASE}' (Gen5, auto-pause)...")
         _az("sql", "db", "create",
             "-g", SUPPORT_RG, "-s", SQL_SERVER, "-n", SQL_DATABASE,
             "--compute-model", "Serverless",

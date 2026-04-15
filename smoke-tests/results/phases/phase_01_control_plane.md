@@ -5,21 +5,21 @@
 
 ---
 
-## SVC-01: Create serverless service (minimal)
+## SVC-01: Create search service (minimal)
 
 | | |
 |---|---|
 | **Operation** | Create |
 | **Object** | Search Service |
 | **Request** | `PUT https://management.azure.com/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Search/searchServices/{disposable-name}?api-version=2026-03-01-Preview` |
-| **Body** | `{"location": "centraluseuap", "sku": {"name": "serverless"}}` |
+| **Body** | `{"location": "centraluseuap", "sku": {"name": "{sku}"}}` |
 | **Expected Response** | `200` or `201` |
 | **Verified** | Status code is 200 or 201 |
 | **Result** | PASS |
 
 ---
 
-## SVC-02: Read service (validate serverless SKU)
+## SVC-02: Read service (validate SKU)
 
 | | |
 |---|---|
@@ -28,7 +28,7 @@
 | **Request** | `GET https://management.azure.com/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Search/searchServices/{service}?api-version=2026-03-01-Preview` |
 | **Body** | None |
 | **Expected Response** | `200` |
-| **Verified** | Status code 200; `sku.name` == `"serverless"` |
+| **Verified** | Status code 200; `sku.name` matches configured SKU |
 | **Result** | PASS |
 
 ---
@@ -42,7 +42,7 @@
 | **Request** | `GET https://management.azure.com/.../searchServices/{service}?api-version=2026-03-01-Preview` |
 | **Body** | None |
 | **Expected Response** | `200` |
-| **Verified** | Status 200; `sku.name` == `"serverless"`; `properties.status` == `"running"` |
+| **Verified** | Status 200; `sku.name` matches configured SKU; `properties.status` == `"running"` |
 | **Result** | PASS |
 
 ---

@@ -1,6 +1,6 @@
 # Azure AI Search — Test Suite
 
-Automated smoke tests for Azure AI Search covering control plane, data plane, indexers, skillsets, vectorization, agentic retrieval, and SKU-specific behavior. Runs against **any SKU** — serverless, basic, standard, standard2, standard3, free.
+Automated smoke tests for Azure AI Search covering control plane, data plane, indexers, skillsets, vectorization, agentic retrieval, and SKU-specific behavior. Runs against **any SKU** — basic, standard, standard2, standard3, free.
 
 ## Test Coverage
 
@@ -69,21 +69,27 @@ If a resource already exists, setup reuses it. External resources are never torn
 
 ## Setup
 
-### 1. Clone and create virtual environment
+### 1. Clone and install dependencies
 
-```bash
+```powershell
+# Clone the repo
 git clone https://github.com/mrcarter8/azureaisearch-testbed.git
-cd azureaisearch-testbed/smoke-tests
-python -m venv .venv
+cd azureaisearch-testbed\smoke-tests
 
-# Windows
+# Create and activate a virtual environment
+python -m venv .venv
 .venv\Scripts\Activate.ps1
 
-# macOS/Linux
-source .venv/bin/activate
-
+# Install test dependencies
 pip install -r requirements.txt
+
+# Install setup/provisioning dependencies (only needed for setup_resources.py)
+pip install -r requirements-setup.txt
 ```
+
+On macOS/Linux, activate with `source .venv/bin/activate` instead.
+
+If you see `python : The term 'python' is not recognized`, install Python from https://www.python.org/downloads/ (3.12+) and ensure it's on your PATH.
 
 ### 2. Configure environment
 
@@ -97,7 +103,7 @@ cp .env.template .env
 
 | Variable | Description |
 |----------|-------------|
-| `SEARCH_SKU` | SKU under test: `serverless`, `basic`, `standard`, `standard2`, `standard3`, `free` |
+| `SEARCH_SKU` | SKU under test: `basic`, `standard`, `standard2`, `standard3`, `free` |
 | `SEARCH_ENDPOINT` | Full URL, e.g. `https://myservice.search.windows.net` |
 | `SEARCH_ADMIN_KEY` | Admin API key |
 | `AZURE_SUBSCRIPTION_ID` | Subscription containing the search service |

@@ -131,7 +131,7 @@
 
 ---
 
-## MSC-10: Serverless stats limits check
+## MSC-10: Stats limits check
 
 | | |
 |---|---|

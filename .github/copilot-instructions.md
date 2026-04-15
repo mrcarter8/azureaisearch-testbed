@@ -10,7 +10,7 @@ For all new bugs logged in this project, set the following fields:
 - Area: Azure Search\vTeam\Unlimited
 - Iteration: Before filing a bug, query ADO for the iterations under `Azure Search\Krypton` and select the iteration whose date range contains the current date. If no iteration covers today, pick the most recent one.
 - Title: [Add specific title here]
-- Tags: (set based on the SEARCH_SKU environment variable, e.g. #Serverless, #Basic, #Standard)
+- Tags: (set based on the SEARCH_SKU environment variable, e.g. #Basic, #Standard, #Standard2)
 
 When searching for duplicates, filter to project `Azure Search`.
 

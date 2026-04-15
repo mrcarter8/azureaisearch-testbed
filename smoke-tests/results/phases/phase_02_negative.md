@@ -1,4 +1,4 @@
-# Phase 2 — Serverless Feature Gates & Negative Tests
+# Phase 2 — Feature Gates & Negative Tests
 
 **API:** Management plane `2026-03-01-Preview`  
 **Result:** 15/15 passed
@@ -14,7 +14,7 @@
 | **Request** | `PATCH .../searchServices/{service}?api-version=2026-03-01-Preview` |
 | **Body** | `{"properties": {"replicaCount": 2}}` |
 | **Expected Response** | `400+` (rejected) or `200` with value clamped to 1 |
-| **Verified** | If 200: `properties.replicaCount` == 1 (value not accepted). If 400+: status >= 400 (rejected). Serverless currently returns 500 |
+| **Verified** | If 200: `properties.replicaCount` == 1 (value not accepted). If 400+: status >= 400 (rejected). Currently returns 500 |
 | **Result** | PASS — [Bug 4907459](https://msdata.visualstudio.com/Azure%20Search/_workitems/edit/4907459) (returns 500 instead of 400) |
 
 ---
@@ -28,7 +28,7 @@
 | **Request** | `PATCH .../searchServices/{service}?api-version=2026-03-01-Preview` |
 | **Body** | `{"properties": {"partitionCount": 2}}` |
 | **Expected Response** | `400+` (rejected) or `200` with value clamped to 1 |
-| **Verified** | If 200: `properties.partitionCount` == 1. If 400+: status >= 400. Serverless currently returns 500 |
+| **Verified** | If 200: `properties.partitionCount` == 1. If 400+: status >= 400. Currently returns 500 |
 | **Result** | PASS — [Bug 4907459](https://msdata.visualstudio.com/Azure%20Search/_workitems/edit/4907459) |
 
 ---
@@ -54,7 +54,7 @@
 | **Operation** | Create (expected rejection) |
 | **Object** | Search Service |
 | **Request** | `PUT .../searchServices/smoke-bad-region?api-version=2026-03-01-Preview` |
-| **Body** | `{"location": "antarcticaland", "sku": {"name": "serverless"}}` |
+| **Body** | `{"location": "antarcticaland", "sku": {"name": "{sku}"}}` |
 | **Expected Response** | `400+` |
 | **Verified** | Status >= 400 |
 | **Result** | PASS |
@@ -68,7 +68,7 @@
 | **Operation** | Create (idempotent PUT) |
 | **Object** | Search Service (existing) |
 | **Request** | `PUT .../searchServices/{service}?api-version=2026-03-01-Preview` |
-| **Body** | `{"location": "centraluseuap", "sku": {"name": "serverless"}}` |
+| **Body** | `{"location": "centraluseuap", "sku": {"name": "{sku}"}}` |
 | **Expected Response** | `200` (idempotent) or `409` (conflict) |
 | **Verified** | Status is 200 or 409 |
 | **Result** | PASS |
@@ -109,7 +109,7 @@
 |---|---|
 | **Operation** | Create → Read (poll) → Delete → Read (verify) |
 | **Object** | Search Service (disposable) |
-| **Requests** | 1. `PUT .../searchServices/{disposable}` with serverless SKU → 200/201 |
+| **Requests** | 1. `PUT .../searchServices/{disposable}` with configured SKU → 200/201 |
 | | 2. Poll `GET .../searchServices/{disposable}` until `provisioningState` == `"succeeded"` or `"failed"` (up to 120s) |
 | | 3. `DELETE .../searchServices/{disposable}` → 200/202/204 |
 | | 4. `GET .../searchServices/{disposable}` → 200 (still deleting) or 404 (gone) |
@@ -182,7 +182,7 @@
 | **Request** | `PATCH .../searchServices/{service}?api-version=2026-03-01-Preview` |
 | **Body** | `{"identity": {"type": "SystemAssigned"}}` |
 | **Expected Response** | `200` (supported) or `400` (rejected) |
-| **Verified** | If 200: `identity.principalId` is non-empty. If 400: serverless doesn't support MSI |
+| **Verified** | If 200: `identity.principalId` is non-empty. If 400: SKU doesn't support MSI |
 | **Result** | PASS |
 
 ---
@@ -197,7 +197,7 @@
 | | 2. `PUT /indexes/smoke-cmk-idx-temp` with `encryptionKey` (keyVaultKeyName, keyVaultUri) |
 | | 3. If 200/201: `GET /indexes/smoke-cmk-idx-temp` verify `encryptionKey` present |
 | | 4. `DELETE /indexes/smoke-cmk-idx-temp` |
-| **Verified** | Discovery — records whether CMK is supported on serverless indexes. If created, verifies `encryptionKey.keyVaultKeyName` matches |
+| **Verified** | Discovery — records whether CMK is supported on this SKU. If created, verifies `encryptionKey.keyVaultKeyName` matches |
 | **Result** | PASS |
 
 ---

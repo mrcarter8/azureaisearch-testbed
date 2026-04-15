@@ -90,7 +90,7 @@ class TestInvalidCreation:
 
 class TestServiceLimits:
 
-    def test_neg_07_serverless_quotas_present(self, rest):
+    def test_neg_07_quotas_present(self, rest):
         """NEG-07: Service properties include SKU-appropriate limits."""
         resp = rest.mgmt_get()
         assert_status(resp, 200)

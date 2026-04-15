@@ -5,7 +5,7 @@
 
 ---
 
-## LIM-01: indexesCount quota >= serverless minimum
+## LIM-01: indexesCount quota >= expected minimum
 
 | | |
 |---|---|
@@ -17,7 +17,7 @@
 
 ---
 
-## LIM-02: indexersCount quota >= serverless minimum
+## LIM-02: indexersCount quota >= expected minimum
 
 | | |
 |---|---|
@@ -29,7 +29,7 @@
 
 ---
 
-## LIM-03: dataSourcesCount quota >= serverless minimum
+## LIM-03: dataSourcesCount quota >= expected minimum
 
 | | |
 |---|---|
@@ -41,7 +41,7 @@
 
 ---
 
-## LIM-04: skillsetCount quota >= serverless minimum
+## LIM-04: skillsetCount quota >= expected minimum
 
 | | |
 |---|---|
@@ -72,7 +72,7 @@
 | **Operation** | Read service stats |
 | **Request** | `GET /servicestats?api-version=2025-11-01-preview` |
 | **Expected Response** | `200`; `counters.aliasesCount.quota == 0` |
-| **Verified** | Status 200; aliases not supported on serverless SKU |
+| **Verified** | Status 200; aliases not supported on this SKU |
 | **Result** | PASS |
 
 ---
@@ -177,7 +177,7 @@
 
 ## Key Findings
 
-### Actual Serverless Quotas (from servicestats)
+### Actual Quotas (from servicestats)
 
 | Counter | Quota | Spec Target | Match? |
 |---------|-------|-------------|--------|
@@ -188,7 +188,7 @@
 | synonymMaps | 20 | 20 | Exact match |
 | aliasesCount | 0 | 0 | Exact match (not supported) |
 
-### Actual Serverless Limits (from servicestats.limits)
+### Actual Limits (from servicestats.limits)
 
 | Limit | Value | Spec Target | Notes |
 |-------|-------|-------------|-------|
@@ -199,4 +199,4 @@
 
 ### Throttling
 
-No 429 responses observed with 30 concurrent requests against either `/indexes` or `/servicestats`. The static rate limits documented (3/sec for List Indexes, 4/sec for Service Stats) may not be enforced in PPE, or the serverless backend may have higher thresholds.
+No 429 responses observed with 30 concurrent requests against either `/indexes` or `/servicestats`. The static rate limits documented (3/sec for List Indexes, 4/sec for Service Stats) may not be enforced in PPE, or the backend may have higher thresholds.

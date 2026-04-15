@@ -368,7 +368,7 @@ _TECH_TOPICS = {
     ],
     "Cloud": [
         "Kubernetes orchestration manages containerized microservices with automated scaling and self-healing capabilities",
-        "Serverless computing eliminates infrastructure management allowing developers to focus on business logic",
+        "Event-driven computing eliminates infrastructure management allowing developers to focus on business logic",
         "Multi-cloud strategies distribute workloads across providers for resilience and cost optimization",
         "Infrastructure as code tools like Terraform and Bicep enable repeatable cloud environment deployments",
         "Cloud-native design patterns include circuit breakers service mesh and event-driven architectures",
@@ -460,7 +460,7 @@ _TECH_TOPICS = {
         "Responsive mobile design adapts layouts typography and touch targets for varying screen sizes and orientations",
         "Mobile security includes certificate pinning biometric authentication secure storage and transport encryption",
         "Augmented reality SDKs overlay digital content on camera feeds for immersive mobile entertainment and commerce",
-        "Mobile backend services provide authentication data storage file hosting and serverless functions for mobile apps",
+        "Mobile backend services provide authentication data storage file hosting and cloud functions for mobile apps",
     ],
     "IoT": [
         "IoT device management platforms handle provisioning firmware updates monitoring and lifecycle for connected devices",
@@ -496,7 +496,7 @@ _AUTHORS = [
 
 _TAG_POOL = {
     "AI": ["machine-learning", "deep-learning", "neural-networks", "nlp", "computer-vision"],
-    "Cloud": ["kubernetes", "serverless", "containers", "microservices", "iaas"],
+    "Cloud": ["kubernetes", "event-driven", "containers", "microservices", "iaas"],
     "Security": ["encryption", "zero-trust", "identity", "compliance", "threat-detection"],
     "DevOps": ["ci-cd", "gitops", "monitoring", "automation", "sre"],
     "Database": ["sql", "nosql", "replication", "indexing", "caching"],

@@ -74,7 +74,7 @@ if (-not $env:SEARCH_SKU) {
     }
 }
 if (-not $env:SEARCH_SKU) {
-    Write-Error "SEARCH_SKU not set. Add it to .env (e.g. SEARCH_SKU=serverless)."
+    Write-Error "SEARCH_SKU not set. Add it to .env (e.g. SEARCH_SKU=basic)."
     Pop-Location; exit 1
 }
 $sku = $env:SEARCH_SKU
