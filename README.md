@@ -19,9 +19,9 @@ Automated smoke tests for Azure AI Search covering control plane, data plane, in
 | 11 | Vectorization | VEC-01–19 | Algorithms, profiles, quantization, E2E integrated vectorization |
 | 12 | Agentic Retrieval | AGT-01–22 | Knowledge sources/bases, retrieve modes, MCP |
 | 13 | Service Behavior | SLS-01–12 | Latency, concurrency, throttling, API compat |
-| 14 | Service Limits | LIM-01–14 | Quotas, stats, usage tracking |
+| 14 | Service Limits | LIM-01–22 | Quotas, counters, limits, indexer runtime, stats completeness |
 | 15 | Advanced Filters | FLT-01–20 | Lambda, geo, complex types, search.in, negation |
-| 16 | Scoring Profiles | SCR-01–14 | Magnitude, freshness, tag, text weights |
+| 16 | Scoring Profiles | SCR-01–15 | Magnitude, freshness, tag, text weights, write-to-read latency |
 | 17 | Semantic Search | SEM-01–12 | Reranking, answers, captions, speller |
 | 18 | Vector Queries | VQR-01–16 | Relevance, modes, hybrid, scoring, facets |
 | 19 | Advanced Queries | ADV-01–12 | Suggest, autocomplete, fuzzy, proximity, regex |
@@ -176,12 +176,16 @@ Use GitHub Copilot as a test orchestrator, bug investigator, and telemetry explo
 | Workflow | Example prompt |
 |----------|----------------|
 | **Run tests** | "Run the smoke tests" or "Run just Phase 7 queries" |
-| **Analyze failures** | "Analyze the test failures and update the dashboard" |
-| **Investigate bugs** | "Investigate the SVC-05 failure using Kusto telemetry" |
+| **Analyze failures** | "Analyze the test failures and produce the failure summary" |
+| **Investigate a failure** | "Investigate the SVC-05 failure using Kusto telemetry" |
+| **Trace with ActivityId** | "Look up ActivityId abc-123 in Kusto to find the root cause" |
 | **File bugs** | "File a bug for the SVC-14 CORS failure" |
-| **Check duplicates** | "Is there already a bug for the checkNameAvailability issue?" |
+| **Check for duplicates** | "Search ADO for existing bugs about CORS not persisting on serverless" |
+| **Triage all failures** | "Go through every failure, check known bugs, and create drafts for new ones" |
 | **Update dashboard** | "Update test_log.md with the latest results" |
 | **Trace code paths** | "Find the code path for the subscription list operation" |
+| **Audit test coverage** | "Check which serverless limits are covered and add missing tests" |
+| **Fix flaky tests** | "SCR-13 is flaky due to indexing latency — fix it" |
 
 Copilot is configured via:
 - [`.github/copilot-instructions.md`](.github/copilot-instructions.md) — project context, ADO defaults, bug field templates
@@ -260,8 +264,8 @@ smoke-tests/
     test_10_skillsets.py        # Phase 10: Skillsets
     test_11_vectorization.py    # Phase 11: Vectorization
     test_12_agentic.py          # Phase 12: Agentic retrieval
-    test_13_service_behavior.py # Phase 13: Service behavior
-    test_14_service_limits.py   # Phase 14: Service limits
+    test_13_serverless_behavior.py # Phase 13: Service behavior
+    test_14_serverless_limits.py   # Phase 14: Service limits (LIM-01–22)
     test_15_filters.py          # Phase 15: Advanced filters
     test_16_scoring.py          # Phase 16: Scoring profiles
     test_17_semantic.py         # Phase 17: Semantic search
@@ -276,6 +280,7 @@ smoke-tests/
       failure_report.json       #   Structured failure data
       failure_summary.md        #   Failure summary
       test_results.json         #   Full test results
+  scratch/                        # Ephemeral investigation files (gitignored)
   sample_data/
     synonyms.txt                # Synonym rules for SYN tests
   custom_skill/
