@@ -14,8 +14,8 @@ What gets created:
     1. Resource groups (search + supporting)
     2. Azure AI Search service (SKU-parameterized, system-assigned MSI)
     3. Storage account + blob container + 10 hotel JSON files
-    4. Cosmos DB account (NoSQL) + database + container + 10 hotels
-    5. Azure SQL server (+ database + Hotels table w/ change tracking + 10 hotels)
+    4. Cosmos DB account (serverless NoSQL) + database + container + 10 hotels
+    5. Azure SQL server (+ serverless DB + Hotels table w/ change tracking + 10 hotels)
     6. Azure Function app + custom skill deployment
     7. Key Vault RBAC grant for CMK
     8. Azure OpenAI account + embeddings + chat deployments
@@ -378,12 +378,12 @@ def setup_cosmos() -> str:
     """Returns Cosmos connection string."""
     print(f"\n[4/9] Cosmos DB ({COSMOS_ACCOUNT})...")
 
-    # Create account (NoSQL) — this is the slowest step (~5 min)
+    # Create account (serverless NoSQL) — this is the slowest step (~5 min)
     r = _az("cosmosdb", "show", "-g", SUPPORT_RG, "-n", COSMOS_ACCOUNT)
     if r.returncode == 0:
         print(f"  Account exists")
     else:
-        print(f"  Creating Cosmos NoSQL account in {SUPPORT_LOCATION}... (5-10 min)")
+        print(f"  Creating serverless NoSQL account in {SUPPORT_LOCATION}... (5-10 min)")
         _az("cosmosdb", "create",
             "-g", SUPPORT_RG, "-n", COSMOS_ACCOUNT, "-l", SUPPORT_LOCATION,
             "--capabilities", "EnableServerless",
@@ -449,12 +449,12 @@ def setup_sql() -> tuple[str, str]:
             "--admin-password", password, check=True)
         print(f"  Server created")
 
-    # Create database (General Purpose Gen5, 1 vCore, auto-pause)
+    # Create database (serverless Gen5, 1 vCore)
     r = _az("sql", "db", "show", "-g", SUPPORT_RG, "-s", SQL_SERVER, "-n", SQL_DATABASE)
     if r.returncode == 0:
         print(f"  Database '{SQL_DATABASE}' exists")
     else:
-        print(f"  Creating database '{SQL_DATABASE}' (Gen5, auto-pause)...")
+        print(f"  Creating database '{SQL_DATABASE}' (serverless Gen5)...")
         _az("sql", "db", "create",
             "-g", SUPPORT_RG, "-s", SQL_SERVER, "-n", SQL_DATABASE,
             "--compute-model", "Serverless",
