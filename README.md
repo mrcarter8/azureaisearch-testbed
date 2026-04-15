@@ -55,17 +55,21 @@ Phase-level notes are shared across SKUs in `results/phases/`.
 
 ### Everything else is provisioned automatically
 
-The `setup_resources.py` script provisions ALL dependencies from a single subscription:
+The `setup_resources.py` script provisions ALL dependencies from a single subscription. If a resource already exists, setup reuses it.
 
-- **Azure AI Search service** — with the SKU specified by `SEARCH_SKU`
-- **Azure OpenAI resource** — with `text-embedding-3-small` and `gpt-4.1-mini` deployments
-- **Azure Blob Storage** — container with hotel sample data
-- **Azure Cosmos DB** — NoSQL database with hotel sample data
-- **Azure SQL Database** — table with hotel sample data
-- **Azure Function App** — custom skill for skillset tests
-- **Key Vault RBAC** — for CMK encryption tests
+| # | Azure Service | SKU / Tier | What's Created | Docs |
+|---|---------------|------------|----------------|------|
+| 1 | **Azure AI Search** | Configurable via `SEARCH_SKU` (default: `basic`) | Search service with system-assigned managed identity, AAD+API key auth, free semantic search | [Azure AI Search](https://learn.microsoft.com/azure/search/search-what-is-azure-search) |
+| 2 | **Azure OpenAI** | S0 (Standard) | Cognitive Services account + `text-embedding-3-small` (120 TPM) and `gpt-4.1-mini` (80 TPM) deployments | [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview) |
+| 3 | **Azure Blob Storage** | Standard_LRS | Storage account + `hotels` container + 10 hotel JSON blobs | [Azure Blob Storage](https://learn.microsoft.com/azure/storage/blobs/storage-blobs-overview) |
+| 4 | **Azure Cosmos DB** | Serverless (NoSQL) | Cosmos DB account (serverless capacity) + `hotels-db` database + `hotels` container + 10 hotel documents | [Azure Cosmos DB for NoSQL](https://learn.microsoft.com/azure/cosmos-db/nosql/) |
+| 5 | **Azure SQL Database** | Serverless General Purpose (Gen5, 1 vCore) | SQL server + `hotelsdb` database with auto-pause at 60 min, change tracking enabled + `Hotels` table + 10 rows | [Azure SQL Database](https://learn.microsoft.com/azure/azure-sql/database/serverless-tier-overview) |
+| 6 | **Azure Functions** | Consumption (Linux, Python 3.11) | Function app running a custom skill (`analyze`) for skillset tests | [Azure Functions](https://learn.microsoft.com/azure/azure-functions/functions-overview) |
+| 7 | **Azure Key Vault** | _(existing vault)_ | RBAC role assignment granting the search service's MSI `Key Vault Crypto Officer` — used for CMK encryption tests | [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview) |
 
-If a resource already exists, setup reuses it. External resources are never torn down.
+Resources are split across two resource groups:
+- **Search RG** (`AZURE_RESOURCE_GROUP`) — contains only the Azure AI Search service
+- **Support RG** (`SUPPORT_RESOURCE_GROUP`) — contains all other resources (Storage, Cosmos, SQL, Functions, AOAI)
 
 ## Setup
 
@@ -203,6 +207,25 @@ To manually clean up all test resources:
 .\run_smoke.ps1 -Teardown
 ```
 
+## Tearing Down Azure Resources
+
+The test suite creates Azure resources via `setup_resources.py`. To **delete all provisioned infrastructure** (not just data plane objects), use the standalone teardown script:
+
+```powershell
+cd smoke-tests
+python teardown_resources.py
+```
+
+This interactively prompts for confirmation, then deletes: the Azure AI Search service, Function App, OpenAI account, Cosmos DB account, SQL server, and Storage account. Resource groups are left in place (the script prints `az group delete` commands if you want to remove those too).
+
+To skip the confirmation prompt (e.g. in CI):
+
+```powershell
+python teardown_resources.py --confirm
+```
+
+> **Note**: `teardown_resources.py` is a manual script — it is never called by `run_smoke.ps1` or the test suite. The data plane teardown (`run_smoke.ps1 -Teardown`) only removes `smoke-*` indexes, indexers, skillsets, etc. from the search service.
+
 ## Project Structure
 
 ```
@@ -213,6 +236,7 @@ smoke-tests/
   conftest.py                   # Pytest fixtures, auth, resource naming, ensure_fresh
   run_smoke.ps1                 # Test runner script
   setup_resources.py            # Provision/teardown external resources
+  teardown_resources.py         # Delete ALL provisioned Azure resources
   setup_cosmos.py               # Cosmos DB setup helper
   requirements.txt              # Test dependencies
   requirements-setup.txt        # Setup-only dependencies
