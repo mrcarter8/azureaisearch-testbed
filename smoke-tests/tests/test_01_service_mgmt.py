@@ -5,8 +5,10 @@ Tests: SVC-01 through SVC-16
 API: Management plane 2026-03-01-Preview
 """
 
+import os
 import pytest
 
+from dotenv import set_key, find_dotenv
 from helpers.assertions import (
     assert_field_equals,
     assert_field_exists,
@@ -112,6 +114,11 @@ class TestAdminKeys:
         # Update the RestClient's data-plane headers so subsequent tests use
         # the freshly-regenerated key.
         rest.headers["api-key"] = new_primary
+        # Persist to .env and os.environ so future runs don't break.
+        os.environ["SEARCH_ADMIN_KEY"] = new_primary
+        dotenv_path = find_dotenv(usecwd=True)
+        if dotenv_path:
+            set_key(dotenv_path, "SEARCH_ADMIN_KEY", new_primary)
 
     def test_svc_08_regenerate_admin_key_secondary(self, rest, original_keys):
         """SVC-08: Regenerate secondary admin key produces a different key."""
@@ -249,7 +256,7 @@ class TestCheckNameAvailability:
             f"https://management.azure.com/subscriptions/{rest.subscription_id}"
             f"/providers/Microsoft.Search/checkNameAvailability"
         )
-        body = {"name": unlikely_name, "type": "Microsoft.Search/searchServices"}
+        body = {"name": unlikely_name, "type": "searchServices"}
         resp = rest.mgmt_request("POST", url, body)
         assert_status(resp, 200)
         data = resp.json()
@@ -261,7 +268,7 @@ class TestCheckNameAvailability:
             f"https://management.azure.com/subscriptions/{rest.subscription_id}"
             f"/providers/Microsoft.Search/checkNameAvailability"
         )
-        body = {"name": rest.service_name, "type": "Microsoft.Search/searchServices"}
+        body = {"name": rest.service_name, "type": "searchServices"}
         resp = rest.mgmt_request("POST", url, body)
         assert_status(resp, 200)
         data = resp.json()

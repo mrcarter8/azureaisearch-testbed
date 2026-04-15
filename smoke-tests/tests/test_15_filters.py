@@ -116,7 +116,7 @@ class TestCollectionFilters:
             rooms = doc.get("Rooms") or []
             assert len(rooms) == 0, \
                 f"Hotel {doc.get('HotelId')} has {len(rooms)} rooms, expected 0"
-        # Hotels 6-25 have no rooms; count should be at least 20
+        # Hotels 6-10 have empty Rooms in our dataset
         assert_count_gte(data, "value", 1)
 
     def test_flt_07_search_in_collection(self, rest, primary_index_name):

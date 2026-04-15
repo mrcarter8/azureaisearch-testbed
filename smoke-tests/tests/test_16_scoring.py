@@ -1,7 +1,7 @@
 """
 test_16_scoring.py — Scoring Profiles & Relevance
 
-Tests: SCR-01 through SCR-14
+Tests: SCR-01 through SCR-15
 
 Validates scoring profile behavior: magnitude/freshness boosts, score
 comparison with/without profiles, profile + filter/orderby/count/semantic,
@@ -276,7 +276,13 @@ class TestCustomScoringProfiles:
             {"@search.action": "upload", "id": "3", "title": "Gamma Article", "tags": ["python", "ml"], "rating": 2.0},
         ]
         rest.post(f"/indexes/{idx_name}/docs/index", {"value": docs})
-        time.sleep(8)
+        # Poll until all 3 docs are indexed (serverless latency is variable)
+        deadline = time.time() + 30
+        while time.time() < deadline:
+            cr = rest.get(f"/indexes/{idx_name}/docs/$count")
+            if cr.status_code == 200 and int(cr.text.strip()) >= 3:
+                break
+            time.sleep(2)
         # Search with tag boost for 'python'
         resp = rest.post(f"/indexes/{idx_name}/docs/search", {
             "search": "*",
@@ -314,7 +320,13 @@ class TestCustomScoringProfiles:
             {"@search.action": "upload", "id": "2", "title": "General overview", "body": "Azure cloud computing is powerful."},
         ]
         rest.post(f"/indexes/{idx_name}/docs/index", {"value": docs})
-        time.sleep(3)
+        # Poll until both docs are indexed
+        deadline = time.time() + 30
+        while time.time() < deadline:
+            cr = rest.get(f"/indexes/{idx_name}/docs/$count")
+            if cr.status_code == 200 and int(cr.text.strip()) >= 2:
+                break
+            time.sleep(2)
         # Without profile
         resp_no = rest.post(f"/indexes/{idx_name}/docs/search", {
             "search": "Azure cloud", "select": "id, title", "top": 2,
@@ -331,3 +343,59 @@ class TestCustomScoringProfiles:
         if len(results_yes) >= 1:
             assert results_yes[0]["id"] == "1", \
                 f"Title weight should boost doc 1 to top, got id={results_yes[0]['id']}"
+
+
+class TestWriteToReadLatency:
+    """Measure serverless write-to-read latency to track indexing performance."""
+
+    def test_scr_15_write_to_read_latency(self, rest):
+        """SCR-15: Measure write-to-read latency — upload docs and time until searchable.
+
+        This test intentionally has a tight threshold so it fails when serverless
+        indexing latency regresses. Track failures over time to motivate a fix.
+        Current expectation: docs should be searchable within 15 seconds.
+        """
+        idx_name = "smoke-scr-latency"
+        body = {
+            "name": idx_name,
+            "fields": [
+                {"name": "id", "type": "Edm.String", "key": True},
+                {"name": "title", "type": "Edm.String", "searchable": True},
+            ],
+        }
+        ensure_fresh(rest, f"/indexes/{idx_name}")
+        resp = rest.put(f"/indexes/{idx_name}", body)
+        assert resp.status_code in (200, 201), f"Create failed: {resp.status_code}"
+
+        # Upload 5 docs and start the clock
+        docs = [
+            {"@search.action": "upload", "id": str(i), "title": f"Latency test doc {i}"}
+            for i in range(1, 6)
+        ]
+        rest.post(f"/indexes/{idx_name}/docs/index", {"value": docs})
+        t0 = time.time()
+
+        # Poll until all 5 docs are searchable
+        max_wait = 60  # hard ceiling
+        count = 0
+        while time.time() - t0 < max_wait:
+            cr = rest.get(f"/indexes/{idx_name}/docs/$count")
+            if cr.status_code == 200:
+                count = int(cr.text.strip())
+                if count >= 5:
+                    break
+            time.sleep(1)
+
+        elapsed = time.time() - t0
+        assert count >= 5, (
+            f"Only {count}/5 docs indexed after {elapsed:.1f}s — "
+            f"serverless write-to-read latency exceeded {max_wait}s hard ceiling"
+        )
+
+        # Soft threshold: warn if latency is high but still pass
+        # Hard threshold: fail if latency exceeds 15s to track regressions
+        threshold = 15
+        assert elapsed <= threshold, (
+            f"Write-to-read latency {elapsed:.1f}s exceeds {threshold}s threshold. "
+            f"Serverless indexing may be degraded."
+        )

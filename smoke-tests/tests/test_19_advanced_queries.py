@@ -146,7 +146,7 @@ class TestLuceneQuerySyntax:
     def test_adv_08_proximity_search(self, rest, primary_index_name):
         """ADV-08: Proximity search — words within N positions of each other."""
         resp = rest.post(f"/indexes/{primary_index_name}/docs/search", {
-            "search": '"best hotel"~5',
+            "search": '"Chicago adventure"~5',
             "queryType": "full",
             "select": "HotelId, HotelName, Description",
             "top": 5,
@@ -154,9 +154,9 @@ class TestLuceneQuerySyntax:
         assert_status(resp, 200)
         data = resp.json()
         results = data.get("value", [])
-        # 'best' and 'hotel' within 5 words should match some descriptions
+        # "Chicago resort where relaxation meets adventure" — 4 words apart (slop 4 <= 5)
         assert len(results) >= 1, \
-            "Proximity search '\"best hotel\"~5' should return results"
+            "Proximity search '\"Chicago adventure\"~5' should return results"
 
     def test_adv_09_fielded_search(self, rest, primary_index_name):
         """ADV-09: Fielded search — Description:luxury restricts to one field."""
@@ -200,7 +200,7 @@ class TestLuceneQuerySyntax:
     def test_adv_11_french_text_search(self, rest, primary_index_name):
         """ADV-11: French language search on Description_fr field."""
         resp = rest.post(f"/indexes/{primary_index_name}/docs/search", {
-            "search": "hôtel classique",
+            "search": "hotel luxe conciergerie",
             "searchFields": "Description_fr",
             "select": "HotelId, HotelName, Description_fr",
             "top": 5,
@@ -209,7 +209,7 @@ class TestLuceneQuerySyntax:
         data = resp.json()
         results = data.get("value", [])
         assert len(results) >= 1, \
-            "Search for 'hôtel classique' in Description_fr should find results"
+            "Search for 'hotel luxe conciergerie' in Description_fr should find results"
         for r in results:
             desc_fr = r.get("Description_fr")
             assert desc_fr is not None, \

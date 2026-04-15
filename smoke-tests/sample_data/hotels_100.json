@@ -325,48 +325,7 @@
       "PostalCode": "73301",
       "Country": "USA"
     },
-    "Rooms": [
-      {
-        "Description": "Deluxe Room, 1 King Bed (Garden View)",
-        "Description_fr": "Deluxe Room, 1 King Bed (Vue panoramique)",
-        "Type": "Deluxe Room",
-        "BaseRate": 453.23,
-        "BedOptions": "1 King Bed",
-        "SleepsCount": 2,
-        "SmokingAllowed": false,
-        "Tags": [
-          "iron",
-          "desk"
-        ]
-      },
-      {
-        "Description": "Standard Room, 1 Queen Bed (Cityscape View)",
-        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur la ville)",
-        "Type": "Standard Room",
-        "BaseRate": 159.07,
-        "BedOptions": "1 Queen Bed",
-        "SleepsCount": 2,
-        "SmokingAllowed": true,
-        "Tags": [
-          "iron",
-          "minibar",
-          "smart tv"
-        ]
-      },
-      {
-        "Description": "Penthouse Suite, 1 King Bed (Mountain View)",
-        "Description_fr": "Penthouse Suite, 1 King Bed (Vue panoramique)",
-        "Type": "Penthouse Suite",
-        "BaseRate": 599.6,
-        "BedOptions": "1 King Bed",
-        "SleepsCount": 2,
-        "SmokingAllowed": false,
-        "Tags": [
-          "minibar",
-          "iron"
-        ]
-      }
-    ]
+    "Rooms": []
   },
   {
     "@search.action": "upload",
@@ -397,23 +356,7 @@
       "PostalCode": "37201",
       "Country": "USA"
     },
-    "Rooms": [
-      {
-        "Description": "Presidential Suite, 1 King Bed (Mountain View)",
-        "Description_fr": "Presidential Suite, 1 King Bed (Vue sur la ville)",
-        "Type": "Presidential Suite",
-        "BaseRate": 317.46,
-        "BedOptions": "1 King Bed",
-        "SleepsCount": 4,
-        "SmokingAllowed": false,
-        "Tags": [
-          "bathrobe",
-          "tv",
-          "nespresso machine",
-          "minibar"
-        ]
-      }
-    ]
+    "Rooms": []
   },
   {
     "@search.action": "upload",
@@ -446,36 +389,7 @@
       "PostalCode": "80201",
       "Country": "USA"
     },
-    "Rooms": [
-      {
-        "Description": "Executive Suite, 1 King Bed (Cityscape View)",
-        "Description_fr": "Executive Suite, 1 King Bed (Vue sur la mer)",
-        "Type": "Executive Suite",
-        "BaseRate": 65.02,
-        "BedOptions": "1 King Bed",
-        "SleepsCount": 2,
-        "SmokingAllowed": false,
-        "Tags": [
-          "bathroom shower",
-          "safe",
-          "minibar",
-          "desk"
-        ]
-      },
-      {
-        "Description": "Deluxe Room, 1 King Bed (River View)",
-        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur le jardin)",
-        "Type": "Deluxe Room",
-        "BaseRate": 248.45,
-        "BedOptions": "1 King Bed",
-        "SleepsCount": 2,
-        "SmokingAllowed": false,
-        "Tags": [
-          "iron",
-          "kitchenette"
-        ]
-      }
-    ]
+    "Rooms": []
   },
   {
     "@search.action": "upload",
@@ -508,50 +422,7 @@
       "PostalCode": "02101",
       "Country": "USA"
     },
-    "Rooms": [
-      {
-        "Description": "Studio Room, 1 Queen Bed (Lake View)",
-        "Description_fr": "Studio Room, 1 Queen Bed (Vue sur le jardin)",
-        "Type": "Studio Room",
-        "BaseRate": 109.83,
-        "BedOptions": "1 Queen Bed",
-        "SleepsCount": 2,
-        "SmokingAllowed": false,
-        "Tags": [
-          "hair dryer",
-          "tv",
-          "coffee maker"
-        ]
-      },
-      {
-        "Description": "Family Suite, 2 Queen Beds (Ocean View)",
-        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur la ville)",
-        "Type": "Family Suite",
-        "BaseRate": 201.45,
-        "BedOptions": "2 Queen Beds",
-        "SleepsCount": 5,
-        "SmokingAllowed": false,
-        "Tags": [
-          "smart tv",
-          "suite",
-          "rainfall shower",
-          "coffee maker"
-        ]
-      },
-      {
-        "Description": "Standard Room, 1 Queen Bed (Lake View)",
-        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur le jardin)",
-        "Type": "Standard Room",
-        "BaseRate": 433.14,
-        "BedOptions": "1 Queen Bed",
-        "SleepsCount": 2,
-        "SmokingAllowed": false,
-        "Tags": [
-          "suite",
-          "tv"
-        ]
-      }
-    ]
+    "Rooms": []
   },
   {
     "@search.action": "upload",
@@ -585,48 +456,7 @@
       "PostalCode": "97201",
       "Country": "USA"
     },
-    "Rooms": [
-      {
-        "Description": "Double Room, 2 Queen Beds (Park View)",
-        "Description_fr": "Double Room, 2 Queen Beds (Vue sur le jardin)",
-        "Type": "Double Room",
-        "BaseRate": 485.17,
-        "BedOptions": "2 Queen Beds",
-        "SleepsCount": 4,
-        "SmokingAllowed": false,
-        "Tags": [
-          "sofa bed",
-          "tv"
-        ]
-      },
-      {
-        "Description": "Family Suite, 2 Queen Beds (Skyline View)",
-        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur le jardin)",
-        "Type": "Family Suite",
-        "BaseRate": 555.95,
-        "BedOptions": "2 Queen Beds",
-        "SleepsCount": 5,
-        "SmokingAllowed": false,
-        "Tags": [
-          "jacuzzi tub",
-          "iron",
-          "bathroom shower"
-        ]
-      },
-      {
-        "Description": "Suite, 1 King Bed (Cityscape View)",
-        "Description_fr": "Suite, 1 King Bed (Vue panoramique)",
-        "Type": "Suite",
-        "BaseRate": 210.44,
-        "BedOptions": "1 King Bed",
-        "SleepsCount": 3,
-        "SmokingAllowed": false,
-        "Tags": [
-          "hair dryer",
-          "kitchenette"
-        ]
-      }
-    ]
+    "Rooms": []
   },
   {
     "@search.action": "upload",

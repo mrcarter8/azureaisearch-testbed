@@ -1,0 +1,466 @@
+"""
+test_14_serverless_limits.py — Serverless Limit Validation
+
+Tests: LIM-01 through LIM-22
+
+Validates that the service-level quotas, per-index limits, and throttling
+rate limits reported by the Azure AI Search serverless SKU match the
+documented specifications.  Uses GET /servicestats, GET /indexes/{name}/stats,
+and rapid-fire API calls to exercise throttling boundaries.
+
+Expected serverless limits (target for Build — S3 HD parity):
+  - Indexes per service: up to 3000
+  - Indexers per service: up to 3000
+  - Data sources per service: up to 3000
+  - Skillsets per service: up to 3000
+  - Synonym maps: 20
+  - Aliases: 0 (not supported in serverless)
+  - Max storage per index: 20 GB (per spec; actual may be higher in preview)
+  - Max fields per index: up to 3000
+  - Max vector index size: 30% of total storage
+  - Throttling: documented static rate limits per API
+"""
+
+import time
+import concurrent.futures
+
+import pytest
+import requests as _http
+
+from conftest import ensure_fresh
+from helpers.assertions import assert_status
+
+pytestmark = [pytest.mark.serverless_limits]
+
+
+# ── Expected serverless quota ranges ─────────────────────────────────────────
+# These define the *minimum acceptable* quota values.  The real quotas may
+# exceed these (e.g. PPE may ship with 200 during preview, GA target is 3000).
+
+_MIN_INDEX_QUOTA = 200       # preview minimum; GA target is 3000
+_MIN_INDEXER_QUOTA = 200
+_MIN_DATASOURCE_QUOTA = 200
+_MIN_SKILLSET_QUOTA = 200
+_SYNONYM_MAP_QUOTA = 20      # exact match expected
+_ALIAS_QUOTA = 0             # serverless does not support aliases
+
+
+class TestServiceQuotas:
+    """LIM-01 through LIM-06: Validate service-level quotas in GET /servicestats."""
+
+    def test_lim_01_servicestats_index_quota(self, rest):
+        """LIM-01: indexesCount quota is present and >= minimum serverless limit."""
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        counters = resp.json()["counters"]
+        idx = counters["indexesCount"]
+        assert "quota" in idx, "indexesCount missing 'quota'"
+        assert idx["quota"] is not None, "indexesCount quota is null"
+        assert idx["quota"] >= _MIN_INDEX_QUOTA, (
+            f"indexesCount quota {idx['quota']} < expected minimum {_MIN_INDEX_QUOTA}"
+        )
+        assert "usage" in idx, "indexesCount missing 'usage'"
+        # Usage can be -1 when not yet computed; accept >= -1
+        assert idx["usage"] >= -1, f"usage should be >= -1, got {idx['usage']}"
+
+    def test_lim_02_servicestats_indexer_quota(self, rest):
+        """LIM-02: indexersCount quota is present and >= minimum serverless limit."""
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        counters = resp.json()["counters"]
+        ixr = counters["indexersCount"]
+        assert ixr["quota"] is not None, "indexersCount quota is null"
+        assert ixr["quota"] >= _MIN_INDEXER_QUOTA, (
+            f"indexersCount quota {ixr['quota']} < expected minimum {_MIN_INDEXER_QUOTA}"
+        )
+
+    def test_lim_03_servicestats_datasource_quota(self, rest):
+        """LIM-03: dataSourcesCount quota is present and >= minimum serverless limit."""
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        counters = resp.json()["counters"]
+        ds = counters["dataSourcesCount"]
+        assert ds["quota"] is not None, "dataSourcesCount quota is null"
+        assert ds["quota"] >= _MIN_DATASOURCE_QUOTA, (
+            f"dataSourcesCount quota {ds['quota']} < expected minimum {_MIN_DATASOURCE_QUOTA}"
+        )
+
+    def test_lim_04_servicestats_skillset_quota(self, rest):
+        """LIM-04: skillsetCount quota is present and >= minimum serverless limit."""
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        counters = resp.json()["counters"]
+        sk = counters["skillsetCount"]
+        assert sk["quota"] is not None, "skillsetCount quota is null"
+        assert sk["quota"] >= _MIN_SKILLSET_QUOTA, (
+            f"skillsetCount quota {sk['quota']} < expected minimum {_MIN_SKILLSET_QUOTA}"
+        )
+
+    def test_lim_05_servicestats_synonym_map_quota(self, rest):
+        """LIM-05: synonymMaps quota equals expected serverless limit (20)."""
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        counters = resp.json()["counters"]
+        syn = counters["synonymMaps"]
+        assert syn["quota"] is not None, "synonymMaps quota is null"
+        assert syn["quota"] == _SYNONYM_MAP_QUOTA, (
+            f"synonymMaps quota {syn['quota']} != expected {_SYNONYM_MAP_QUOTA}"
+        )
+
+    def test_lim_06_servicestats_alias_quota_zero(self, rest):
+        """LIM-06: aliasesCount quota is 0 — aliases not supported on serverless."""
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        counters = resp.json()["counters"]
+        al = counters["aliasesCount"]
+        assert al["quota"] is not None, "aliasesCount quota is null"
+        assert al["quota"] == _ALIAS_QUOTA, (
+            f"aliasesCount quota {al['quota']} != expected {_ALIAS_QUOTA}"
+        )
+
+
+class TestServiceLimitsSection:
+    """LIM-07 through LIM-09: Validate the 'limits' section in GET /servicestats."""
+
+    def test_lim_07_max_storage_per_index(self, rest):
+        """LIM-07: maxStoragePerIndex is present and > 0 in service limits."""
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        limits = resp.json()["limits"]
+        max_storage = limits.get("maxStoragePerIndex")
+        assert max_storage is not None, "maxStoragePerIndex is missing or null"
+        assert max_storage > 0, f"maxStoragePerIndex should be > 0, got {max_storage}"
+        # Log actual value for reference (spec says 20 GB, may differ in preview)
+        gb = max_storage / (1024 ** 3)
+        print(f"  maxStoragePerIndex = {max_storage} bytes ({gb:.1f} GB)")
+
+    def test_lim_08_max_fields_per_index(self, rest):
+        """LIM-08: maxFieldsPerIndex is present and >= 1000."""
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        limits = resp.json()["limits"]
+        max_fields = limits.get("maxFieldsPerIndex")
+        assert max_fields is not None, "maxFieldsPerIndex is missing or null"
+        assert max_fields >= 1000, (
+            f"maxFieldsPerIndex should be >= 1000, got {max_fields}"
+        )
+
+    def test_lim_09_vector_index_size_quota(self, rest):
+        """LIM-09: vectorIndexSize quota is present and reflects ~30% of total storage."""
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        counters = resp.json()["counters"]
+        vis = counters.get("vectorIndexSize", {})
+        assert "quota" in vis or "usage" in vis, (
+            "vectorIndexSize counter missing from servicestats"
+        )
+        vec_quota = vis.get("quota")
+        storage_quota = counters.get("storageSize", {}).get("quota")
+        if vec_quota is not None and storage_quota is not None and storage_quota > 0:
+            ratio = vec_quota / storage_quota
+            print(f"  vectorIndexSize quota = {vec_quota} bytes "
+                  f"({vec_quota / (1024**3):.1f} GB), "
+                  f"ratio to total storage = {ratio:.2%}")
+            # Spec says ~30% of total storage
+            assert 0.15 <= ratio <= 0.50, (
+                f"vectorIndexSize/storageSize ratio {ratio:.2%} outside expected 15-50% range"
+            )
+
+
+class TestIndexStats:
+    """LIM-10 through LIM-11: Validate per-index statistics API."""
+
+    def test_lim_10_index_stats_structure(self, rest):
+        """LIM-10: GET /indexes/{name}/stats returns documentCount, storageSize, vectorIndexSize."""
+        # Create a minimal index to test against
+        name = "smoke-lim10-stats"
+        body = {
+            "name": name,
+            "fields": [
+                {"name": "id", "type": "Edm.String", "key": True},
+                {"name": "content", "type": "Edm.String"},
+            ],
+        }
+        ensure_fresh(rest, f"/indexes/{name}")
+        put_resp = rest.put(f"/indexes/{name}", body)
+        assert put_resp.status_code in (200, 201), (
+            f"Create index failed: {put_resp.status_code}"
+        )
+        stats_resp = rest.get(f"/indexes/{name}/stats")
+        assert_status(stats_resp, 200)
+        data = stats_resp.json()
+        assert "documentCount" in data, "Missing documentCount in index stats"
+        assert "storageSize" in data, "Missing storageSize in index stats"
+        assert "vectorIndexSize" in data, "Missing vectorIndexSize in index stats"
+        assert data["documentCount"] >= 0
+        assert data["storageSize"] >= 0
+        assert data["vectorIndexSize"] >= 0
+
+    def test_lim_11_index_stats_after_docs(self, rest, primary_index_name):
+        """LIM-11: Index stats reflect document count and non-zero storage after upload."""
+        # Use existing primary index — it should have docs from earlier phases
+        stats_resp = rest.get(f"/indexes/{primary_index_name}/stats")
+        if stats_resp.status_code == 404:
+            pytest.skip("Primary index not found — run earlier phases first")
+        assert_status(stats_resp, 200)
+        data = stats_resp.json()
+        doc_count = data.get("documentCount", 0)
+        storage = data.get("storageSize", 0)
+        print(f"  {primary_index_name}: {doc_count} docs, {storage} bytes storage")
+        # If docs were uploaded in prior phases, count and storage should be > 0
+        if doc_count > 0:
+            assert storage > 0, (
+                f"documentCount={doc_count} but storageSize=0 — stats inconsistency"
+            )
+
+
+class TestCounterUsageTracking:
+    """LIM-12: Validate that counters.usage values track actual resource counts."""
+
+    def test_lim_12_usage_tracks_resource_count(self, rest):
+        """LIM-12: indexesCount.usage reflects the actual number of indexes on the service."""
+        name = "smoke-lim12-track"
+        ensure_fresh(rest, f"/indexes/{name}")
+
+        # Create an index
+        body = {
+            "name": name,
+            "fields": [
+                {"name": "id", "type": "Edm.String", "key": True},
+            ],
+        }
+        put_resp = rest.put(f"/indexes/{name}", body)
+        assert put_resp.status_code in (200, 201)
+
+        # List indexes to get the authoritative count
+        list_resp = rest.get("/indexes")
+        assert list_resp.status_code == 200
+        actual_count = len(list_resp.json().get("value", []))
+
+        # Service stats usage should be >= the list count
+        # (stats are periodic so usage may lag, but should never be LESS)
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        usage = resp.json()["counters"]["indexesCount"]["usage"]
+        # Usage can be -1 when counter is not yet computed (PPE behavior)
+        if usage < 0:
+            pytest.skip(f"indexesCount.usage is {usage} (counter not computed yet)")
+        assert usage >= 1, (
+            f"indexesCount.usage should be >= 1 after creating an index, got {usage}"
+        )
+        print(f"  indexesCount.usage={usage}, list count={actual_count}")
+
+
+class TestThrottling:
+    """LIM-13 through LIM-14: Exercise throttling rate limits."""
+
+    @staticmethod
+    def _raw_get(base_url, path, headers, api_version):
+        """Direct HTTP GET bypassing RestClient retry logic.  Retries on SSL errors only."""
+        url = f"{base_url}{path}"
+        for attempt in range(3):
+            try:
+                resp = _http.get(url, headers=headers, params={"api-version": api_version}, timeout=30)
+                return resp.status_code
+            except (_http.exceptions.SSLError, _http.exceptions.ConnectionError):
+                if attempt == 2:
+                    return -1  # SSL failure — count as "other"
+                time.sleep(0.5)
+        return -1
+
+    def test_lim_13_list_indexes_throttle(self, rest):
+        """LIM-13: Rapid GET /indexes calls observe 429 throttle at documented 3/sec limit."""
+        # Documented limit: List Indexes = 3 per second per search unit.
+        # Fire many requests in parallel to attempt triggering a 429.
+        results = {"200": 0, "429": 0, "other": 0}
+        base_url = rest.base_url
+        headers = dict(rest.headers)
+        api_version = rest.api_version
+
+        def _fire():
+            return self._raw_get(base_url, "/indexes", headers, api_version)
+
+        # Fire 30 rapid requests using threads
+        with concurrent.futures.ThreadPoolExecutor(max_workers=15) as pool:
+            futures = [pool.submit(_fire) for _ in range(30)]
+            for f in concurrent.futures.as_completed(futures):
+                code = f.result()
+                if code == 200:
+                    results["200"] += 1
+                elif code == 429:
+                    results["429"] += 1
+                else:
+                    results["other"] += 1
+
+        print(f"  List Indexes rapid-fire: {results}")
+        # We expect at least some 200s (service responded) and ideally some 429s.
+        # If NO 429s, the throttle limit may be higher than 3/sec in preview —
+        # that's acceptable, but we log a warning.
+        assert results["200"] + results["429"] > 0, "No successful responses at all"
+        if results["429"] == 0:
+            print("  WARNING: No 429s observed — throttle limit may be higher than documented")
+
+    def test_lim_14_servicestats_throttle(self, rest):
+        """LIM-14: Rapid GET /servicestats calls observe 429 throttle at documented 4/sec limit."""
+        results = {"200": 0, "429": 0, "other": 0}
+        base_url = rest.base_url
+        headers = dict(rest.headers)
+        api_version = rest.api_version
+
+        def _fire():
+            return self._raw_get(base_url, "/servicestats", headers, api_version)
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=15) as pool:
+            futures = [pool.submit(_fire) for _ in range(30)]
+            for f in concurrent.futures.as_completed(futures):
+                code = f.result()
+                if code == 200:
+                    results["200"] += 1
+                elif code == 429:
+                    results["429"] += 1
+                else:
+                    results["other"] += 1
+
+        print(f"  Service Stats rapid-fire: {results}")
+        assert results["200"] + results["429"] > 0, "No successful responses at all"
+        if results["429"] == 0:
+            print("  WARNING: No 429s observed — throttle limit may be higher than documented")
+
+
+class TestMissingCounters:
+    """LIM-15 through LIM-16: Validate counters not covered by TestServiceQuotas."""
+
+    def test_lim_15_document_count_counter(self, rest):
+        """LIM-15: documentCount counter — quota is null (unlimited) on serverless."""
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        counters = resp.json()["counters"]
+        dc = counters.get("documentCount")
+        assert dc is not None, "documentCount counter missing from servicestats"
+        assert "usage" in dc, "documentCount missing 'usage'"
+        assert dc["usage"] >= 0, f"documentCount.usage should be >= 0, got {dc['usage']}"
+        # Serverless has no document quota cap — quota should be null
+        assert dc["quota"] is None, (
+            f"documentCount.quota should be null on serverless, got {dc['quota']}"
+        )
+
+    def test_lim_16_storage_size_counter(self, rest):
+        """LIM-16: storageSize counter — quota is present and represents total storage capacity."""
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        counters = resp.json()["counters"]
+        ss = counters.get("storageSize")
+        assert ss is not None, "storageSize counter missing from servicestats"
+        assert "usage" in ss, "storageSize missing 'usage'"
+        assert "quota" in ss, "storageSize missing 'quota'"
+        assert ss["usage"] >= 0, f"storageSize.usage should be >= 0, got {ss['usage']}"
+        assert ss["quota"] is not None, "storageSize.quota is null"
+        assert ss["quota"] > 0, f"storageSize.quota should be > 0, got {ss['quota']}"
+        gb = ss["quota"] / (1024 ** 3)
+        print(f"  storageSize: usage={ss['usage']} bytes, quota={ss['quota']} bytes ({gb:.1f} GB)")
+
+
+class TestAdditionalLimits:
+    """LIM-17 through LIM-20: Validate limits section fields not covered by TestServiceLimitsSection."""
+
+    def test_lim_17_max_field_nesting_depth(self, rest):
+        """LIM-17: maxFieldNestingDepthPerIndex is present and == 10."""
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        limits = resp.json()["limits"]
+        val = limits.get("maxFieldNestingDepthPerIndex")
+        assert val is not None, "maxFieldNestingDepthPerIndex is missing or null"
+        assert val == 10, f"maxFieldNestingDepthPerIndex expected 10, got {val}"
+
+    def test_lim_18_max_complex_collection_fields(self, rest):
+        """LIM-18: maxComplexCollectionFieldsPerIndex is present and == 40."""
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        limits = resp.json()["limits"]
+        val = limits.get("maxComplexCollectionFieldsPerIndex")
+        assert val is not None, "maxComplexCollectionFieldsPerIndex is missing or null"
+        assert val == 40, f"maxComplexCollectionFieldsPerIndex expected 40, got {val}"
+
+    def test_lim_19_max_complex_objects_in_collections(self, rest):
+        """LIM-19: maxComplexObjectsInCollectionsPerDocument is present and == 3000."""
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        limits = resp.json()["limits"]
+        val = limits.get("maxComplexObjectsInCollectionsPerDocument")
+        assert val is not None, "maxComplexObjectsInCollectionsPerDocument is missing or null"
+        assert val == 3000, f"maxComplexObjectsInCollectionsPerDocument expected 3000, got {val}"
+
+    def test_lim_20_max_cumulative_indexer_runtime_null(self, rest):
+        """LIM-20: maxCumulativeIndexerRuntimeSeconds is null — no cap on serverless."""
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        limits = resp.json()["limits"]
+        assert "maxCumulativeIndexerRuntimeSeconds" in limits, (
+            "maxCumulativeIndexerRuntimeSeconds missing from limits"
+        )
+        val = limits["maxCumulativeIndexerRuntimeSeconds"]
+        assert val is None, (
+            f"maxCumulativeIndexerRuntimeSeconds should be null on serverless, got {val}"
+        )
+
+
+class TestIndexersRuntime:
+    """LIM-21: Validate the indexersRuntime section in GET /servicestats."""
+
+    def test_lim_21_indexers_runtime_section(self, rest):
+        """LIM-21: indexersRuntime section is present with expected fields."""
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        data = resp.json()
+        rt = data.get("indexersRuntime")
+        assert rt is not None, "indexersRuntime section missing from servicestats"
+        assert "usedSeconds" in rt, "indexersRuntime missing 'usedSeconds'"
+        assert "remainingSeconds" in rt, "indexersRuntime missing 'remainingSeconds'"
+        assert "beginningTime" in rt, "indexersRuntime missing 'beginningTime'"
+        assert "endingTime" in rt, "indexersRuntime missing 'endingTime'"
+        # On serverless, remainingSeconds should be null (no cap)
+        assert rt["remainingSeconds"] is None, (
+            f"remainingSeconds should be null on serverless, got {rt['remainingSeconds']}"
+        )
+        print(f"  indexersRuntime: usedSeconds={rt['usedSeconds']}, "
+              f"window={rt['beginningTime']} to {rt['endingTime']}")
+
+
+class TestServiceStatsCompleteness:
+    """LIM-22: Validate that GET /servicestats returns all expected sections and counters."""
+
+    def test_lim_22_servicestats_all_sections(self, rest):
+        """LIM-22: servicestats response contains counters, limits, and indexersRuntime sections."""
+        resp = rest.get("/servicestats")
+        assert_status(resp, 200)
+        data = resp.json()
+
+        # Top-level sections
+        assert "counters" in data, "Missing 'counters' section"
+        assert "limits" in data, "Missing 'limits' section"
+        assert "indexersRuntime" in data, "Missing 'indexersRuntime' section"
+
+        # All expected counters present
+        expected_counters = [
+            "documentCount", "indexesCount", "indexersCount",
+            "dataSourcesCount", "storageSize", "synonymMaps",
+            "skillsetCount", "aliasesCount", "vectorIndexSize",
+        ]
+        counters = data["counters"]
+        for name in expected_counters:
+            assert name in counters, f"Missing counter: {name}"
+            assert "usage" in counters[name], f"{name} missing 'usage'"
+            assert "quota" in counters[name], f"{name} missing 'quota'"
+
+        # All expected limits present
+        expected_limits = [
+            "maxStoragePerIndex", "maxFieldsPerIndex",
+            "maxFieldNestingDepthPerIndex", "maxComplexCollectionFieldsPerIndex",
+            "maxComplexObjectsInCollectionsPerDocument",
+            "maxCumulativeIndexerRuntimeSeconds",
+        ]
+        limits = data["limits"]
+        for name in expected_limits:
+            assert name in limits, f"Missing limit: {name}"
+
+        print(f"  All {len(expected_counters)} counters and {len(expected_limits)} limits present")

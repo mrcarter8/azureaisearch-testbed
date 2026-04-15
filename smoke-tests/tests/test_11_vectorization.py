@@ -532,7 +532,7 @@ def _generate_articles():
     return articles
 
 
-def _embed_texts(texts, aoai_config, batch_size=200):
+def _embed_texts(texts, aoai_config, batch_size=50):
     """Call Azure OpenAI embedding API in batches.  Returns list[list[float]]."""
     endpoint = aoai_config["endpoint"].rstrip("/")
     deployment = aoai_config["embedding_deployment"]
@@ -543,7 +543,7 @@ def _embed_texts(texts, aoai_config, batch_size=200):
     for start in range(0, len(texts), batch_size):
         batch = texts[start : start + batch_size]
         last_err = None
-        for attempt in range(6):
+        for attempt in range(8):
             try:
                 resp = _http.post(url, json={"input": batch}, headers=headers, timeout=120)
             except _http.exceptions.RequestException as exc:
@@ -551,7 +551,7 @@ def _embed_texts(texts, aoai_config, batch_size=200):
                 _time.sleep(2 ** attempt)
                 continue
             if resp.status_code == 429:
-                wait = int(resp.headers.get("Retry-After", 2 ** attempt))
+                wait = int(resp.headers.get("Retry-After", min(2 ** attempt, 60)))
                 _time.sleep(wait)
                 continue
             if resp.status_code >= 500:
@@ -564,8 +564,11 @@ def _embed_texts(texts, aoai_config, batch_size=200):
             break
         else:
             raise RuntimeError(
-                f"AOAI embedding failed for batch at index {start} after 6 retries: {last_err}"
+                f"AOAI embedding failed for batch at index {start} after 8 retries: {last_err}"
             )
+        # Small delay between batches to stay under TPM limits
+        if start + batch_size < len(texts):
+            _time.sleep(1)
     return all_embeddings
 
 

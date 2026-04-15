@@ -28,7 +28,7 @@ from helpers.rest_client import RestClient
 
 # ── Environment ──────────────────────────────────────────────────────────────
 
-load_dotenv()
+load_dotenv(override=True)
 
 logger = logging.getLogger("smoke-tests")
 

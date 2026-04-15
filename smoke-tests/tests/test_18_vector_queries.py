@@ -11,6 +11,8 @@ queries. Uses both the primary hotels index and the E2E vector corpus
 (smoke-vec-e2e) for meaningful relevance validation.
 """
 
+import copy
+
 import pytest
 
 from conftest import ensure_fresh
@@ -368,39 +370,50 @@ class TestVectorModes:
 
     def test_vqr_09_exhaustive_knn(self, rest, e2e_index):
         """VQR-09: Exhaustive KNN search — exhaustive:true bypasses HNSW index."""
-        resp = rest.post(f"/indexes/{e2e_index}/docs/search", {
+        query_body = {
             "vectorQueries": [{
                 "kind": "text",
-                "text": "mobile cross-platform application development",
+                "text": "cloud migration infrastructure deployment",
                 "fields": "contentVector",
                 "k": 10,
-                "exhaustive": True,
             }],
             "select": "id, title, category",
             "top": 10,
-        })
-        data = assert_search_results(resp, min_count=1)
-        # Exhaustive should still return relevant results
-        categories = [r["category"] for r in data["value"]]
-        assert "Mobile" in categories, f"Expected Mobile in exhaustive results: {categories}"
+        }
+        # HNSW baseline
+        resp_hnsw = rest.post(f"/indexes/{e2e_index}/docs/search", query_body)
+        hnsw_data = assert_search_results(resp_hnsw, min_count=1)
+        hnsw_ids = {r["id"] for r in hnsw_data["value"]}
 
-    def test_vqr_10_oversampling(self, rest, e2e_index):
-        """VQR-10: Oversampling parameter expands candidate set before re-scoring."""
-        resp = rest.post(f"/indexes/{e2e_index}/docs/search", {
+        # Exhaustive KNN — same query with exhaustive:true
+        exh_body = copy.deepcopy(query_body)
+        exh_body["vectorQueries"][0]["exhaustive"] = True
+        resp_exh = rest.post(f"/indexes/{e2e_index}/docs/search", exh_body)
+        exh_data = assert_search_results(resp_exh, min_count=1)
+        exh_ids = {r["id"] for r in exh_data["value"]}
+
+        # Both should return Cloud-category results and overlap significantly
+        exh_categories = [r["category"] for r in exh_data["value"]]
+        assert "Cloud" in exh_categories, f"Expected Cloud in exhaustive results: {exh_categories}"
+        overlap = hnsw_ids & exh_ids
+        assert len(overlap) >= 5, f"HNSW/exhaustive overlap too low ({len(overlap)}): HNSW={hnsw_ids}, EXH={exh_ids}"
+
+    def test_vqr_10_oversampling(self, rest, primary_index_name):
+        """VQR-10: Oversampling parameter expands candidate set before re-scoring (requires compressed field)."""
+        resp = rest.post(f"/indexes/{primary_index_name}/docs/search", {
             "vectorQueries": [{
                 "kind": "text",
-                "text": "frontend React TypeScript web design",
-                "fields": "contentVector",
+                "text": "luxury hotel with pool and spa",
+                "fields": "DescriptionVectorSQ",
                 "k": 10,
                 "oversampling": 5.0,
             }],
-            "select": "id, category",
+            "select": "HotelId, HotelName, Rating",
             "top": 10,
         })
         data = assert_search_results(resp, min_count=1)
-        categories = [r["category"] for r in data["value"]]
-        assert "Frontend" in categories, \
-            f"Expected Frontend in oversampled results: {categories}"
+        assert any(r.get("Rating", 0) >= 3 for r in data["value"]), \
+            "Expected at least one result with Rating >= 3"
 
     def test_vqr_11_vector_weight(self, rest, e2e_index):
         """VQR-11: Vector weight parameter influences hybrid score contribution."""

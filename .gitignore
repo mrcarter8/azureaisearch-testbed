@@ -32,6 +32,9 @@ smoke-tests/results/failure_summary.md
 smoke-tests/results/test_log.md
 smoke-tests/results/known_bugs.json
 
+# ── Investigation scratch (ephemeral diagnostic scripts/data) ────────────────
+smoke-tests/scratch/
+
 # ── IDE / Editor ────────────────────────────────────────────────────────────
 .vscode/
 .idea/
