@@ -6,6 +6,10 @@ Tests: IDX-01 through IDX-16
 Gate: IDX-01 failure aborts run.
 """
 
+import json
+import os
+import re
+
 import pytest
 
 from conftest import ensure_fresh
@@ -18,107 +22,34 @@ from helpers.assertions import (
 
 pytestmark = [pytest.mark.indexes]
 
+_TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), "hotels_index_def.json")
 
-def _full_index_body(name: str, synonym_map_name: str, aoai_config: dict) -> dict:
-    """Build the full-featured index definition used by IDX-01."""
-    return {
-        "name": name,
-        "fields": [
-            {"name": "HotelId",           "type": "Edm.String",           "key": True,  "searchable": False, "filterable": True,  "sortable": False, "facetable": True},
-            {"name": "HotelName",         "type": "Edm.String",           "searchable": True,  "filterable": False, "sortable": False, "facetable": False, "analyzer": "en.microsoft", "synonymMaps": [synonym_map_name]},
-            {"name": "Description",       "type": "Edm.String",           "searchable": True,  "filterable": False, "sortable": False, "facetable": False, "analyzer": "en.microsoft", "synonymMaps": [synonym_map_name]},
-            {"name": "Description_fr",    "type": "Edm.String",           "searchable": True,  "filterable": False, "sortable": False, "facetable": False, "analyzer": "fr.microsoft"},
-            {"name": "Category",          "type": "Edm.String",           "searchable": True,  "filterable": True,  "sortable": False, "facetable": True,  "analyzer": "en.microsoft"},
-            {"name": "Tags",              "type": "Collection(Edm.String)","searchable": True,  "filterable": True,  "sortable": False, "facetable": True,  "analyzer": "en.microsoft"},
-            {"name": "ParkingIncluded",   "type": "Edm.Boolean",          "searchable": False, "filterable": True,  "sortable": False, "facetable": True},
-            {"name": "LastRenovationDate","type": "Edm.DateTimeOffset",    "searchable": False, "filterable": True,  "sortable": True,  "facetable": False},
-            {"name": "Rating",            "type": "Edm.Double",           "searchable": False, "filterable": True,  "sortable": True,  "facetable": True},
-            {"name": "Location",          "type": "Edm.GeographyPoint",   "searchable": False, "filterable": True,  "sortable": True,  "facetable": False},
-            {
-                "name": "DescriptionVector",
-                "type": "Collection(Edm.Single)",
-                "searchable": True, "filterable": False, "sortable": False, "facetable": False,
-                "dimensions": aoai_config["embedding_dimensions"],
-                "vectorSearchProfile": "hotel-vector-profile",
-            },
-            {
-                "name": "Address", "type": "Edm.ComplexType",
-                "fields": [
-                    {"name": "StreetAddress", "type": "Edm.String", "searchable": True,  "filterable": False},
-                    {"name": "City",          "type": "Edm.String", "searchable": True,  "filterable": True, "facetable": True},
-                    {"name": "StateProvince", "type": "Edm.String", "searchable": True,  "filterable": True, "facetable": True},
-                    {"name": "PostalCode",    "type": "Edm.String", "searchable": True,  "filterable": True, "facetable": True},
-                    {"name": "Country",       "type": "Edm.String", "searchable": True,  "filterable": True, "facetable": True},
-                ],
-            },
-            {
-                "name": "Rooms", "type": "Collection(Edm.ComplexType)",
-                "fields": [
-                    {"name": "Description",    "type": "Edm.String",            "searchable": True},
-                    {"name": "Description_fr", "type": "Edm.String",            "searchable": True, "analyzer": "fr.microsoft"},
-                    {"name": "Type",           "type": "Edm.String",            "searchable": True, "filterable": True, "facetable": True},
-                    {"name": "BaseRate",       "type": "Edm.Double",            "filterable": True, "facetable": True},
-                    {"name": "BedOptions",     "type": "Edm.String",            "searchable": True, "filterable": True, "facetable": True},
-                    {"name": "SleepsCount",    "type": "Edm.Int64",             "filterable": True, "facetable": True},
-                    {"name": "SmokingAllowed", "type": "Edm.Boolean",           "filterable": True, "facetable": True},
-                    {"name": "Tags",           "type": "Collection(Edm.String)","searchable": True, "filterable": True, "facetable": True},
-                ],
-            },
-        ],
-        "vectorSearch": {
-            "algorithms": [
-                {"name": "hotel-hnsw", "kind": "hnsw", "hnswParameters": {"m": 4, "efConstruction": 400, "efSearch": 500, "metric": "cosine"}},
-                {"name": "hotel-eknn", "kind": "exhaustiveKnn", "exhaustiveKnnParameters": {"metric": "cosine"}},
-            ],
-            "profiles": [
-                {"name": "hotel-vector-profile", "algorithm": "hotel-hnsw", "vectorizer": "hotel-openai-vectorizer"},
-            ],
-            "vectorizers": [
-                {
-                    "name": "hotel-openai-vectorizer",
-                    "kind": "azureOpenAI",
-                    "azureOpenAIParameters": {
-                        "resourceUri": aoai_config["endpoint"],
-                        "deploymentId": aoai_config["embedding_deployment"],
-                        "apiKey": aoai_config["api_key"],
-                        "modelName": aoai_config["embedding_deployment"],
-                    },
-                },
-            ],
-        },
-        "suggesters": [
-            {"name": "sg", "searchMode": "analyzingInfixMatching", "sourceFields": ["Address/City", "Address/Country", "Rooms/Type", "Rooms/Tags"]},
-        ],
-        "scoringProfiles": [
-            {
-                "name": "boostHighRating",
-                "text": {"weights": {"Description": 2, "HotelName": 1.5}},
-                "functions": [
-                    {"type": "magnitude", "fieldName": "Rating", "boost": 3, "interpolation": "linear",
-                     "magnitude": {"boostingRangeStart": 1, "boostingRangeEnd": 5, "constantBoostBeyondRange": False}},
-                    {"type": "freshness", "fieldName": "LastRenovationDate", "boost": 2, "interpolation": "logarithmic",
-                     "freshness": {"boostingDuration": "P1825D"}},
-                ],
-            },
-        ],
-        "semantic": {
-            "defaultConfiguration": "hotel-semantic-config",
-            "configurations": [
-                {
-                    "name": "hotel-semantic-config",
-                    "prioritizedFields": {
-                        "titleField": {"fieldName": "HotelName"},
-                        "prioritizedContentFields": [{"fieldName": "Description"}],
-                        "prioritizedKeywordsFields": [{"fieldName": "Category"}, {"fieldName": "Tags"}],
-                    },
-                },
-            ],
-        },
-        "corsOptions": {
-            "allowedOrigins": ["https://smoke-test.example.com"],
-            "maxAgeInSeconds": 300,
-        },
+
+def _load_index_template(name: str, aoai_config: dict, synonym_map_name: str | None = None) -> dict:
+    """Load hotels_index_def.json, substitute placeholders, optionally wire synonym map."""
+    with open(_TEMPLATE_PATH, encoding="utf-8") as f:
+        raw = f.read()
+    replacements = {
+        "{{index}}": name,
+        "{{embedding_dimensions}}": str(aoai_config["embedding_dimensions"]),
+        "{{aoai_endpoint}}": aoai_config["endpoint"],
+        "{{aoai_embedding_deployment}}": aoai_config["embedding_deployment"],
+        "{{aoai_api_key}}": aoai_config["api_key"],
+        "{{aoai_embedding_model}}": aoai_config.get("embedding_model", aoai_config["embedding_deployment"]),
     }
+    for placeholder, value in replacements.items():
+        raw = raw.replace(placeholder, value)
+    # dimensions is a string in JSON template — convert to integer
+    body = json.loads(raw)
+    for field in body.get("fields", []):
+        if "dimensions" in field and isinstance(field["dimensions"], str):
+            field["dimensions"] = int(field["dimensions"])
+    # Wire synonym map onto HotelName and Description
+    if synonym_map_name:
+        for field in body["fields"]:
+            if field["name"] in ("HotelName", "Description"):
+                field["synonymMaps"] = [synonym_map_name]
+    return body
 
 
 class TestIndexCRUD:
@@ -133,7 +64,7 @@ class TestIndexCRUD:
             "synonyms": "hotel, motel, inn\nsuites, penthouse",
         }
         rest.put(f"/synonymmaps/{synonym_map_name}", syn_body)
-        body = _full_index_body(primary_index_name, synonym_map_name, aoai_config)
+        body = _load_index_template(primary_index_name, aoai_config, synonym_map_name=synonym_map_name)
         resp = rest.put(f"/indexes/{primary_index_name}", body)
         assert_status(resp, (200, 201))
 

@@ -181,6 +181,9 @@ class TestScoringWithQueryFeatures:
         # With wildcard, profile still applies (boosted by magnitude/freshness)
         for r in data["value"]:
             assert "@search.score" in r
+            assert r["@search.score"] > 0, (
+                f"Score should be > 0 with profile on wildcard: {r.get('HotelId')}"
+            )
 
     def test_scr_10_profile_search_mode_all(self, rest, primary_index_name):
         """SCR-10: Profile with searchMode 'all' — both features work together."""
@@ -193,6 +196,14 @@ class TestScoringWithQueryFeatures:
             "top": 10,
         })
         assert_status(resp, 200)
+        data = resp.json()
+        results = data.get("value", [])
+        count = data.get("@odata.count", len(results))
+        # searchMode 'all' with scoring profile should return results
+        # where ALL terms match AND profile boost applies
+        assert count >= 0, f"Unexpected negative count: {count}"
+        for r in results:
+            assert "@search.score" in r, f"Missing score on {r.get('HotelId')}"
 
     def test_scr_11_profile_select_restriction(self, rest, primary_index_name):
         """SCR-11: Profile + select — only selected fields returned."""

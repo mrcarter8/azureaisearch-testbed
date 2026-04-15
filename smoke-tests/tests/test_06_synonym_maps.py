@@ -70,4 +70,13 @@ class TestSynonymMapCRUD:
             "select": "HotelName, Description",
             "top": 5,
         })
-        assert_search_results(resp, min_count=1)
+        data = assert_search_results(resp, min_count=1)
+        # Synonym 'inn' should expand to include 'hotel' matches
+        text_blob = " ".join(
+            (r.get("HotelName", "") + " " + r.get("Description", "")).lower()
+            for r in data["value"]
+        )
+        assert "hotel" in text_blob or "inn" in text_blob or "lodge" in text_blob, (
+            f"Synonym expansion for 'inn' didn't return hotel/inn/lodge-related results: "
+            f"{[r.get('HotelName') for r in data['value']]}"
+        )

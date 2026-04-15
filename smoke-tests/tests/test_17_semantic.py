@@ -6,7 +6,7 @@ Tests: SEM-01 through SEM-12
 Comprehensive semantic search validation: rerankerScore ordering, extractive
 answers/captions structure, French language, filter+semantic combo, orderby
 override, maxTextRecallSize, speller, count, highlight, and pagination.
-Each test handles 206 partial response gracefully (PPE transient).
+206 is treated as a failure — it means the semantic ranker did not run.
 """
 
 import pytest
@@ -37,11 +37,7 @@ class TestSemanticReranking:
             "select": "HotelId, HotelName, Category",
             "top": 10,
         })
-        assert_status(resp, (200, 206))
-        data = resp.json()
-        if resp.status_code == 206:
-            assert "@search.semanticPartialResponseReason" in data
-            return  # Base results only — no rerankerScore to validate
+        assert_status(resp, 200)
         results = data.get("value", [])
         assert len(results) >= 1, "No results returned"
         # All results must have @search.rerankerScore
@@ -69,18 +65,20 @@ class TestExtractiveFeatures:
             "select": "HotelId, HotelName",
             "top": 5,
         })
-        assert_status(resp, (200, 206))
+        assert_status(resp, 200)
         data = resp.json()
-        if resp.status_code == 206:
-            return
-        # Answers may or may not be returned depending on confidence
+        # Answers should be returned for a pointed question on a small corpus
         answers = data.get("@search.answers", [])
-        if answers:
-            for ans in answers:
-                assert "key" in ans, "Answer missing 'key'"
-                assert "text" in ans, "Answer missing 'text'"
-                assert "score" in ans, "Answer missing 'score'"
-                assert ans["score"] >= 0, f"Answer score negative: {ans['score']}"
+        assert len(answers) >= 1, (
+            f"Expected at least 1 semantic answer for a pointed question, "
+            f"got {len(answers)}. Keys in response: {list(data.keys())}"
+        )
+        for ans in answers:
+            assert "key" in ans, "Answer missing 'key'"
+            assert "text" in ans, "Answer missing 'text'"
+            assert "score" in ans, "Answer missing 'score'"
+            assert ans["score"] >= 0, f"Answer score negative: {ans['score']}"
+            assert len(ans["text"]) > 0, "Answer 'text' is empty"
 
     def test_sem_03_extractive_captions(self, rest, primary_index_name):
         """SEM-03: Semantic captions — @search.captions on each result."""
@@ -92,10 +90,8 @@ class TestExtractiveFeatures:
             "select": "HotelId, HotelName",
             "top": 5,
         })
-        assert_status(resp, (200, 206))
+        assert_status(resp, 200)
         data = resp.json()
-        if resp.status_code == 206:
-            return
         results = data.get("value", [])
         assert len(results) >= 1, "No results returned"
         # At least some results should have captions
@@ -118,15 +114,21 @@ class TestExtractiveFeatures:
             "select": "HotelId, HotelName, Rating",
             "top": 5,
         })
-        assert_status(resp, (200, 206))
+        assert_status(resp, 200)
         data = resp.json()
-        if resp.status_code == 206:
-            return
         results = data.get("value", [])
         assert len(results) >= 1
         # rerankerScore on results
         for r in results:
-            assert "@search.rerankerScore" in r
+            assert "@search.rerankerScore" in r, (
+                f"Hotel {r.get('HotelId')} missing @search.rerankerScore"
+            )
+        # When both answers and captions are requested, verify captions are present
+        captions_found = sum(1 for r in results if "@search.captions" in r)
+        assert captions_found >= 1, (
+            f"Expected at least 1 result with @search.captions when captions requested, "
+            f"found {captions_found}/{len(results)}"
+        )
 
 
 class TestSemanticLanguage:
@@ -142,10 +144,19 @@ class TestSemanticLanguage:
             "select": "HotelId, HotelName, Description_fr",
             "top": 5,
         })
-        assert_status(resp, (200, 206))
+        assert_status(resp, 200)
         data = resp.json()
         results = data.get("value", [])
         assert len(results) >= 1, "No results for French query"
+        # Verify at least one result has French content in Description_fr
+        has_french = any(
+            r.get("Description_fr") and len(r["Description_fr"]) > 0
+            for r in results
+        )
+        assert has_french, (
+            f"French semantic search returned results but none have Description_fr content: "
+            f"{[r.get('Description_fr', '<missing>') for r in results[:3]]}"
+        )
 
 
 class TestSemanticWithFilters:
@@ -161,15 +172,15 @@ class TestSemanticWithFilters:
             "select": "HotelId, HotelName, Rating",
             "top": 5,
         })
-        assert_status(resp, (200, 206))
+        assert_status(resp, 200)
         data = resp.json()
         results = data.get("value", [])
-        # All results must satisfy the filter regardless of 200/206
+        # All results must satisfy the filter
         for r in results:
             rating = r.get("Rating")
             assert rating is not None and rating >= 4, \
                 f"Hotel {r.get('HotelId')} Rating {rating} should be >= 4"
-        if resp.status_code == 200 and results:
+        if results:
             assert "@search.rerankerScore" in results[0]
 
     def test_sem_07_semantic_orderby_override(self, rest, primary_index_name):
@@ -219,10 +230,15 @@ class TestSemanticParameters:
             "select": "HotelId, HotelName",
             "top": 5,
         })
-        assert_status(resp, (200, 206))
+        assert_status(resp, 200)
         data = resp.json()
         results = data.get("value", [])
         assert len(results) >= 1, "Speller should correct misspellings and find results"
+        has_reranker = any("@search.rerankerScore" in r for r in results)
+        assert has_reranker, (
+            "Semantic search with speller returned results but no rerankerScores "
+            "— speller may not have corrected the query"
+        )
 
     def test_sem_10_semantic_with_count(self, rest, primary_index_name):
         """SEM-10: $count=true with semantic search returns @odata.count."""
@@ -233,7 +249,7 @@ class TestSemanticParameters:
             "count": True,
             "top": 3,
         })
-        assert_status(resp, (200, 206))
+        assert_status(resp, 200)
         data = resp.json()
         count = data.get("@odata.count")
         assert count is not None, "@odata.count missing from semantic response"
@@ -256,17 +272,19 @@ class TestSemanticWithOtherFeatures:
             "select": "HotelId, HotelName",
             "top": 5,
         })
-        assert_status(resp, (200, 206))
+        assert_status(resp, 200)
         data = resp.json()
         results = data.get("value", [])
         assert len(results) >= 1, "No results returned"
-        # Highlights and captions may coexist
-        if resp.status_code == 200:
-            highlights_found = any("@search.highlights" in r for r in results)
-            captions_found = any("@search.captions" in r for r in results)
-            # At least one feature should be present
-            assert highlights_found or captions_found, \
-                "Neither @search.highlights nor @search.captions found"
+        # Highlights and captions should coexist
+        highlights_found = any("@search.highlights" in r for r in results)
+        captions_found = any("@search.captions" in r for r in results)
+        assert highlights_found, (
+            "@search.highlights not found on any result despite highlight param"
+        )
+        assert captions_found, (
+            "@search.captions not found on any result despite captions param"
+        )
 
     def test_sem_12_semantic_pagination(self, rest, primary_index_name):
         """SEM-12: Semantic search top/skip — no overlap between pages."""
@@ -284,8 +302,8 @@ class TestSemanticWithOtherFeatures:
             "top": 3, "skip": 3,
             "select": "HotelId",
         })
-        assert_status(resp1, (200, 206))
-        assert_status(resp2, (200, 206))
+        assert_status(resp1, 200)
+        assert_status(resp2, 200)
         ids1 = {r["HotelId"] for r in resp1.json().get("value", [])}
         ids2 = {r["HotelId"] for r in resp2.json().get("value", [])}
         overlap = ids1 & ids2

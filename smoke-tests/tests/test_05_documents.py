@@ -1,10 +1,13 @@
 """
 test_05_documents.py — Document CRUD Operations
 
-Tests: DOC-01 through DOC-12
+Tests: DOC-01 through DOC-22
 
 Gate: DOC-01 failure aborts run.
 """
+
+import json
+import os
 
 import pytest
 
@@ -16,108 +19,20 @@ from helpers.assertions import (
 
 pytestmark = [pytest.mark.documents]
 
-# Sample hotel documents — 5 docs covering multiple field types, categories, geo, rooms
-SAMPLE_HOTELS = [
-    {
-        "@search.action": "upload",
-        "HotelId": "1", "HotelName": "Stay-Kay City Hotel",
-        "Description": "This classic hotel is ideally located on the main commercial artery of the city in the heart of New York.",
-        "Description_fr": "Cet hôtel classique est idéalement situé sur la principale artère commerciale de la ville.",
-        "Category": "Boutique",
-        "Tags": ["pool", "air conditioning", "concierge"],
-        "ParkingIncluded": False,
-        "LastRenovationDate": "1970-01-18T00:00:00Z",
-        "Rating": 3.6,
-        "Location": {"type": "Point", "coordinates": [-73.975403, 40.760586]},
-        "Address": {"StreetAddress": "677 5th Ave", "City": "New York", "StateProvince": "NY", "PostalCode": "10022", "Country": "USA"},
-        "Rooms": [
-            {"Description": "Budget Room, 1 Queen Bed (City View)", "Type": "Budget Room", "BaseRate": 72.99, "BedOptions": "1 Queen Bed", "SleepsCount": 2, "SmokingAllowed": False, "Tags": ["coffee maker"]},
-        ],
-    },
-    {
-        "@search.action": "upload",
-        "HotelId": "2", "HotelName": "Old Century Hotel",
-        "Description": "The hotel is situated in a 19th century plaza, which has been expanded and renovated to the highest standards.",
-        "Category": "Boutique",
-        "Tags": ["view", "pool", "restaurant"],
-        "ParkingIncluded": True,
-        "LastRenovationDate": "2019-02-18T00:00:00Z",
-        "Rating": 4.8,
-        "Location": {"type": "Point", "coordinates": [-73.986328, 40.755042]},
-        "Address": {"StreetAddress": "140 University Dr", "City": "New York", "StateProvince": "NY", "PostalCode": "10003", "Country": "USA"},
-        "Rooms": [
-            {"Description": "Suite, 1 King Bed (Amenities)", "Type": "Suite", "BaseRate": 254.99, "BedOptions": "1 King Bed", "SleepsCount": 2, "SmokingAllowed": False, "Tags": ["suite"]},
-        ],
-    },
-    {
-        "@search.action": "upload",
-        "HotelId": "3", "HotelName": "Gastronomic Landscape Hotel",
-        "Description": "The Gastronomic Hotel stands out for its culinary excellence under the management of William Dough.",
-        "Description_fr": "L'hôtel Gastronomic se distingue par son excellence gastronomique.",
-        "Category": "Suite",
-        "Tags": ["restaurant", "bar", "continental breakfast"],
-        "ParkingIncluded": True,
-        "LastRenovationDate": "2015-09-20T00:00:00Z",
-        "Rating": 4.8,
-        "Location": {"type": "Point", "coordinates": [-84.362465, 33.846432]},
-        "Address": {"StreetAddress": "3393 Peachtree Rd", "City": "Atlanta", "StateProvince": "GA", "PostalCode": "30326", "Country": "USA"},
-        "Rooms": [
-            {"Description": "Standard Room, 2 Queen Beds", "Type": "Standard Room", "BaseRate": 101.99, "BedOptions": "2 Queen Beds", "SleepsCount": 4, "SmokingAllowed": True, "Tags": ["vcr/dvd"]},
-            {"Description": "Suite, 1 King Bed (Amenities)", "Type": "Suite", "BaseRate": 264.99, "BedOptions": "1 King Bed", "SleepsCount": 2, "SmokingAllowed": True, "Tags": ["jacuzzi tub"]},
-        ],
-    },
-    {
-        "@search.action": "upload",
-        "HotelId": "4", "HotelName": "Sublime Palace Hotel",
-        "Description": "Sublime Cliff Hotel is located in the heart of the historic center of sublime in a vibrant area.",
-        "Category": "Boutique",
-        "Tags": ["concierge", "view", "air conditioning"],
-        "ParkingIncluded": True,
-        "LastRenovationDate": "2020-02-06T00:00:00Z",
-        "Rating": 4.6,
-        "Location": {"type": "Point", "coordinates": [-98.495422, 29.518398]},
-        "Address": {"StreetAddress": "7400 San Pedro Ave", "City": "San Antonio", "StateProvince": "TX", "PostalCode": "78216", "Country": "USA"},
-        "Rooms": [
-            {"Description": "Budget Room, 1 Queen Bed (Waterfront View)", "Type": "Budget Room", "BaseRate": 81.99, "BedOptions": "1 Queen Bed", "SleepsCount": 2, "SmokingAllowed": False, "Tags": ["tv"]},
-        ],
-    },
-    {
-        "@search.action": "upload",
-        "HotelId": "5", "HotelName": "Fancy Stay",
-        "Description": "The fancy stay is a luxury hotel in the heart of downtown with world-class amenities and upscale service.",
-        "Category": "Luxury",
-        "Tags": ["pool", "spa", "fitness center"],
-        "ParkingIncluded": False,
-        "LastRenovationDate": "2022-06-15T00:00:00Z",
-        "Rating": 4.9,
-        "Location": {"type": "Point", "coordinates": [-122.131577, 47.678581]},
-        "Address": {"StreetAddress": "100 1st Ave", "City": "Seattle", "StateProvince": "WA", "PostalCode": "98101", "Country": "USA"},
-        "Rooms": [
-            {"Description": "Deluxe Room, 1 King Bed", "Type": "Deluxe Room", "BaseRate": 289.99, "BedOptions": "1 King Bed", "SleepsCount": 2, "SmokingAllowed": False, "Tags": ["suite", "bathroom shower"]},
-        ],
-    },
-]
+# Load 100 sample hotels from JSON file
+_DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "sample_data", "hotels_100.json")
+with open(_DATA_PATH, encoding="utf-8") as _f:
+    SAMPLE_HOTELS = json.load(_f)
 
-# Extended set — 20 more hotels for batch upload to reach 25 total
-HOTELS_6_THROUGH_25 = [
-    {"@search.action": "upload", "HotelId": str(i), "HotelName": f"Test Hotel {i}",
-     "Description": f"Description for hotel {i} with amenities and a great location.",
-     "Category": ["Luxury", "Budget", "Resort and Spa", "Extended-Stay", "Boutique"][i % 5],
-     "Tags": [["pool", "spa"], ["wifi", "parking"], ["restaurant", "bar"], ["gym", "pool"], ["view", "quiet"]][i % 5],
-     "ParkingIncluded": i % 2 == 0,
-     "Rating": round(1.0 + (i % 50) / 10, 1),
-     "Address": {"City": ["Denver", "Chicago", "Miami", "Portland", "Austin"][i % 5], "StateProvince": ["CO", "IL", "FL", "OR", "TX"][i % 5], "Country": "USA"}}
-    for i in range(6, 26)
-]
+HOTEL_COUNT = len(SAMPLE_HOTELS)
 
 
 class TestDocumentUpload:
 
     @pytest.mark.gate
     def test_doc_01_upload_batch(self, rest, primary_index_name):
-        """DOC-01: Upload 25 documents. GATE — failure aborts run."""
-        all_docs = SAMPLE_HOTELS + HOTELS_6_THROUGH_25
-        body = {"value": all_docs}
+        """DOC-01: Upload 100 documents. GATE — failure aborts run."""
+        body = {"value": SAMPLE_HOTELS}
         resp = rest.post(f"/indexes/{primary_index_name}/docs/index", body)
         assert_status(resp, (200, 207))
         data = resp.json()
@@ -130,8 +45,10 @@ class TestDocumentUpload:
         resp = rest.get(f"/indexes/{primary_index_name}/docs/1")
         assert_status(resp, 200)
         data = resp.json()
-        assert_field_equals(data, "HotelName", "Stay-Kay City Hotel")
-        assert_field_equals(data, "Category", "Boutique")
+        # Verify data matches sample_data/hotels_100.json hotel #1
+        expected = SAMPLE_HOTELS[0]
+        assert_field_equals(data, "HotelName", expected["HotelName"])
+        assert_field_equals(data, "Category", expected["Category"])
 
     def test_doc_03_document_count(self, rest, primary_index_name):
         """DOC-03: Document count matches uploaded count."""
@@ -141,10 +58,10 @@ class TestDocumentUpload:
             resp = rest.get(f"/indexes/{primary_index_name}/docs/$count")
             assert_status(resp, 200)
             count = int(resp.text.strip())
-            if count == 25:
+            if count == HOTEL_COUNT:
                 break
             time.sleep(3)
-        assert count == 25, f"Expected 25 documents, got {count}"
+        assert count == HOTEL_COUNT, f"Expected {HOTEL_COUNT} documents, got {count}"
 
 
 class TestDocumentMerge:
@@ -158,7 +75,7 @@ class TestDocumentMerge:
         get_resp = rest.get(f"/indexes/{primary_index_name}/docs/1")
         assert_field_equals(get_resp.json(), "Rating", 4.5)
         # Verify other fields unchanged
-        assert_field_equals(get_resp.json(), "HotelName", "Stay-Kay City Hotel")
+        assert_field_equals(get_resp.json(), "HotelName", SAMPLE_HOTELS[0]["HotelName"])
 
     def test_doc_05_merge_or_upload_existing(self, rest, primary_index_name):
         """DOC-05: mergeOrUpload on existing doc updates it."""
@@ -172,45 +89,115 @@ class TestDocumentMerge:
         """DOC-06: mergeOrUpload on new doc creates it."""
         body = {"value": [{
             "@search.action": "mergeOrUpload",
-            "HotelId": "26",
+            "HotelId": "200",
             "HotelName": "Upserted Hotel",
             "Description": "Created via mergeOrUpload",
             "Rating": 3.5,
         }]}
         resp = rest.post(f"/indexes/{primary_index_name}/docs/index", body)
         assert_status(resp, (200, 207))
-        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/26")
+        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/200")
         assert_status(get_resp, 200)
 
     def test_doc_07_delete_document(self, rest, primary_index_name):
         """DOC-07: Delete a document."""
-        body = {"value": [{"@search.action": "delete", "HotelId": "26"}]}
+        body = {"value": [{"@search.action": "delete", "HotelId": "200"}]}
         resp = rest.post(f"/indexes/{primary_index_name}/docs/index", body)
         assert_status(resp, (200, 207))
         import time
         time.sleep(2)
-        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/26")
+        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/200")
         assert_status(get_resp, 404)
 
 
 class TestDocumentEdgeCases:
 
-    def test_doc_08_upload_with_vectors(self, rest, primary_index_name):
-        """DOC-08: Upload a doc with a pre-computed vector field."""
-        # Create a dummy 1536-dim vector (all zeros for structural test)
-        vector = [0.0] * 1536
-        body = {"value": [{
-            "@search.action": "mergeOrUpload",
-            "HotelId": "1",
-            "DescriptionVector": vector,
-        }]}
-        resp = rest.post(f"/indexes/{primary_index_name}/docs/index", body)
-        assert_status(resp, (200, 207))
-        # Verify document still exists (vector fields are hidden by default,
-        # so we only verify the doc is accessible, not the vector content)
-        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/1", params={"$select": "HotelId"})
-        assert_status(get_resp, 200)
-        assert get_resp.json().get("HotelId") == "1"
+    def test_doc_08_upload_with_vectors(self, rest, primary_index_name, aoai_config):
+        """DOC-08: Populate all 100 documents with real AOAI embeddings across 4 vector fields."""
+        import requests as _http
+        import time as _time
+
+        endpoint = aoai_config["endpoint"].rstrip("/")
+        deployment = aoai_config["embedding_deployment"]
+        api_version = aoai_config["api_version"]
+        url = f"{endpoint}/openai/deployments/{deployment}/embeddings?api-version={api_version}"
+        headers = {"api-key": aoai_config["api_key"], "Content-Type": "application/json"}
+
+        # Collect descriptions for all 100 hotels
+        texts = [d.get("Description", f"Hotel {d['HotelId']}") for d in SAMPLE_HOTELS]
+
+        # Call AOAI embedding API in batches of 16 (rate-limit friendly)
+        BATCH_SIZE = 16
+        embeddings = [None] * len(texts)
+        for batch_start in range(0, len(texts), BATCH_SIZE):
+            batch_texts = texts[batch_start:batch_start + BATCH_SIZE]
+            for attempt in range(6):
+                try:
+                    resp = _http.post(url, json={"input": batch_texts}, headers=headers, timeout=120)
+                except _http.exceptions.RequestException:
+                    _time.sleep(2 ** attempt)
+                    continue
+                if resp.status_code == 429:
+                    wait = int(resp.headers.get("Retry-After", 2 ** attempt))
+                    _time.sleep(wait)
+                    continue
+                if resp.status_code >= 500:
+                    _time.sleep(2 ** attempt)
+                    continue
+                resp.raise_for_status()
+                for item in resp.json()["data"]:
+                    embeddings[batch_start + item["index"]] = item["embedding"]
+                break
+
+        assert all(e is not None for e in embeddings), "Some embeddings missing from AOAI response"
+
+        # Verify embedding dimensions
+        for i, emb in enumerate(embeddings):
+            assert len(emb) == 1536, (
+                f"Embedding for doc {SAMPLE_HOTELS[i]['HotelId']} has {len(emb)} dims, expected 1536"
+            )
+
+        # MergeOrUpload all docs with vectors into all 4 vector fields
+        # (same embedding for each field — compression happens server-side)
+        UPLOAD_BATCH = 50
+        for batch_start in range(0, len(SAMPLE_HOTELS), UPLOAD_BATCH):
+            merge_docs = []
+            for idx in range(batch_start, min(batch_start + UPLOAD_BATCH, len(SAMPLE_HOTELS))):
+                emb = embeddings[idx]
+                merge_docs.append({
+                    "@search.action": "mergeOrUpload",
+                    "HotelId": SAMPLE_HOTELS[idx]["HotelId"],
+                    "DescriptionVector": emb,
+                    "DescriptionVectorBQ": emb,
+                    "DescriptionVectorSQ": emb,
+                    "DescriptionVectorEKNN": emb,
+                })
+            upload_resp = rest.post(
+                f"/indexes/{primary_index_name}/docs/index", {"value": merge_docs}
+            )
+            assert_status(upload_resp, (200, 207))
+            results = upload_resp.json().get("value", [])
+            failed = [r for r in results if not r.get("status", False)]
+            assert len(failed) == 0, f"{len(failed)} vector uploads failed: {failed[:3]}"
+
+        # Wait for indexing and verify vectors via a vector query
+        _time.sleep(5)
+        verify = rest.post(f"/indexes/{primary_index_name}/docs/search", {
+            "vectorQueries": [{
+                "kind": "text",
+                "text": "luxury hotel with spa",
+                "fields": "DescriptionVector",
+                "k": 3,
+            }],
+            "select": "HotelId, HotelName",
+        })
+        assert_status(verify, 200)
+        results = verify.json().get("value", [])
+        assert len(results) >= 1, "Vector query returned no results after embedding upload"
+        for r in results:
+            assert "@search.score" in r, (
+                f"Vector result for {r.get('HotelId')} missing @search.score"
+            )
 
     def test_doc_09_large_document(self, rest, primary_index_name):
         """DOC-09: Upload a document with a large text field."""
@@ -253,7 +240,10 @@ class TestDocumentEdgeCases:
         if resp.status_code in (200, 207):
             results = resp.json().get("value", [])
             succeeded = sum(1 for r in results if r.get("status") is True)
-            assert succeeded > 0, "No documents succeeded in batch"
+            failed = sum(1 for r in results if r.get("status") is not True)
+            assert succeeded == 1000, (
+                f"Expected all 1000 docs to succeed, got {succeeded} succeeded, {failed} failed"
+            )
         else:
             # Batch size limit rejection is acceptable
             assert resp.status_code in (400, 413), f"Unexpected: {resp.status_code}"
@@ -294,7 +284,16 @@ class TestDocumentMergeExpanded:
         assert_field_equals(data, "Category", "Suite")
         assert "updated" in data.get("Tags", []), "Tags should contain 'updated'"
         # HotelName should be unchanged
-        assert_field_equals(data, "HotelName", "Gastronomic Landscape Hotel")
+        assert_field_equals(data, "HotelName", SAMPLE_HOTELS[2]["HotelName"])
+        # Restore original data so subsequent tests are unaffected
+        original = SAMPLE_HOTELS[2]
+        rest.post(f"/indexes/{primary_index_name}/docs/index", {"value": [{
+            "@search.action": "merge",
+            "HotelId": "3",
+            "Rating": original["Rating"],
+            "Category": original["Category"],
+            "Tags": original["Tags"],
+        }]})
 
     def test_doc_14_merge_nonexistent_doc(self, rest, primary_index_name):
         """DOC-14: Merge on non-existent document — item-level 404 error."""
@@ -314,7 +313,7 @@ class TestDocumentMergeExpanded:
         """DOC-15: Upload with existing key overwrites the document entirely."""
         body = {"value": [{
             "@search.action": "upload",
-            "HotelId": "90",
+            "HotelId": "201",
             "HotelName": "Temp Hotel V1",
             "Category": "Budget",
             "Rating": 2.0,
@@ -325,14 +324,14 @@ class TestDocumentMergeExpanded:
         # Overwrite with different data
         body2 = {"value": [{
             "@search.action": "upload",
-            "HotelId": "90",
+            "HotelId": "201",
             "HotelName": "Temp Hotel V2",
             "Category": "Luxury",
         }]}
         resp2 = rest.post(f"/indexes/{primary_index_name}/docs/index", body2)
         assert_status(resp2, (200, 207))
         time.sleep(2)
-        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/90")
+        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/201")
         data = get_resp.json()
         assert_field_equals(data, "HotelName", "Temp Hotel V2")
         assert_field_equals(data, "Category", "Luxury")
@@ -341,7 +340,7 @@ class TestDocumentMergeExpanded:
             f"Upload should replace: Rating should be null, got {data.get('Rating')}"
         # Cleanup
         rest.post(f"/indexes/{primary_index_name}/docs/index", {
-            "value": [{"@search.action": "delete", "HotelId": "90"}]
+            "value": [{"@search.action": "delete", "HotelId": "201"}]
         })
 
     def test_doc_16_batch_mixed_actions(self, rest, primary_index_name):
@@ -349,14 +348,14 @@ class TestDocumentMergeExpanded:
         import time
         # Setup: upload temp doc
         rest.post(f"/indexes/{primary_index_name}/docs/index", {
-            "value": [{"@search.action": "upload", "HotelId": "91", "HotelName": "Mixed Test", "Rating": 3.0}]
+            "value": [{"@search.action": "upload", "HotelId": "202", "HotelName": "Mixed Test", "Rating": 3.0}]
         })
         time.sleep(2)
         # Mixed batch
         body = {"value": [
-            {"@search.action": "upload", "HotelId": "92", "HotelName": "Mixed Upload", "Rating": 4.0},
-            {"@search.action": "merge", "HotelId": "91", "Rating": 5.0},
-            {"@search.action": "delete", "HotelId": "92"},
+            {"@search.action": "upload", "HotelId": "203", "HotelName": "Mixed Upload", "Rating": 4.0},
+            {"@search.action": "merge", "HotelId": "202", "Rating": 5.0},
+            {"@search.action": "delete", "HotelId": "203"},
         ]}
         resp = rest.post(f"/indexes/{primary_index_name}/docs/index", body)
         assert_status(resp, (200, 207))
@@ -365,14 +364,14 @@ class TestDocumentMergeExpanded:
             f"Mixed batch has failures: {[r for r in results if not r.get('status')]}"
         time.sleep(2)
         # Verify merge applied
-        get91 = rest.get(f"/indexes/{primary_index_name}/docs/91")
-        assert_field_equals(get91.json(), "Rating", 5.0)
+        get202 = rest.get(f"/indexes/{primary_index_name}/docs/202")
+        assert_field_equals(get202.json(), "Rating", 5.0)
         # Verify delete applied
-        get92 = rest.get(f"/indexes/{primary_index_name}/docs/92")
-        assert_status(get92, 404)
+        get203 = rest.get(f"/indexes/{primary_index_name}/docs/203")
+        assert_status(get203, 404)
         # Cleanup
         rest.post(f"/indexes/{primary_index_name}/docs/index", {
-            "value": [{"@search.action": "delete", "HotelId": "91"}]
+            "value": [{"@search.action": "delete", "HotelId": "202"}]
         })
 
 
@@ -421,7 +420,7 @@ class TestDocumentComplexTypes:
         import time
         body = {"value": [{
             "@search.action": "upload",
-            "HotelId": "93",
+            "HotelId": "204",
             "HotelName": "Complex Type Hotel",
             "Description": "A fully populated hotel for testing.",
             "Category": "Resort and Spa",
@@ -447,7 +446,7 @@ class TestDocumentComplexTypes:
         resp = rest.post(f"/indexes/{primary_index_name}/docs/index", body)
         assert_status(resp, (200, 207))
         time.sleep(2)
-        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/93")
+        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/204")
         assert_status(get_resp, 200)
         data = get_resp.json()
         assert_field_equals(data, "HotelName", "Complex Type Hotel")
@@ -456,7 +455,7 @@ class TestDocumentComplexTypes:
         assert data["Rooms"][0]["Type"] == "Suite"
         # Cleanup
         rest.post(f"/indexes/{primary_index_name}/docs/index", {
-            "value": [{"@search.action": "delete", "HotelId": "93"}]
+            "value": [{"@search.action": "delete", "HotelId": "204"}]
         })
 
     def test_doc_21_upload_empty_rooms_collection(self, rest, primary_index_name):
@@ -464,21 +463,21 @@ class TestDocumentComplexTypes:
         import time
         body = {"value": [{
             "@search.action": "upload",
-            "HotelId": "94",
+            "HotelId": "205",
             "HotelName": "No Rooms Hotel",
             "Rooms": [],
         }]}
         resp = rest.post(f"/indexes/{primary_index_name}/docs/index", body)
         assert_status(resp, (200, 207))
         time.sleep(2)
-        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/94")
+        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/205")
         data = get_resp.json()
         rooms = data.get("Rooms", None)
         assert rooms is not None and len(rooms) == 0, \
             f"Rooms should be empty list, got: {rooms}"
         # Cleanup
         rest.post(f"/indexes/{primary_index_name}/docs/index", {
-            "value": [{"@search.action": "delete", "HotelId": "94"}]
+            "value": [{"@search.action": "delete", "HotelId": "205"}]
         })
 
     def test_doc_22_merge_replaces_collection(self, rest, primary_index_name):
@@ -526,33 +525,33 @@ class TestDocumentEdgeCasesExpanded:
         import time
         # Upload temp doc
         rest.post(f"/indexes/{primary_index_name}/docs/index", {
-            "value": [{"@search.action": "upload", "HotelId": "95", "HotelName": "Temp Reupload"}]
+            "value": [{"@search.action": "upload", "HotelId": "206", "HotelName": "Temp Reupload"}]
         })
         time.sleep(2)
         # Delete it
         rest.post(f"/indexes/{primary_index_name}/docs/index", {
-            "value": [{"@search.action": "delete", "HotelId": "95"}]
+            "value": [{"@search.action": "delete", "HotelId": "206"}]
         })
         time.sleep(2)
-        assert_status(rest.get(f"/indexes/{primary_index_name}/docs/95"), 404)
+        assert_status(rest.get(f"/indexes/{primary_index_name}/docs/206"), 404)
         # Re-upload
         rest.post(f"/indexes/{primary_index_name}/docs/index", {
-            "value": [{"@search.action": "upload", "HotelId": "95",
+            "value": [{"@search.action": "upload", "HotelId": "206",
                         "HotelName": "Temp Reupload V2", "Rating": 5.0}]
         })
         time.sleep(2)
-        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/95")
+        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/206")
         assert_status(get_resp, 200)
         assert_field_equals(get_resp.json(), "HotelName", "Temp Reupload V2")
         # Cleanup
         rest.post(f"/indexes/{primary_index_name}/docs/index", {
-            "value": [{"@search.action": "delete", "HotelId": "95"}]
+            "value": [{"@search.action": "delete", "HotelId": "206"}]
         })
 
     def test_doc_25_batch_partial_failure(self, rest, primary_index_name):
         """DOC-25: Batch with 1 invalid doc — 207 with partial success."""
         body = {"value": [
-            {"@search.action": "upload", "HotelId": "96", "HotelName": "Good Doc"},
+            {"@search.action": "upload", "HotelId": "207", "HotelName": "Good Doc"},
             {"@search.action": "merge", "HotelId": "NONEXISTENT-99", "Rating": 1.0},
         ]}
         resp = rest.post(f"/indexes/{primary_index_name}/docs/index", body)
@@ -564,7 +563,7 @@ class TestDocumentEdgeCasesExpanded:
             assert True in statuses, "Expected partial success — at least one doc should succeed"
         # Cleanup
         rest.post(f"/indexes/{primary_index_name}/docs/index", {
-            "value": [{"@search.action": "delete", "HotelId": "96"}]
+            "value": [{"@search.action": "delete", "HotelId": "207"}]
         })
 
     def test_doc_26_merge_preserves_unmentioned_fields(self, rest, primary_index_name):
@@ -572,17 +571,17 @@ class TestDocumentEdgeCasesExpanded:
         import time
         # Upload a doc with multiple fields
         rest.post(f"/indexes/{primary_index_name}/docs/index", {
-            "value": [{"@search.action": "upload", "HotelId": "97",
+            "value": [{"@search.action": "upload", "HotelId": "208",
                         "HotelName": "Preserve Test", "Category": "Budget",
                         "Rating": 3.5, "ParkingIncluded": True}]
         })
         time.sleep(2)
         # Merge only Rating
         rest.post(f"/indexes/{primary_index_name}/docs/index", {
-            "value": [{"@search.action": "merge", "HotelId": "97", "Rating": 4.0}]
+            "value": [{"@search.action": "merge", "HotelId": "208", "Rating": 4.0}]
         })
         time.sleep(2)
-        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/97")
+        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/208")
         data = get_resp.json()
         assert_field_equals(data, "Rating", 4.0)
         assert_field_equals(data, "HotelName", "Preserve Test")
@@ -590,7 +589,7 @@ class TestDocumentEdgeCasesExpanded:
         assert data.get("ParkingIncluded") is True, "ParkingIncluded should be preserved"
         # Cleanup
         rest.post(f"/indexes/{primary_index_name}/docs/index", {
-            "value": [{"@search.action": "delete", "HotelId": "97"}]
+            "value": [{"@search.action": "delete", "HotelId": "208"}]
         })
 
     def test_doc_27_upload_special_chars_in_fields(self, rest, primary_index_name):
@@ -598,21 +597,21 @@ class TestDocumentEdgeCasesExpanded:
         import time
         body = {"value": [{
             "@search.action": "upload",
-            "HotelId": "98",
+            "HotelId": "209",
             "HotelName": 'Hotel "Grand" <Palace> & Café',
             "Description": "A hotel with 'single quotes', \"double quotes\", <tags>, & ampersands.",
         }]}
         resp = rest.post(f"/indexes/{primary_index_name}/docs/index", body)
         assert_status(resp, (200, 207))
         time.sleep(2)
-        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/98")
+        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/209")
         assert_status(get_resp, 200)
         data = get_resp.json()
         assert "Grand" in data.get("HotelName", ""), "Special chars in name should be preserved"
         assert "&" in data.get("HotelName", ""), "Ampersand should be preserved"
         # Cleanup
         rest.post(f"/indexes/{primary_index_name}/docs/index", {
-            "value": [{"@search.action": "delete", "HotelId": "98"}]
+            "value": [{"@search.action": "delete", "HotelId": "209"}]
         })
 
     def test_doc_28_upload_with_null_optional_fields(self, rest, primary_index_name):
@@ -620,7 +619,7 @@ class TestDocumentEdgeCasesExpanded:
         import time
         body = {"value": [{
             "@search.action": "upload",
-            "HotelId": "99",
+            "HotelId": "210",
             "HotelName": "Null Fields Hotel",
             "Description": None,
             "Category": None,
@@ -629,7 +628,7 @@ class TestDocumentEdgeCasesExpanded:
         resp = rest.post(f"/indexes/{primary_index_name}/docs/index", body)
         assert_status(resp, (200, 207))
         time.sleep(2)
-        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/99")
+        get_resp = rest.get(f"/indexes/{primary_index_name}/docs/210")
         assert_status(get_resp, 200)
         data = get_resp.json()
         assert data.get("Description") is None, "Description should be null"
@@ -637,7 +636,7 @@ class TestDocumentEdgeCasesExpanded:
         assert data.get("Rating") is None, "Rating should be null"
         # Cleanup
         rest.post(f"/indexes/{primary_index_name}/docs/index", {
-            "value": [{"@search.action": "delete", "HotelId": "99"}]
+            "value": [{"@search.action": "delete", "HotelId": "210"}]
         })
 
     def test_doc_29_empty_batch(self, rest, primary_index_name):
@@ -660,5 +659,5 @@ class TestDocumentEdgeCasesExpanded:
         data = resp.json()
         results = data.get("value", [])
         assert len(results) == 1, f"Expected exactly 1 result for HotelId=5, got {len(results)}"
-        assert results[0]["HotelName"] == "Fancy Stay"
-        assert results[0]["Category"] == "Luxury"
+        assert results[0]["HotelName"] == SAMPLE_HOTELS[4]["HotelName"]
+        assert results[0]["Category"] == SAMPLE_HOTELS[4]["Category"]

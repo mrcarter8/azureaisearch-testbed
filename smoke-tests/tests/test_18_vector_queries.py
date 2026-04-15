@@ -1,13 +1,14 @@
 """
 test_18_vector_queries.py — Vector Search Scenarios
 
-Tests: VQR-01 through VQR-16
+Tests: VQR-01 through VQR-22
 
 Comprehensive vector search validation: kind:text integrated vectorization,
 exhaustive KNN, hybrid+semantic tri-modal, relevance differentiation,
 score ordering, oversampling, weight parameter, k vs top semantics,
-and vector+facets. Uses both the primary hotels index and the E2E
-vector corpus (smoke-vec-e2e) for meaningful relevance validation.
+vector compression (scalar/binary quantization), and multi-field vector
+queries. Uses both the primary hotels index and the E2E vector corpus
+(smoke-vec-e2e) for meaningful relevance validation.
 """
 
 import pytest
@@ -125,6 +126,143 @@ class TestVectorOnPrimaryIndex:
             # Semantic rerankerScore should be present
             assert "@search.rerankerScore" in results[0], \
                 "Tri-modal 200 response should have @search.rerankerScore"
+
+
+class TestVectorCompression:
+    """Vector search with scalar quantization, binary quantization, and exhaustive KNN on primary index."""
+
+    def test_vqr_17_scalar_quantized_vector_search(self, rest, primary_index_name):
+        """VQR-17: Scalar quantized (int8) vector field returns scored results."""
+        resp = rest.post(f"/indexes/{primary_index_name}/docs/search", {
+            "vectorQueries": [{
+                "kind": "text",
+                "text": "spa and wellness resort with pool",
+                "fields": "DescriptionVectorSQ",
+                "k": 5,
+            }],
+            "select": "HotelId, HotelName, Category",
+        })
+        assert_status(resp, 200)
+        results = resp.json().get("value", [])
+        assert len(results) >= 1, "Scalar quantized vector search returned no results"
+        for r in results:
+            assert "@search.score" in r, f"Missing @search.score on {r.get('HotelId')}"
+
+    def test_vqr_18_binary_quantized_vector_search(self, rest, primary_index_name):
+        """VQR-18: Binary quantized vector field returns scored results."""
+        resp = rest.post(f"/indexes/{primary_index_name}/docs/search", {
+            "vectorQueries": [{
+                "kind": "text",
+                "text": "budget hotel near downtown with free parking",
+                "fields": "DescriptionVectorBQ",
+                "k": 5,
+            }],
+            "select": "HotelId, HotelName, Category",
+        })
+        assert_status(resp, 200)
+        results = resp.json().get("value", [])
+        assert len(results) >= 1, "Binary quantized vector search returned no results"
+        for r in results:
+            assert "@search.score" in r, f"Missing @search.score on {r.get('HotelId')}"
+
+    def test_vqr_19_exhaustive_knn_on_primary(self, rest, primary_index_name):
+        """VQR-19: Exhaustive KNN vector field search returns results."""
+        resp = rest.post(f"/indexes/{primary_index_name}/docs/search", {
+            "vectorQueries": [{
+                "kind": "text",
+                "text": "historic boutique hotel with character",
+                "fields": "DescriptionVectorEKNN",
+                "k": 5,
+            }],
+            "select": "HotelId, HotelName, Category",
+        })
+        assert_status(resp, 200)
+        results = resp.json().get("value", [])
+        assert len(results) >= 1, "Exhaustive KNN vector search returned no results"
+        for r in results:
+            assert "@search.score" in r, f"Missing @search.score on {r.get('HotelId')}"
+
+    def test_vqr_20_compression_vs_uncompressed_overlap(self, rest, primary_index_name):
+        """VQR-20: Compressed and uncompressed fields return overlapping top results."""
+        query_text = "luxury hotel with world-class amenities"
+        # Uncompressed HNSW
+        resp_hnsw = rest.post(f"/indexes/{primary_index_name}/docs/search", {
+            "vectorQueries": [{
+                "kind": "text",
+                "text": query_text,
+                "fields": "DescriptionVector",
+                "k": 10,
+            }],
+            "select": "HotelId",
+        })
+        # Scalar quantized
+        resp_sq = rest.post(f"/indexes/{primary_index_name}/docs/search", {
+            "vectorQueries": [{
+                "kind": "text",
+                "text": query_text,
+                "fields": "DescriptionVectorSQ",
+                "k": 10,
+            }],
+            "select": "HotelId",
+        })
+        assert_status(resp_hnsw, 200)
+        assert_status(resp_sq, 200)
+        ids_hnsw = {r["HotelId"] for r in resp_hnsw.json().get("value", [])}
+        ids_sq = {r["HotelId"] for r in resp_sq.json().get("value", [])}
+        overlap = ids_hnsw & ids_sq
+        # With reranking enabled, scalar quantized should have significant overlap
+        assert len(overlap) >= 3, (
+            f"Expected >= 3 overlapping results between HNSW and SQ, "
+            f"got {len(overlap)}: HNSW={ids_hnsw}, SQ={ids_sq}"
+        )
+
+    def test_vqr_21_multi_field_vector_query(self, rest, primary_index_name):
+        """VQR-21: Multi-vector query across two vector fields with different algorithms."""
+        resp = rest.post(f"/indexes/{primary_index_name}/docs/search", {
+            "vectorQueries": [
+                {
+                    "kind": "text",
+                    "text": "eco-friendly sustainable green hotel",
+                    "fields": "DescriptionVector",
+                    "k": 5,
+                },
+                {
+                    "kind": "text",
+                    "text": "eco-friendly sustainable green hotel",
+                    "fields": "DescriptionVectorEKNN",
+                    "k": 5,
+                },
+            ],
+            "select": "HotelId, HotelName, Category",
+        })
+        assert_status(resp, 200)
+        results = resp.json().get("value", [])
+        assert len(results) >= 1, "Multi-field vector query returned no results"
+        # RRF fusion from two fields should give Eco-Friendly hotels higher scores
+        categories = [r.get("Category") for r in results[:5]]
+        assert "Eco-Friendly" in categories, (
+            f"Expected Eco-Friendly in top 5 multi-field results: {categories}"
+        )
+
+    def test_vqr_22_hybrid_with_compressed_field(self, rest, primary_index_name):
+        """VQR-22: Hybrid keyword + binary quantized vector search."""
+        resp = rest.post(f"/indexes/{primary_index_name}/docs/search", {
+            "search": "business center meeting rooms",
+            "vectorQueries": [{
+                "kind": "text",
+                "text": "business hotel conference center",
+                "fields": "DescriptionVectorBQ",
+                "k": 10,
+            }],
+            "select": "HotelId, HotelName, Category",
+            "count": True,
+        })
+        assert_status(resp, 200)
+        data = resp.json()
+        results = data.get("value", [])
+        assert len(results) >= 1, "Hybrid + BQ search returned no results"
+        count = data.get("@odata.count")
+        assert count is not None, "@odata.count missing from hybrid + BQ search"
 
 
 # ---------------------------------------------------------------------------

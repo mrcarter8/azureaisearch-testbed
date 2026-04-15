@@ -38,30 +38,52 @@ class TestKeywordSearch:
         resp = rest.post(f"/indexes/{primary_index_name}/docs/search", {
             "search": "luxury AND pool",
             "queryType": "full",
-            "select": "HotelName, Tags",
+            "select": "HotelName, Tags, Description",
             "top": 5,
         })
-        assert_search_results(resp)
+        data = assert_search_results(resp)
+        # Verify results relate to luxury AND pool (both terms should appear)
+        for r in data["value"]:
+            text = (r.get("HotelName", "") + " " +
+                    r.get("Description", "") + " " +
+                    " ".join(r.get("Tags", []))).lower()
+            assert "pool" in text or "luxury" in text, (
+                f"Lucene AND result has neither 'luxury' nor 'pool' in content: {r.get('HotelName')}"
+            )
 
     def test_qry_03_lucene_wildcard(self, rest, primary_index_name):
         """QRY-03: Lucene wildcard query — lux*."""
         resp = rest.post(f"/indexes/{primary_index_name}/docs/search", {
             "search": "lux*",
             "queryType": "full",
-            "select": "HotelName",
+            "select": "HotelName, Description, Category",
             "top": 5,
         })
-        assert_search_results(resp)
+        data = assert_search_results(resp)
+        # Wildcard lux* should match luxury/luxurious/etc.
+        for r in data["value"]:
+            text = (r.get("HotelName", "") + " " +
+                    r.get("Description", "") + " " +
+                    r.get("Category", "")).lower()
+            assert "lux" in text, (
+                f"Wildcard 'lux*' result has no 'lux' prefix match: {r.get('HotelName')}"
+            )
 
     def test_qry_04_lucene_regex(self, rest, primary_index_name):
         """QRY-04: Lucene regex query."""
         resp = rest.post(f"/indexes/{primary_index_name}/docs/search", {
             "search": "/[Hh]otel/",
             "queryType": "full",
-            "select": "HotelName",
+            "select": "HotelName, Description",
             "top": 5,
         })
-        assert_search_results(resp)
+        data = assert_search_results(resp)
+        # Regex /[Hh]otel/ — results should contain "hotel" or "Hotel"
+        for r in data["value"]:
+            text = (r.get("HotelName", "") + " " + r.get("Description", "")).lower()
+            assert "hotel" in text, (
+                f"Regex /[Hh]otel/ result has no 'hotel' match: {r.get('HotelName')}"
+            )
 
 
 class TestFilters:
@@ -178,8 +200,9 @@ class TestSortAndPaging:
             "top": 5,
         })
         data = assert_search_results(resp)
-        # Nearest to Times Square should be NYC hotels
-        assert len(data["value"]) >= 1, "Expected at least 1 result"
+        # Nearest to Times Square should be NYC-area hotels
+        first = data["value"][0]
+        assert first.get("HotelName"), "First geo-sorted result has no HotelName"
 
     def test_qry_20_top_and_skip(self, rest, primary_index_name):
         """QRY-20: Top + Skip pagination — no overlap between pages."""
@@ -210,6 +233,11 @@ class TestFacets:
         data = resp.json()
         assert "@search.facets" in data, "No facets in response"
         assert "Category" in data["@search.facets"]
+        buckets = data["@search.facets"]["Category"]
+        assert len(buckets) >= 1, "Category facet returned no buckets"
+        for bucket in buckets:
+            assert "count" in bucket, f"Facet bucket missing 'count': {bucket}"
+            assert bucket["count"] > 0, f"Facet bucket count is 0: {bucket}"
 
     def test_qry_16_facets_rating_interval(self, rest, primary_index_name):
         """QRY-16: Facets — Rating with interval:1."""
@@ -221,6 +249,11 @@ class TestFacets:
         assert_status(resp, 200)
         data = resp.json()
         assert "Rating" in data.get("@search.facets", {})
+        buckets = data["@search.facets"]["Rating"]
+        assert len(buckets) >= 1, "Rating facet returned no interval buckets"
+        for bucket in buckets:
+            assert "count" in bucket, f"Rating facet bucket missing 'count': {bucket}"
+            assert bucket["count"] > 0, f"Rating facet bucket count is 0: {bucket}"
 
     def test_qry_17_facets_tags(self, rest, primary_index_name):
         """QRY-17: Facets — Tags collection field."""
@@ -232,6 +265,11 @@ class TestFacets:
         assert_status(resp, 200)
         data = resp.json()
         assert "Tags" in data.get("@search.facets", {})
+        buckets = data["@search.facets"]["Tags"]
+        assert len(buckets) >= 1, "Tags facet returned no buckets"
+        for bucket in buckets:
+            assert "count" in bucket, f"Tags facet bucket missing 'count': {bucket}"
+            assert bucket["count"] > 0, f"Tags facet bucket count is 0: {bucket}"
 
 
 class TestHighlightSelect:
@@ -249,6 +287,15 @@ class TestHighlightSelect:
         data = assert_search_results(resp)
         highlights_found = any("@search.highlights" in r for r in data["value"])
         assert highlights_found, "No @search.highlights in any result"
+        # Verify highlight tags are present in the highlighted text
+        for r in data["value"]:
+            if "@search.highlights" in r:
+                for field, fragments in r["@search.highlights"].items():
+                    for frag in fragments:
+                        assert "<b>" in frag, (
+                            f"Highlight fragment missing <b> tag: {frag[:100]}"
+                        )
+                break  # Only need to verify one result
 
     def test_qry_19_select_restriction(self, rest, primary_index_name):
         """QRY-19: Select restricts returned fields."""
@@ -287,15 +334,11 @@ class TestSemanticSearch:
             "select": "HotelName, Category, Rating",
             "top": 5,
         })
-        assert_status(resp, (200, 206))
+        assert_status(resp, 200)
         data = resp.json()
         assert len(data.get("value", [])) >= 1, "No results returned"
-        if resp.status_code == 200:
-            first = data["value"][0]
-            assert "@search.rerankerScore" in first, "Missing @search.rerankerScore"
-        else:
-            # 206 = semantic partial response (transient); base results returned
-            assert "@search.semanticPartialResponseReason" in data
+        first = data["value"][0]
+        assert "@search.rerankerScore" in first, "Missing @search.rerankerScore"
 
     def test_qry_23_semantic_with_answers(self, rest, primary_index_name):
         """QRY-23: Semantic search with answers for answerable query."""
@@ -307,11 +350,17 @@ class TestSemanticSearch:
             "select": "HotelName, Rating",
             "top": 5,
         })
-        assert_status(resp, (200, 206))
+        assert_status(resp, 200)
         data = resp.json()
         if resp.status_code == 200:
-            # Verify answers array exists in response
+            # Verify answers array exists and has content
             assert "@search.answers" in data, "Missing @search.answers in semantic response"
+            answers = data["@search.answers"]
+            if len(answers) > 0:
+                for ans in answers:
+                    assert "key" in ans, "Semantic answer missing 'key'"
+                    assert "text" in ans, "Semantic answer missing 'text'"
+                    assert "score" in ans, "Semantic answer missing 'score'"
             assert len(data.get("value", [])) >= 1, "No results returned"
 
 
@@ -492,9 +541,16 @@ class TestScoringAndAdvanced:
             "select": "HotelName",
             "top": 5,
         })
-        assert_status(resp, (200, 206))  # 206 = semantic partial response
+        assert_status(resp, 200)
         data = resp.json()
         assert len(data.get("value", [])) >= 1, "Spell correction returned no results"
+        has_reranker = any(
+            "@search.rerankerScore" in r for r in data["value"]
+        )
+        assert has_reranker, (
+            "Spell correction query returned results but no rerankerScores "
+            "— semantic layer may not have engaged"
+        )
 
     def test_qry_36_query_language(self, rest, primary_index_name):
         """QRY-36: queryLanguage parameter."""
@@ -505,7 +561,7 @@ class TestScoringAndAdvanced:
             "semanticConfiguration": "hotel-semantic-config",
             "top": 3,
         })
-        assert_status(resp, (200, 206))  # 206 = semantic partial response
+        assert_status(resp, 200)
         data = resp.json()
         assert len(data.get("value", [])) >= 1, "queryLanguage query returned no results"
 

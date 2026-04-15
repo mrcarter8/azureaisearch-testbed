@@ -1,0 +1,188 @@
+{
+  "name": "{{index}}",
+  "fields": [
+    { "name": "HotelId",           "type": "Edm.String",                    "key": true,  "searchable": false, "filterable": true,  "sortable": false, "facetable": true  },
+    { "name": "HotelName",         "type": "Edm.String",                    "key": false, "searchable": true,  "filterable": false, "sortable": false, "facetable": false, "analyzer": "en.microsoft" },
+    { "name": "Description",       "type": "Edm.String",                    "key": false, "searchable": true,  "filterable": false, "sortable": false, "facetable": false, "analyzer": "en.microsoft"},
+    { "name": "Description_fr",    "type": "Edm.String",                    "key": false, "searchable": true,  "filterable": false, "sortable": false, "facetable": false, "analyzer": "fr.microsoft" },
+    { "name": "Category",          "type": "Edm.String",                    "key": false, "searchable": true,  "filterable": true,  "sortable": false, "facetable": true,  "analyzer": "en.microsoft" },
+    { "name": "Tags",              "type": "Collection(Edm.String)",         "key": false, "searchable": true,  "filterable": true,  "sortable": false, "facetable": true,  "analyzer": "en.microsoft" },
+    { "name": "ParkingIncluded",   "type": "Edm.Boolean",                   "key": false, "searchable": false, "filterable": true,  "sortable": false, "facetable": true  },
+    { "name": "LastRenovationDate","type": "Edm.DateTimeOffset",             "key": false, "searchable": false, "filterable": true,  "sortable": true,  "facetable": false },
+    { "name": "Rating",            "type": "Edm.Double",                    "key": false, "searchable": false, "filterable": true,  "sortable": true,  "facetable": true  },
+    { "name": "Location",          "type": "Edm.GeographyPoint",            "key": false, "searchable": false, "filterable": true,  "sortable": true,  "facetable": false },
+    {
+      "name": "DescriptionVector",
+      "type": "Collection(Edm.Single)",
+      "searchable": true,
+      "filterable": false,
+      "sortable": false,
+      "facetable": false,
+      "dimensions": "{{embedding_dimensions}}",
+      "vectorSearchProfile": "hotel-vector-hnsw"
+    },
+    {
+      "name": "DescriptionVectorBQ",
+      "type": "Collection(Edm.Single)",
+      "searchable": true,
+      "filterable": false,
+      "sortable": false,
+      "facetable": false,
+      "dimensions": "{{embedding_dimensions}}",
+      "vectorSearchProfile": "hotel-vector-hnsw-bq"
+    },
+    {
+      "name": "DescriptionVectorSQ",
+      "type": "Collection(Edm.Single)",
+      "searchable": true,
+      "filterable": false,
+      "sortable": false,
+      "facetable": false,
+      "dimensions": "{{embedding_dimensions}}",
+      "vectorSearchProfile": "hotel-vector-hnsw-sq"
+    },
+    {
+      "name": "DescriptionVectorEKNN",
+      "type": "Collection(Edm.Single)",
+      "searchable": true,
+      "filterable": false,
+      "sortable": false,
+      "facetable": false,
+      "dimensions": "{{embedding_dimensions}}",
+      "vectorSearchProfile": "hotel-vector-eknn"
+    },
+    {
+      "name": "Address",
+      "type": "Edm.ComplexType",
+      "fields": [
+        { "name": "StreetAddress", "type": "Edm.String", "searchable": true,  "filterable": false, "sortable": false, "facetable": false, "analyzer": "en.microsoft" },
+        { "name": "City",          "type": "Edm.String", "searchable": true,  "filterable": true,  "sortable": false, "facetable": true,  "analyzer": "en.microsoft" },
+        { "name": "StateProvince", "type": "Edm.String", "searchable": true,  "filterable": true,  "sortable": false, "facetable": true,  "analyzer": "en.microsoft" },
+        { "name": "PostalCode",    "type": "Edm.String", "searchable": true,  "filterable": true,  "sortable": false, "facetable": true,  "analyzer": "en.microsoft" },
+        { "name": "Country",       "type": "Edm.String", "searchable": true,  "filterable": true,  "sortable": false, "facetable": true,  "analyzer": "en.microsoft" }
+      ]
+    },
+    {
+      "name": "Rooms",
+      "type": "Collection(Edm.ComplexType)",
+      "fields": [
+        { "name": "Description",    "type": "Edm.String",           "searchable": true,  "filterable": false, "sortable": false, "facetable": false, "analyzer": "en.microsoft" },
+        { "name": "Description_fr", "type": "Edm.String",           "searchable": true,  "filterable": false, "sortable": false, "facetable": false, "analyzer": "fr.microsoft" },
+        { "name": "Type",           "type": "Edm.String",           "searchable": true,  "filterable": true,  "sortable": false, "facetable": true,  "analyzer": "en.microsoft" },
+        { "name": "BaseRate",       "type": "Edm.Double",           "searchable": false, "filterable": true,  "sortable": false, "facetable": true  },
+        { "name": "BedOptions",     "type": "Edm.String",           "searchable": true,  "filterable": true,  "sortable": false, "facetable": true,  "analyzer": "en.microsoft" },
+        { "name": "SleepsCount",    "type": "Edm.Int64",            "searchable": false, "filterable": true,  "sortable": false, "facetable": true  },
+        { "name": "SmokingAllowed", "type": "Edm.Boolean",          "searchable": false, "filterable": true,  "sortable": false, "facetable": true  },
+        { "name": "Tags",           "type": "Collection(Edm.String)","searchable": true,  "filterable": true,  "sortable": false, "facetable": true,  "analyzer": "en.microsoft" }
+      ]
+    }
+  ],
+  "vectorSearch": {
+    "algorithms": [
+      {
+        "name": "hotel-hnsw",
+        "kind": "hnsw",
+        "hnswParameters": { "m": 4, "efConstruction": 400, "efSearch": 500, "metric": "cosine" }
+      },
+      {
+        "name": "hotel-eknn",
+        "kind": "exhaustiveKnn",
+        "exhaustiveKnnParameters": { "metric": "cosine" }
+      }
+    ],
+    "compressions": [
+      {
+        "name": "scalar-quant",
+        "kind": "scalarQuantization",
+        "scalarQuantizationParameters": { "quantizedDataType": "int8" }
+      },
+      {
+        "name": "binary-quant",
+        "kind": "binaryQuantization"
+      }
+    ],
+    "profiles": [
+      { "name": "hotel-vector-hnsw",    "algorithm": "hotel-hnsw",  "vectorizer": "hotel-openai-vectorizer" },
+      { "name": "hotel-vector-hnsw-sq",  "algorithm": "hotel-hnsw",  "vectorizer": "hotel-openai-vectorizer", "compression": "scalar-quant" },
+      { "name": "hotel-vector-hnsw-bq",  "algorithm": "hotel-hnsw",  "vectorizer": "hotel-openai-vectorizer", "compression": "binary-quant" },
+      { "name": "hotel-vector-eknn",     "algorithm": "hotel-eknn",  "vectorizer": "hotel-openai-vectorizer" }
+    ],
+    "vectorizers": [
+      {
+        "name": "hotel-openai-vectorizer",
+        "kind": "azureOpenAI",
+        "azureOpenAIParameters": {
+          "resourceUri": "{{aoai_endpoint}}",
+          "deploymentId": "{{aoai_embedding_deployment}}",
+          "apiKey": "{{aoai_api_key}}",
+          "modelName": "{{aoai_embedding_model}}"
+        }
+      }
+    ]
+  },
+  "suggesters": [
+    {
+      "name": "sg",
+      "searchMode": "analyzingInfixMatching",
+      "sourceFields": [ "Address/City", "Address/Country", "Rooms/Type", "Rooms/Tags" ]
+    }
+  ],
+  "similarity": {
+    "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
+  },
+  "scoringProfiles": [
+    {
+      "name": "boostHighRating",
+      "text": {
+        "weights": {
+          "Description": 2,
+          "HotelName": 1.5
+        }
+      },
+      "functions": [
+        {
+          "type": "magnitude",
+          "fieldName": "Rating",
+          "boost": 3,
+          "interpolation": "linear",
+          "magnitude": {
+            "boostingRangeStart": 1,
+            "boostingRangeEnd": 5,
+            "constantBoostBeyondRange": false
+          }
+        },
+        {
+          "type": "freshness",
+          "fieldName": "LastRenovationDate",
+          "boost": 2,
+          "interpolation": "logarithmic",
+          "freshness": {
+            "boostingDuration": "P1825D"
+          }
+        }
+      ]
+    }
+  ],
+  "semantic": {
+    "defaultConfiguration": "hotel-semantic-config",
+    "configurations": [
+      {
+        "name": "hotel-semantic-config",
+        "prioritizedFields": {
+          "titleField": { "fieldName": "HotelName" },
+          "prioritizedContentFields": [
+            { "fieldName": "Description" }
+          ],
+          "prioritizedKeywordsFields": [
+            { "fieldName": "Category" },
+            { "fieldName": "Tags" }
+          ]
+        }
+      }
+    ]
+  },
+  "corsOptions": {
+    "allowedOrigins": [ "https://smoke-test.example.com" ],
+    "maxAgeInSeconds": 300
+  }
+}

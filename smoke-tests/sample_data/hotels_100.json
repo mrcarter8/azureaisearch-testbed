@@ -1,0 +1,6116 @@
+[
+  {
+    "@search.action": "upload",
+    "HotelId": "1",
+    "HotelName": "New York Resort Hotel",
+    "Description": "An opulent 4-star retreat in the heart of New York, featuring world-class dining, a full-service spa, and breathtaking ocean views. Guests enjoy marble-clad suites, a Michelin-starred restaurant, and personalized butler service. Perfect for discerning travelers who expect nothing but the finest accommodations.",
+    "Description_fr": "Un hotel de luxe exceptionnel au coeur de New York, offrant un service de conciergerie personnalise, un spa de classe mondiale et une cuisine gastronomique primee.",
+    "Category": "Luxury",
+    "Tags": [
+      "laundry service",
+      "airport shuttle",
+      "spa"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2010-03-23T00:00:00Z",
+    "Rating": 4.0,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -73.993439,
+        40.726187
+      ]
+    },
+    "Address": {
+      "StreetAddress": "3528 Ocean Blvd",
+      "City": "New York",
+      "StateProvince": "NY",
+      "PostalCode": "10001",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Deluxe Room, 1 King Bed (Cityscape View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue panoramique)",
+        "Type": "Deluxe Room",
+        "BaseRate": 178.05,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bidet",
+          "coffee maker",
+          "suite",
+          "desk"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "2",
+    "HotelName": "San Francisco Boutique Hotel",
+    "Description": "Tucked away on a charming San Francisco side street, this intimate boutique hotel offers a curated escape from the ordinary. With only 58 rooms, guests receive personalized attention from a staff that anticipates every need. The rooftop garden bar is a hidden gem among locals and travelers alike.",
+    "Description_fr": "Un charmant hotel-boutique a San Francisco ou art contemporain et confort intime se rencontrent dans un cadre unique.",
+    "Category": "Boutique",
+    "Tags": [
+      "garden",
+      "restaurant",
+      "kids club",
+      "gym",
+      "sauna",
+      "valet parking"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2017-01-08T00:00:00Z",
+    "Rating": 5.0,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -122.38722,
+        37.805405
+      ]
+    },
+    "Address": {
+      "StreetAddress": "6573 Pine St",
+      "City": "San Francisco",
+      "StateProvince": "CA",
+      "PostalCode": "94102",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Presidential Suite, 1 King Bed (Ocean View)",
+        "Description_fr": "Presidential Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Presidential Suite",
+        "BaseRate": 440.46,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "iron",
+          "jacuzzi tub"
+        ]
+      },
+      {
+        "Description": "Executive Suite, 1 King Bed (Lake View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Executive Suite",
+        "BaseRate": 265.26,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "kitchenette",
+          "bathrobe",
+          "bidet"
+        ]
+      },
+      {
+        "Description": "Double Room, 2 Queen Beds (Mountain View)",
+        "Description_fr": "Double Room, 2 Queen Beds (Vue panoramique)",
+        "Type": "Double Room",
+        "BaseRate": 438.97,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "minibar",
+          "bathrobe",
+          "suite",
+          "iron"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "3",
+    "HotelName": "Chicago Lodge Hotel",
+    "Description": "Escape to paradise at this stunning Chicago resort where relaxation meets adventure. Guests unwind at the oceanfront spa while thrill-seekers enjoy water sports, zipline tours, and guided nature hikes. The resort culinary program features cooking classes with the executive chef using locally harvested ingredients.",
+    "Description_fr": "Un complexe hotelier et spa prime a Chicago proposant des soins de bien-etre, un parcours de golf et une cuisine raffinee.",
+    "Category": "Resort and Spa",
+    "Tags": [
+      "bar",
+      "business center",
+      "sauna",
+      "free wifi",
+      "wellness center",
+      "garden"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2019-08-01T00:00:00Z",
+    "Rating": 3.4,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -87.584418,
+        41.915685
+      ]
+    },
+    "Address": {
+      "StreetAddress": "4316 Heritage Ln",
+      "City": "Chicago",
+      "StateProvince": "IL",
+      "PostalCode": "60601",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Family Suite, 2 Queen Beds (Ocean View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur la ville)",
+        "Type": "Family Suite",
+        "BaseRate": 255.47,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "nespresso machine",
+          "bluetooth speaker"
+        ]
+      },
+      {
+        "Description": "Penthouse Suite, 1 King Bed (Harbor View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 142.52,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "rainfall shower",
+          "minibar"
+        ]
+      },
+      {
+        "Description": "Budget Room, 1 Full Bed (Cityscape View)",
+        "Description_fr": "Budget Room, 1 Full Bed (Vue sur la mer)",
+        "Type": "Budget Room",
+        "BaseRate": 312.74,
+        "BedOptions": "1 Full Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "suite",
+          "coffee maker",
+          "safe"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "4",
+    "HotelName": "Hotel Summit",
+    "Description": "Ideal for budget-conscious travelers visiting Miami, this no-frills hotel delivers on the essentials: spotless rooms, reliable wifi, and a friendly front desk team available around the clock. The on-site self-service laundry and free parking make extended stays painless.",
+    "Description_fr": "Un hotel economique bien situe a Miami offrant des chambres propres et modernes avec petit-dejeuner gratuit.",
+    "Category": "Budget",
+    "Tags": [
+      "continental breakfast",
+      "rooftop terrace",
+      "mountain view"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2012-09-25T00:00:00Z",
+    "Rating": 3.7,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -80.229224,
+        25.777675
+      ]
+    },
+    "Address": {
+      "StreetAddress": "9008 Riverside Dr",
+      "City": "Miami",
+      "StateProvince": "FL",
+      "PostalCode": "33101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Deluxe Room, 1 King Bed (Valley View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur la ville)",
+        "Type": "Deluxe Room",
+        "BaseRate": 561.7,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": true,
+        "Tags": [
+          "iron",
+          "tv",
+          "bidet"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "5",
+    "HotelName": "The Seattle Manor",
+    "Description": "Designed for guests who need more than a hotel room, this Seattle extended-stay property features fully equipped kitchens, in-suite washer/dryers, and separate living areas. Weekly housekeeping, a well-stocked grocery delivery partnership, and a communal outdoor grill area make long-term stays feel like home.",
+    "Description_fr": "Un hotel de sejour prolonge a Seattle avec des suites entierement equipees comprenant cuisine et espace de vie.",
+    "Category": "Extended-Stay",
+    "Tags": [
+      "ocean view",
+      "golf course",
+      "city view",
+      "restaurant",
+      "free wifi"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2020-04-09T00:00:00Z",
+    "Rating": 4.8,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -122.315202,
+        47.577624
+      ]
+    },
+    "Address": {
+      "StreetAddress": "2168 Commerce St",
+      "City": "Seattle",
+      "StateProvince": "WA",
+      "PostalCode": "98101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Deluxe Room, 1 King Bed (Ocean View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur la ville)",
+        "Type": "Deluxe Room",
+        "BaseRate": 242.56,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "suite",
+          "iron",
+          "bathroom shower",
+          "coffee maker"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "6",
+    "HotelName": "Pristine Crest Inn",
+    "Description": "Engineered for the modern professional, this Austin business hotel combines productivity with comfort. High-speed fiber internet, a 24-hour business center with printing and shipping services, and same-day dry cleaning ensure nothing disrupts a tight schedule. The lobby cafe doubles as a co-working space.",
+    "Description_fr": "Un hotel d'affaires de premier plan au centre-ville de Austin avec acces direct au centre de congres.",
+    "Category": "Business",
+    "Tags": [
+      "pet friendly",
+      "airport shuttle",
+      "golf course",
+      "ocean view",
+      "wellness center",
+      "spa"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2022-03-13T00:00:00Z",
+    "Rating": 3.0,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -97.792884,
+        30.256242
+      ]
+    },
+    "Address": {
+      "StreetAddress": "7455 Maple Ave",
+      "City": "Austin",
+      "StateProvince": "TX",
+      "PostalCode": "73301",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Deluxe Room, 1 King Bed (Garden View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue panoramique)",
+        "Type": "Deluxe Room",
+        "BaseRate": 453.23,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "iron",
+          "desk"
+        ]
+      },
+      {
+        "Description": "Standard Room, 1 Queen Bed (Cityscape View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur la ville)",
+        "Type": "Standard Room",
+        "BaseRate": 159.07,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": true,
+        "Tags": [
+          "iron",
+          "minibar",
+          "smart tv"
+        ]
+      },
+      {
+        "Description": "Penthouse Suite, 1 King Bed (Mountain View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 599.6,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "minibar",
+          "iron"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "7",
+    "HotelName": "Grand Quarters Hotel",
+    "Description": "Step back in time at this lovingly restored 1945 landmark in Nashville. Original architectural details including crown moldings, stained glass windows, and a sweeping grand staircase coexist with modern comforts like smart room controls and rainfall showers. The on-site museum chronicles the building's storied past.",
+    "Description_fr": "Un hotel historique magnifiquement restaure dans le quartier patrimonial de Nashville.",
+    "Category": "Historic",
+    "Tags": [
+      "wellness center",
+      "rooftop terrace",
+      "spa"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2017-10-08T00:00:00Z",
+    "Rating": 4.2,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -86.773708,
+        36.116674
+      ]
+    },
+    "Address": {
+      "StreetAddress": "1344 Mountain Pass",
+      "City": "Nashville",
+      "StateProvince": "TN",
+      "PostalCode": "37201",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Presidential Suite, 1 King Bed (Mountain View)",
+        "Description_fr": "Presidential Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Presidential Suite",
+        "BaseRate": 317.46,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathrobe",
+          "tv",
+          "nespresso machine",
+          "minibar"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "8",
+    "HotelName": "Coastal Retreat Inn",
+    "Description": "This pioneering eco-friendly hotel in Denver is built from reclaimed timber and recycled steel. The living green wall in the atrium naturally purifies indoor air, while the kitchen composts one hundred percent of food waste. Electric vehicle charging stations and a bicycle-share fleet encourage car-free exploration.",
+    "Description_fr": "Un hotel ecologique certifie a Denver alliant durabilite et confort haut de gamme.",
+    "Category": "Eco-Friendly",
+    "Tags": [
+      "kids club",
+      "bar",
+      "beachfront",
+      "all-inclusive",
+      "valet parking"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2019-11-17T00:00:00Z",
+    "Rating": 3.9,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -105.039518,
+        39.77091
+      ]
+    },
+    "Address": {
+      "StreetAddress": "4906 Oak Ave",
+      "City": "Denver",
+      "StateProvince": "CO",
+      "PostalCode": "80201",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Executive Suite, 1 King Bed (Cityscape View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue sur la mer)",
+        "Type": "Executive Suite",
+        "BaseRate": 65.02,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathroom shower",
+          "safe",
+          "minibar",
+          "desk"
+        ]
+      },
+      {
+        "Description": "Deluxe Room, 1 King Bed (River View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur le jardin)",
+        "Type": "Deluxe Room",
+        "BaseRate": 248.45,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "iron",
+          "kitchenette"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "9",
+    "HotelName": "Hotel Pearl",
+    "Description": "An opulent 5-star retreat in the heart of Boston, featuring world-class dining, a full-service spa, and breathtaking valley views. Guests enjoy marble-clad suites, a Michelin-starred restaurant, and personalized butler service. Perfect for discerning travelers who expect nothing but the finest accommodations.",
+    "Description_fr": "Un hotel de luxe exceptionnel au coeur de Boston, offrant un service de conciergerie personnalise, un spa de classe mondiale et une cuisine gastronomique primee.",
+    "Category": "Luxury",
+    "Tags": [
+      "room service",
+      "beachfront",
+      "all-inclusive",
+      "tennis court",
+      "business center"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2021-01-12T00:00:00Z",
+    "Rating": 2.6,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -71.087892,
+        42.335053
+      ]
+    },
+    "Address": {
+      "StreetAddress": "1685 Sunset Dr",
+      "City": "Boston",
+      "StateProvince": "MA",
+      "PostalCode": "02101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Studio Room, 1 Queen Bed (Lake View)",
+        "Description_fr": "Studio Room, 1 Queen Bed (Vue sur le jardin)",
+        "Type": "Studio Room",
+        "BaseRate": 109.83,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "hair dryer",
+          "tv",
+          "coffee maker"
+        ]
+      },
+      {
+        "Description": "Family Suite, 2 Queen Beds (Ocean View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur la ville)",
+        "Type": "Family Suite",
+        "BaseRate": 201.45,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "smart tv",
+          "suite",
+          "rainfall shower",
+          "coffee maker"
+        ]
+      },
+      {
+        "Description": "Standard Room, 1 Queen Bed (Lake View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur le jardin)",
+        "Type": "Standard Room",
+        "BaseRate": 433.14,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "suite",
+          "tv"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "10",
+    "HotelName": "Portland Radiant Resort",
+    "Description": "A one-of-a-kind boutique hotel in Portland that blends contemporary art with intimate comfort. Each of the 75 individually designed rooms tells a unique story through local artwork and artisan furniture. The on-site cafe serves farm-to-table cuisine sourced from nearby purveyors.",
+    "Description_fr": "Un charmant hotel-boutique a Portland ou art contemporain et confort intime se rencontrent dans un cadre unique.",
+    "Category": "Boutique",
+    "Tags": [
+      "pool",
+      "concierge",
+      "wellness center",
+      "rooftop terrace",
+      "ev charging",
+      "airport shuttle"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2020-02-09T00:00:00Z",
+    "Rating": 4.6,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -122.708643,
+        45.561453
+      ]
+    },
+    "Address": {
+      "StreetAddress": "4350 Broadway",
+      "City": "Portland",
+      "StateProvince": "OR",
+      "PostalCode": "97201",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Double Room, 2 Queen Beds (Park View)",
+        "Description_fr": "Double Room, 2 Queen Beds (Vue sur le jardin)",
+        "Type": "Double Room",
+        "BaseRate": 485.17,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "sofa bed",
+          "tv"
+        ]
+      },
+      {
+        "Description": "Family Suite, 2 Queen Beds (Skyline View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur le jardin)",
+        "Type": "Family Suite",
+        "BaseRate": 555.95,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "jacuzzi tub",
+          "iron",
+          "bathroom shower"
+        ]
+      },
+      {
+        "Description": "Suite, 1 King Bed (Cityscape View)",
+        "Description_fr": "Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Suite",
+        "BaseRate": 210.44,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": false,
+        "Tags": [
+          "hair dryer",
+          "kitchenette"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "11",
+    "HotelName": "New Orleans Suites Hotel",
+    "Description": "Escape to paradise at this stunning New Orleans resort where relaxation meets adventure. Guests unwind at the oceanfront spa while thrill-seekers enjoy water sports, zipline tours, and guided nature hikes. The resort culinary program features cooking classes with the executive chef using locally harvested ingredients.",
+    "Description_fr": "Un complexe hotelier et spa prime a New Orleans proposant des soins de bien-etre, un parcours de golf et une cuisine raffinee.",
+    "Category": "Resort and Spa",
+    "Tags": [
+      "golf course",
+      "laundry service",
+      "room service",
+      "business center",
+      "spa",
+      "ski-in/ski-out"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2016-07-22T00:00:00Z",
+    "Rating": 3.9,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -90.046687,
+        29.918503
+      ]
+    },
+    "Address": {
+      "StreetAddress": "9325 Maple Ave",
+      "City": "New Orleans",
+      "StateProvince": "LA",
+      "PostalCode": "70112",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Standard Room, 1 Queen Bed (Lake View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur la mer)",
+        "Type": "Standard Room",
+        "BaseRate": 559.8,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "desk",
+          "kitchenette",
+          "rainfall shower",
+          "minibar"
+        ]
+      },
+      {
+        "Description": "Budget Room, 1 Full Bed (Lake View)",
+        "Description_fr": "Budget Room, 1 Full Bed (Vue panoramique)",
+        "Type": "Budget Room",
+        "BaseRate": 127.29,
+        "BedOptions": "1 Full Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "nespresso machine",
+          "jacuzzi tub",
+          "rainfall shower"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "12",
+    "HotelName": "Grand Palace Hotel",
+    "Description": "Ideal for budget-conscious travelers visiting San Diego, this no-frills hotel delivers on the essentials: spotless rooms, reliable wifi, and a friendly front desk team available around the clock. The on-site self-service laundry and free parking make extended stays painless.",
+    "Description_fr": "Un hotel economique bien situe a San Diego offrant des chambres propres et modernes avec petit-dejeuner gratuit.",
+    "Category": "Budget",
+    "Tags": [
+      "ocean view",
+      "beachfront",
+      "room service",
+      "city view",
+      "mountain view"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2013-04-06T00:00:00Z",
+    "Rating": 2.5,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -117.130689,
+        32.735291
+      ]
+    },
+    "Address": {
+      "StreetAddress": "7612 Broadway",
+      "City": "San Diego",
+      "StateProvince": "CA",
+      "PostalCode": "92101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Suite, 1 King Bed (River View)",
+        "Description_fr": "Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Suite",
+        "BaseRate": 338.33,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bidet",
+          "fireplace",
+          "minibar",
+          "iron"
+        ]
+      },
+      {
+        "Description": "Deluxe Room, 1 King Bed (Valley View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur la ville)",
+        "Type": "Deluxe Room",
+        "BaseRate": 139.56,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "iron",
+          "bluetooth speaker"
+        ]
+      },
+      {
+        "Description": "Family Suite, 2 Queen Beds (Garden View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur le jardin)",
+        "Type": "Family Suite",
+        "BaseRate": 538.5,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "desk",
+          "sofa bed",
+          "bluetooth speaker",
+          "bathroom shower"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "13",
+    "HotelName": "Savannah Sapphire Resort",
+    "Description": "Designed for guests who need more than a hotel room, this Savannah extended-stay property features fully equipped kitchens, in-suite washer/dryers, and separate living areas. Weekly housekeeping, a well-stocked grocery delivery partnership, and a communal outdoor grill area make long-term stays feel like home.",
+    "Description_fr": "Un hotel de sejour prolonge a Savannah avec des suites entierement equipees comprenant cuisine et espace de vie.",
+    "Category": "Extended-Stay",
+    "Tags": [
+      "meeting rooms",
+      "golf course",
+      "ocean view",
+      "continental breakfast",
+      "bicycle rental"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2023-08-14T00:00:00Z",
+    "Rating": 2.7,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -81.143573,
+        32.114189
+      ]
+    },
+    "Address": {
+      "StreetAddress": "6382 Commerce St",
+      "City": "Savannah",
+      "StateProvince": "GA",
+      "PostalCode": "31401",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Budget Room, 1 Full Bed (River View)",
+        "Description_fr": "Budget Room, 1 Full Bed (Vue panoramique)",
+        "Type": "Budget Room",
+        "BaseRate": 544.48,
+        "BedOptions": "1 Full Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bluetooth speaker",
+          "smart tv",
+          "hair dryer",
+          "iron"
+        ]
+      },
+      {
+        "Description": "Penthouse Suite, 1 King Bed (River View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue sur la mer)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 208.27,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "jacuzzi tub",
+          "iron"
+        ]
+      },
+      {
+        "Description": "Studio Room, 1 Queen Bed (Harbor View)",
+        "Description_fr": "Studio Room, 1 Queen Bed (Vue sur le jardin)",
+        "Type": "Studio Room",
+        "BaseRate": 351.67,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "balcony",
+          "iron"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "14",
+    "HotelName": "The Coastal Observatory",
+    "Description": "A premier business hotel in downtown Scottsdale with direct skybridge access to the convention center. Every room features dual monitors, ergonomic Herman Miller chairs, and noise-canceling panels. The executive floor lounge offers complimentary hors d'oeuvres, premium cocktails, and private meeting pods bookable by the hour.",
+    "Description_fr": "Un hotel d'affaires de premier plan au centre-ville de Scottsdale avec acces direct au centre de congres.",
+    "Category": "Business",
+    "Tags": [
+      "mountain view",
+      "free wifi",
+      "business center",
+      "airport shuttle"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2016-06-25T00:00:00Z",
+    "Rating": 3.4,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -111.888136,
+        33.472026
+      ]
+    },
+    "Address": {
+      "StreetAddress": "6907 Pine St",
+      "City": "Scottsdale",
+      "StateProvince": "AZ",
+      "PostalCode": "85251",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Standard Room, 1 Queen Bed (Valley View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur la ville)",
+        "Type": "Standard Room",
+        "BaseRate": 241.5,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "sofa bed",
+          "bathrobe",
+          "smart tv",
+          "balcony"
+        ]
+      },
+      {
+        "Description": "Penthouse Suite, 1 King Bed (Park View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 379.61,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": true,
+        "Tags": [
+          "coffee maker",
+          "minibar",
+          "rainfall shower",
+          "balcony"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "15",
+    "HotelName": "Honolulu Lodge Hotel",
+    "Description": "Step back in time at this lovingly restored 1870 landmark in Honolulu. Original architectural details including crown moldings, stained glass windows, and a sweeping grand staircase coexist with modern comforts like smart room controls and rainfall showers. The on-site museum chronicles the building's storied past.",
+    "Description_fr": "Un hotel historique magnifiquement restaure dans le quartier patrimonial de Honolulu.",
+    "Category": "Historic",
+    "Tags": [
+      "free wifi",
+      "room service",
+      "bicycle rental"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2021-10-24T00:00:00Z",
+    "Rating": 3.1,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -157.836464,
+        21.334679
+      ]
+    },
+    "Address": {
+      "StreetAddress": "2684 Maple Ave",
+      "City": "Honolulu",
+      "StateProvince": "HI",
+      "PostalCode": "96801",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Presidential Suite, 1 King Bed (Valley View)",
+        "Description_fr": "Presidential Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Presidential Suite",
+        "BaseRate": 142.28,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bluetooth speaker",
+          "safe"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "16",
+    "HotelName": "Charleston Suites Hotel",
+    "Description": "This pioneering eco-friendly hotel in Charleston is built from reclaimed timber and recycled steel. The living green wall in the atrium naturally purifies indoor air, while the kitchen composts one hundred percent of food waste. Electric vehicle charging stations and a bicycle-share fleet encourage car-free exploration.",
+    "Description_fr": "Un hotel ecologique certifie a Charleston alliant durabilite et confort haut de gamme.",
+    "Category": "Eco-Friendly",
+    "Tags": [
+      "restaurant",
+      "ski-in/ski-out",
+      "meeting rooms",
+      "valet parking"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2012-08-08T00:00:00Z",
+    "Rating": 3.1,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -79.906052,
+        32.783485
+      ]
+    },
+    "Address": {
+      "StreetAddress": "6210 Ocean Blvd",
+      "City": "Charleston",
+      "StateProvince": "SC",
+      "PostalCode": "29401",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Presidential Suite, 1 King Bed (Lake View)",
+        "Description_fr": "Presidential Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Presidential Suite",
+        "BaseRate": 247.48,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "kitchenette",
+          "minibar",
+          "nespresso machine"
+        ]
+      },
+      {
+        "Description": "Deluxe Room, 1 King Bed (Park View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur le jardin)",
+        "Type": "Deluxe Room",
+        "BaseRate": 504.05,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "rainfall shower",
+          "kitchenette"
+        ]
+      },
+      {
+        "Description": "Standard Room, 1 Queen Bed (Harbor View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur la mer)",
+        "Type": "Standard Room",
+        "BaseRate": 456.24,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "hair dryer",
+          "suite",
+          "bluetooth speaker",
+          "smart tv"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "17",
+    "HotelName": "The Pristine Lighthouse",
+    "Description": "Experience unparalleled elegance at this iconic Aspen luxury hotel. From the crystal chandeliers in the grand lobby to the hand-crafted furnishings in every room, every detail speaks to refined taste. The rooftop infinity pool overlooks the glittering skyline while the concierge team curates bespoke city experiences.",
+    "Description_fr": "Un hotel de luxe exceptionnel au coeur de Aspen, offrant un service de conciergerie personnalise, un spa de classe mondiale et une cuisine gastronomique primee.",
+    "Category": "Luxury",
+    "Tags": [
+      "golf course",
+      "continental breakfast",
+      "ski-in/ski-out",
+      "business center",
+      "garden"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2025-01-03T00:00:00Z",
+    "Rating": 4.1,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -106.838076,
+        39.18154
+      ]
+    },
+    "Address": {
+      "StreetAddress": "3987 Maple Ave",
+      "City": "Aspen",
+      "StateProvince": "CO",
+      "PostalCode": "81611",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Budget Room, 1 Full Bed (Park View)",
+        "Description_fr": "Budget Room, 1 Full Bed (Vue sur le jardin)",
+        "Type": "Budget Room",
+        "BaseRate": 571.94,
+        "BedOptions": "1 Full Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "iron",
+          "rainfall shower"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "18",
+    "HotelName": "Noble Quarters Inn",
+    "Description": "Tucked away on a charming Las Vegas side street, this intimate boutique hotel offers a curated escape from the ordinary. With only 67 rooms, guests receive personalized attention from a staff that anticipates every need. The rooftop garden bar is a hidden gem among locals and travelers alike.",
+    "Description_fr": "Un charmant hotel-boutique a Las Vegas ou art contemporain et confort intime se rencontrent dans un cadre unique.",
+    "Category": "Boutique",
+    "Tags": [
+      "ski-in/ski-out",
+      "ocean view",
+      "business center",
+      "valet parking",
+      "free wifi"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2019-04-10T00:00:00Z",
+    "Rating": 4.9,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -115.167052,
+        36.137844
+      ]
+    },
+    "Address": {
+      "StreetAddress": "232 Garden Path",
+      "City": "Las Vegas",
+      "StateProvince": "NV",
+      "PostalCode": "89101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Double Room, 2 Queen Beds (Park View)",
+        "Description_fr": "Double Room, 2 Queen Beds (Vue sur la mer)",
+        "Type": "Double Room",
+        "BaseRate": 230.39,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "suite",
+          "bathrobe",
+          "desk",
+          "bidet"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "19",
+    "HotelName": "Orlando Ivory Resort",
+    "Description": "Escape to paradise at this stunning Orlando resort where relaxation meets adventure. Guests unwind at the oceanfront spa while thrill-seekers enjoy water sports, zipline tours, and guided nature hikes. The resort culinary program features cooking classes with the executive chef using locally harvested ingredients.",
+    "Description_fr": "Un complexe hotelier et spa prime a Orlando proposant des soins de bien-etre, un parcours de golf et une cuisine raffinee.",
+    "Category": "Resort and Spa",
+    "Tags": [
+      "mountain view",
+      "ocean view",
+      "rooftop terrace",
+      "concierge",
+      "spa"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2017-07-15T00:00:00Z",
+    "Rating": 4.5,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -81.33835,
+        28.518035
+      ]
+    },
+    "Address": {
+      "StreetAddress": "9643 Mountain Pass",
+      "City": "Orlando",
+      "StateProvince": "FL",
+      "PostalCode": "32801",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Studio Room, 1 Queen Bed (Mountain View)",
+        "Description_fr": "Studio Room, 1 Queen Bed (Vue sur le jardin)",
+        "Type": "Studio Room",
+        "BaseRate": 503.93,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bluetooth speaker",
+          "minibar",
+          "tv"
+        ]
+      },
+      {
+        "Description": "Deluxe Room, 1 King Bed (Cityscape View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue panoramique)",
+        "Type": "Deluxe Room",
+        "BaseRate": 572.52,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "iron",
+          "safe"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "20",
+    "HotelName": "The Washington Manor",
+    "Description": "A smart-value hotel in Washington that proves comfort does not require a premium price. Clean, modern rooms feature pillow-top mattresses, high-speed wifi, and a functional workspace. The complimentary breakfast buffet and 24-hour coffee station keep guests fueled for exploration, and the central location puts major attractions within walking distance.",
+    "Description_fr": "Un hotel economique bien situe a Washington offrant des chambres propres et modernes avec petit-dejeuner gratuit.",
+    "Category": "Budget",
+    "Tags": [
+      "concierge",
+      "free wifi",
+      "garden"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2024-04-09T00:00:00Z",
+    "Rating": 3.2,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -77.008117,
+        38.919706
+      ]
+    },
+    "Address": {
+      "StreetAddress": "3242 Mountain Pass",
+      "City": "Washington",
+      "StateProvince": "DC",
+      "PostalCode": "20001",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Suite, 1 King Bed (Skyline View)",
+        "Description_fr": "Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Suite",
+        "BaseRate": 61.43,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bidet",
+          "bluetooth speaker",
+          "jacuzzi tub"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "21",
+    "HotelName": "New York Lodge Hotel",
+    "Description": "Designed for guests who need more than a hotel room, this New York extended-stay property features fully equipped kitchens, in-suite washer/dryers, and separate living areas. Weekly housekeeping, a well-stocked grocery delivery partnership, and a communal outdoor grill area make long-term stays feel like home.",
+    "Description_fr": "Un hotel de sejour prolonge a New York avec des suites entierement equipees comprenant cuisine et espace de vie.",
+    "Category": "Extended-Stay",
+    "Tags": [
+      "concierge",
+      "ev charging",
+      "valet parking"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2018-10-14T00:00:00Z",
+    "Rating": 3.6,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -73.972222,
+        40.747573
+      ]
+    },
+    "Address": {
+      "StreetAddress": "1495 Promenade Walk",
+      "City": "New York",
+      "StateProvince": "NY",
+      "PostalCode": "10001",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Presidential Suite, 1 King Bed (Cityscape View)",
+        "Description_fr": "Presidential Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Presidential Suite",
+        "BaseRate": 127.14,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "jacuzzi tub",
+          "sofa bed",
+          "hair dryer",
+          "nespresso machine"
+        ]
+      },
+      {
+        "Description": "Family Suite, 2 Queen Beds (Ocean View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur le jardin)",
+        "Type": "Family Suite",
+        "BaseRate": 382.93,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "fireplace",
+          "hair dryer",
+          "coffee maker"
+        ]
+      },
+      {
+        "Description": "Studio Room, 1 Queen Bed (Mountain View)",
+        "Description_fr": "Studio Room, 1 Queen Bed (Vue panoramique)",
+        "Type": "Studio Room",
+        "BaseRate": 511.41,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathroom shower",
+          "coffee maker",
+          "hair dryer",
+          "tv"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "22",
+    "HotelName": "Radiant Suites & Suites",
+    "Description": "A premier business hotel in downtown San Francisco with direct skybridge access to the convention center. Every room features dual monitors, ergonomic Herman Miller chairs, and noise-canceling panels. The executive floor lounge offers complimentary hors d'oeuvres, premium cocktails, and private meeting pods bookable by the hour.",
+    "Description_fr": "Un hotel d'affaires de premier plan au centre-ville de San Francisco avec acces direct au centre de congres.",
+    "Category": "Business",
+    "Tags": [
+      "beachfront",
+      "kids club",
+      "bicycle rental",
+      "meeting rooms",
+      "garden"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2023-09-12T00:00:00Z",
+    "Rating": 3.9,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -122.407137,
+        37.774749
+      ]
+    },
+    "Address": {
+      "StreetAddress": "7243 Broadway",
+      "City": "San Francisco",
+      "StateProvince": "CA",
+      "PostalCode": "94102",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Studio Room, 1 Queen Bed (Cityscape View)",
+        "Description_fr": "Studio Room, 1 Queen Bed (Vue sur la ville)",
+        "Type": "Studio Room",
+        "BaseRate": 107.54,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "fireplace",
+          "safe",
+          "sofa bed"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "23",
+    "HotelName": "Residence Resort",
+    "Description": "A registered historic property in the heart of Chicago's heritage district, this hotel occupies a beautifully preserved 1885 building. Period antiques furnish the common areas while guest rooms blend vintage charm with contemporary amenities. Evening ghost tours and historical walking guides depart from the ornate lobby.",
+    "Description_fr": "Un hotel historique magnifiquement restaure dans le quartier patrimonial de Chicago.",
+    "Category": "Historic",
+    "Tags": [
+      "all-inclusive",
+      "continental breakfast",
+      "ev charging"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2024-11-27T00:00:00Z",
+    "Rating": 4.8,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -87.664403,
+        41.921365
+      ]
+    },
+    "Address": {
+      "StreetAddress": "4782 Heritage Ln",
+      "City": "Chicago",
+      "StateProvince": "IL",
+      "PostalCode": "60601",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Suite, 1 King Bed (Ocean View)",
+        "Description_fr": "Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Suite",
+        "BaseRate": 227.8,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": false,
+        "Tags": [
+          "suite",
+          "rainfall shower"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "24",
+    "HotelName": "The Miami Quarters",
+    "Description": "A LEED Platinum-certified hotel in Miami that proves sustainability and luxury can coexist. Solar panels generate seventy percent of the building's energy, greywater recycling irrigates the organic rooftop garden, and every amenity is plastic-free. Guests sleep on organic cotton linens and dine on zero-waste cuisine.",
+    "Description_fr": "Un hotel ecologique certifie a Miami alliant durabilite et confort haut de gamme.",
+    "Category": "Eco-Friendly",
+    "Tags": [
+      "sauna",
+      "continental breakfast",
+      "city view",
+      "wellness center"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2025-08-18T00:00:00Z",
+    "Rating": 4.6,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -80.193366,
+        25.744944
+      ]
+    },
+    "Address": {
+      "StreetAddress": "8904 Lakeview Rd",
+      "City": "Miami",
+      "StateProvince": "FL",
+      "PostalCode": "33101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Deluxe Room, 1 King Bed (Skyline View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur la mer)",
+        "Type": "Deluxe Room",
+        "BaseRate": 209.16,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "fireplace",
+          "nespresso machine",
+          "hair dryer"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "25",
+    "HotelName": "The Haven at Seattle",
+    "Description": "An opulent 5-star retreat in the heart of Seattle, featuring world-class dining, a full-service spa, and breathtaking harbor views. Guests enjoy marble-clad suites, a Michelin-starred restaurant, and personalized butler service. Perfect for discerning travelers who expect nothing but the finest accommodations.",
+    "Description_fr": "Un hotel de luxe exceptionnel au coeur de Seattle, offrant un service de conciergerie personnalise, un spa de classe mondiale et une cuisine gastronomique primee.",
+    "Category": "Luxury",
+    "Tags": [
+      "wellness center",
+      "mountain view",
+      "ski-in/ski-out",
+      "sauna",
+      "ev charging"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2014-05-11T00:00:00Z",
+    "Rating": 4.1,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -122.319774,
+        47.595948
+      ]
+    },
+    "Address": {
+      "StreetAddress": "1316 Ocean Blvd",
+      "City": "Seattle",
+      "StateProvince": "WA",
+      "PostalCode": "98101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Penthouse Suite, 1 King Bed (Valley View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue sur la mer)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 327.47,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "balcony",
+          "nespresso machine"
+        ]
+      },
+      {
+        "Description": "Suite, 1 King Bed (Skyline View)",
+        "Description_fr": "Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Suite",
+        "BaseRate": 532.05,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": false,
+        "Tags": [
+          "safe",
+          "nespresso machine",
+          "smart tv"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "26",
+    "HotelName": "Austin Serene Resort",
+    "Description": "Tucked away on a charming Austin side street, this intimate boutique hotel offers a curated escape from the ordinary. With only 59 rooms, guests receive personalized attention from a staff that anticipates every need. The rooftop garden bar is a hidden gem among locals and travelers alike.",
+    "Description_fr": "Un charmant hotel-boutique a Austin ou art contemporain et confort intime se rencontrent dans un cadre unique.",
+    "Category": "Boutique",
+    "Tags": [
+      "free wifi",
+      "wellness center",
+      "gym",
+      "airport shuttle",
+      "restaurant"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2024-01-26T00:00:00Z",
+    "Rating": 4.1,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -97.746575,
+        30.245963
+      ]
+    },
+    "Address": {
+      "StreetAddress": "8956 Riverside Dr",
+      "City": "Austin",
+      "StateProvince": "TX",
+      "PostalCode": "73301",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Deluxe Room, 1 King Bed (Skyline View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur la mer)",
+        "Type": "Deluxe Room",
+        "BaseRate": 434.75,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "tv",
+          "fireplace"
+        ]
+      },
+      {
+        "Description": "Studio Room, 1 Queen Bed (Valley View)",
+        "Description_fr": "Studio Room, 1 Queen Bed (Vue sur le jardin)",
+        "Type": "Studio Room",
+        "BaseRate": 292.56,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "nespresso machine",
+          "rainfall shower"
+        ]
+      },
+      {
+        "Description": "Suite, 1 King Bed (Valley View)",
+        "Description_fr": "Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Suite",
+        "BaseRate": 102.63,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bidet",
+          "iron",
+          "bluetooth speaker"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "27",
+    "HotelName": "Nashville Hotel Hotel",
+    "Description": "Escape to paradise at this stunning Nashville resort where relaxation meets adventure. Guests unwind at the oceanfront spa while thrill-seekers enjoy water sports, zipline tours, and guided nature hikes. The resort culinary program features cooking classes with the executive chef using locally harvested ingredients.",
+    "Description_fr": "Un complexe hotelier et spa prime a Nashville proposant des soins de bien-etre, un parcours de golf et une cuisine raffinee.",
+    "Category": "Resort and Spa",
+    "Tags": [
+      "room service",
+      "kids club",
+      "tennis court",
+      "mountain view",
+      "restaurant"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2011-12-16T00:00:00Z",
+    "Rating": 4.2,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -86.748316,
+        36.202993
+      ]
+    },
+    "Address": {
+      "StreetAddress": "3771 University Ave",
+      "City": "Nashville",
+      "StateProvince": "TN",
+      "PostalCode": "37201",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Penthouse Suite, 1 King Bed (River View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 368.83,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "jacuzzi tub",
+          "bidet",
+          "coffee maker",
+          "sofa bed"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "28",
+    "HotelName": "Sapphire Hotel & Suites",
+    "Description": "Ideal for budget-conscious travelers visiting Denver, this no-frills hotel delivers on the essentials: spotless rooms, reliable wifi, and a friendly front desk team available around the clock. The on-site self-service laundry and free parking make extended stays painless.",
+    "Description_fr": "Un hotel economique bien situe a Denver offrant des chambres propres et modernes avec petit-dejeuner gratuit.",
+    "Category": "Budget",
+    "Tags": [
+      "ev charging",
+      "ocean view",
+      "spa",
+      "laundry service",
+      "pet friendly"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2018-08-12T00:00:00Z",
+    "Rating": 3.5,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -104.973017,
+        39.756434
+      ]
+    },
+    "Address": {
+      "StreetAddress": "9578 Lakeview Rd",
+      "City": "Denver",
+      "StateProvince": "CO",
+      "PostalCode": "80201",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Suite, 1 King Bed (Cityscape View)",
+        "Description_fr": "Suite, 1 King Bed (Vue sur la mer)",
+        "Type": "Suite",
+        "BaseRate": 236.42,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathrobe",
+          "desk",
+          "balcony"
+        ]
+      },
+      {
+        "Description": "Deluxe Room, 1 King Bed (River View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur la mer)",
+        "Type": "Deluxe Room",
+        "BaseRate": 553.27,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "hair dryer",
+          "bluetooth speaker"
+        ]
+      },
+      {
+        "Description": "Family Suite, 2 Queen Beds (Harbor View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur la mer)",
+        "Type": "Family Suite",
+        "BaseRate": 312.89,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": true,
+        "Tags": [
+          "balcony",
+          "iron"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "29",
+    "HotelName": "Golden Inn & Suites",
+    "Description": "Designed for guests who need more than a hotel room, this Boston extended-stay property features fully equipped kitchens, in-suite washer/dryers, and separate living areas. Weekly housekeeping, a well-stocked grocery delivery partnership, and a communal outdoor grill area make long-term stays feel like home.",
+    "Description_fr": "Un hotel de sejour prolonge a Boston avec des suites entierement equipees comprenant cuisine et espace de vie.",
+    "Category": "Extended-Stay",
+    "Tags": [
+      "all-inclusive",
+      "bicycle rental",
+      "ocean view"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2017-02-22T00:00:00Z",
+    "Rating": 3.6,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -71.072167,
+        42.40027
+      ]
+    },
+    "Address": {
+      "StreetAddress": "5877 Broadway",
+      "City": "Boston",
+      "StateProvince": "MA",
+      "PostalCode": "02101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Family Suite, 2 Queen Beds (Ocean View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur la ville)",
+        "Type": "Family Suite",
+        "BaseRate": 135.47,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "jacuzzi tub",
+          "bluetooth speaker"
+        ]
+      },
+      {
+        "Description": "Penthouse Suite, 1 King Bed (Harbor View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 350.27,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "smart tv",
+          "kitchenette",
+          "suite"
+        ]
+      },
+      {
+        "Description": "Deluxe Room, 1 King Bed (Skyline View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur la mer)",
+        "Type": "Deluxe Room",
+        "BaseRate": 413.65,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bidet",
+          "rainfall shower",
+          "hair dryer"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "30",
+    "HotelName": "Grand Haven Hotel",
+    "Description": "Engineered for the modern professional, this Portland business hotel combines productivity with comfort. High-speed fiber internet, a 24-hour business center with printing and shipping services, and same-day dry cleaning ensure nothing disrupts a tight schedule. The lobby cafe doubles as a co-working space.",
+    "Description_fr": "Un hotel d'affaires de premier plan au centre-ville de Portland avec acces direct au centre de congres.",
+    "Category": "Business",
+    "Tags": [
+      "spa",
+      "ev charging",
+      "rooftop terrace"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2014-10-01T00:00:00Z",
+    "Rating": 3.1,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -122.698773,
+        45.563603
+      ]
+    },
+    "Address": {
+      "StreetAddress": "2130 Garden Path",
+      "City": "Portland",
+      "StateProvince": "OR",
+      "PostalCode": "97201",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Suite, 1 King Bed (Garden View)",
+        "Description_fr": "Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Suite",
+        "BaseRate": 484.96,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": false,
+        "Tags": [
+          "minibar",
+          "suite"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "31",
+    "HotelName": "The New Orleans Meridian",
+    "Description": "Step back in time at this lovingly restored 1901 landmark in New Orleans. Original architectural details including crown moldings, stained glass windows, and a sweeping grand staircase coexist with modern comforts like smart room controls and rainfall showers. The on-site museum chronicles the building's storied past.",
+    "Description_fr": "Un hotel historique magnifiquement restaure dans le quartier patrimonial de New Orleans.",
+    "Category": "Historic",
+    "Tags": [
+      "pool",
+      "concierge",
+      "business center",
+      "spa",
+      "bar"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2014-11-19T00:00:00Z",
+    "Rating": 2.9,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -90.066664,
+        29.933619
+      ]
+    },
+    "Address": {
+      "StreetAddress": "9788 Heritage Ln",
+      "City": "New Orleans",
+      "StateProvince": "LA",
+      "PostalCode": "70112",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Penthouse Suite, 1 King Bed (Valley View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 462.65,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "smart tv",
+          "kitchenette",
+          "nespresso machine"
+        ]
+      },
+      {
+        "Description": "Budget Room, 1 Full Bed (Skyline View)",
+        "Description_fr": "Budget Room, 1 Full Bed (Vue sur la ville)",
+        "Type": "Budget Room",
+        "BaseRate": 179.63,
+        "BedOptions": "1 Full Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "tv",
+          "nespresso machine",
+          "jacuzzi tub",
+          "smart tv"
+        ]
+      },
+      {
+        "Description": "Deluxe Room, 1 King Bed (Ocean View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur la ville)",
+        "Type": "Deluxe Room",
+        "BaseRate": 517.53,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "safe",
+          "bluetooth speaker",
+          "smart tv"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "32",
+    "HotelName": "The San Diego Retreat",
+    "Description": "This pioneering eco-friendly hotel in San Diego is built from reclaimed timber and recycled steel. The living green wall in the atrium naturally purifies indoor air, while the kitchen composts one hundred percent of food waste. Electric vehicle charging stations and a bicycle-share fleet encourage car-free exploration.",
+    "Description_fr": "Un hotel ecologique certifie a San Diego alliant durabilite et confort haut de gamme.",
+    "Category": "Eco-Friendly",
+    "Tags": [
+      "airport shuttle",
+      "ocean view",
+      "golf course",
+      "free wifi"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2014-10-18T00:00:00Z",
+    "Rating": 4.3,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -117.154932,
+        32.732701
+      ]
+    },
+    "Address": {
+      "StreetAddress": "6731 Sunset Dr",
+      "City": "San Diego",
+      "StateProvince": "CA",
+      "PostalCode": "92101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Executive Suite, 1 King Bed (River View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue sur la mer)",
+        "Type": "Executive Suite",
+        "BaseRate": 275.3,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "safe",
+          "fireplace",
+          "rainfall shower",
+          "bathroom shower"
+        ]
+      },
+      {
+        "Description": "Studio Room, 1 Queen Bed (Ocean View)",
+        "Description_fr": "Studio Room, 1 Queen Bed (Vue panoramique)",
+        "Type": "Studio Room",
+        "BaseRate": 430.87,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": true,
+        "Tags": [
+          "minibar",
+          "bidet",
+          "bathroom shower"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "33",
+    "HotelName": "Grand Terrace Hotel",
+    "Description": "Experience unparalleled elegance at this iconic Savannah luxury hotel. From the crystal chandeliers in the grand lobby to the hand-crafted furnishings in every room, every detail speaks to refined taste. The rooftop infinity pool overlooks the glittering skyline while the concierge team curates bespoke city experiences.",
+    "Description_fr": "Un hotel de luxe exceptionnel au coeur de Savannah, offrant un service de conciergerie personnalise, un spa de classe mondiale et une cuisine gastronomique primee.",
+    "Category": "Luxury",
+    "Tags": [
+      "bar",
+      "beachfront",
+      "mountain view",
+      "free wifi"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2018-05-23T00:00:00Z",
+    "Rating": 4.1,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -81.073559,
+        32.123054
+      ]
+    },
+    "Address": {
+      "StreetAddress": "5752 Main St",
+      "City": "Savannah",
+      "StateProvince": "GA",
+      "PostalCode": "31401",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Executive Suite, 1 King Bed (Harbor View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Executive Suite",
+        "BaseRate": 516.49,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "safe",
+          "hair dryer",
+          "iron"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "34",
+    "HotelName": "Hotel Silver",
+    "Description": "Tucked away on a charming Scottsdale side street, this intimate boutique hotel offers a curated escape from the ordinary. With only 29 rooms, guests receive personalized attention from a staff that anticipates every need. The rooftop garden bar is a hidden gem among locals and travelers alike.",
+    "Description_fr": "Un charmant hotel-boutique a Scottsdale ou art contemporain et confort intime se rencontrent dans un cadre unique.",
+    "Category": "Boutique",
+    "Tags": [
+      "kids club",
+      "airport shuttle",
+      "ocean view",
+      "rooftop terrace"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2012-11-14T00:00:00Z",
+    "Rating": 2.6,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -111.927534,
+        33.488404
+      ]
+    },
+    "Address": {
+      "StreetAddress": "4476 Elm St",
+      "City": "Scottsdale",
+      "StateProvince": "AZ",
+      "PostalCode": "85251",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Executive Suite, 1 King Bed (Mountain View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Executive Suite",
+        "BaseRate": 228.27,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathroom shower",
+          "minibar",
+          "tv"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "35",
+    "HotelName": "Honolulu Golden Resort",
+    "Description": "An award-winning resort and spa destination in Honolulu offering complete rejuvenation. Spread across lush tropical grounds, the property features a championship golf course, six swimming pools, and a world-renowned wellness center with over forty treatment rooms. All-day dining options range from casual poolside fare to elegant tasting menus.",
+    "Description_fr": "Un complexe hotelier et spa prime a Honolulu proposant des soins de bien-etre, un parcours de golf et une cuisine raffinee.",
+    "Category": "Resort and Spa",
+    "Tags": [
+      "spa",
+      "free wifi",
+      "kids club",
+      "continental breakfast",
+      "pool"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2015-09-23T00:00:00Z",
+    "Rating": 4.4,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -157.885289,
+        21.312772
+      ]
+    },
+    "Address": {
+      "StreetAddress": "5803 Market St",
+      "City": "Honolulu",
+      "StateProvince": "HI",
+      "PostalCode": "96801",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Family Suite, 2 Queen Beds (Lake View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur la ville)",
+        "Type": "Family Suite",
+        "BaseRate": 570.47,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": true,
+        "Tags": [
+          "hair dryer",
+          "jacuzzi tub"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "36",
+    "HotelName": "Grand Canopy Hotel",
+    "Description": "Ideal for budget-conscious travelers visiting Charleston, this no-frills hotel delivers on the essentials: spotless rooms, reliable wifi, and a friendly front desk team available around the clock. The on-site self-service laundry and free parking make extended stays painless.",
+    "Description_fr": "Un hotel economique bien situe a Charleston offrant des chambres propres et modernes avec petit-dejeuner gratuit.",
+    "Category": "Budget",
+    "Tags": [
+      "laundry service",
+      "kids club",
+      "ski-in/ski-out",
+      "all-inclusive",
+      "airport shuttle",
+      "valet parking"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2022-07-28T00:00:00Z",
+    "Rating": 3.1,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -79.950073,
+        32.760451
+      ]
+    },
+    "Address": {
+      "StreetAddress": "5457 Riverside Dr",
+      "City": "Charleston",
+      "StateProvince": "SC",
+      "PostalCode": "29401",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Penthouse Suite, 1 King Bed (Ocean View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 71.25,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathrobe",
+          "smart tv",
+          "kitchenette"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "37",
+    "HotelName": "Aspen Hotel Hotel",
+    "Description": "Designed for guests who need more than a hotel room, this Aspen extended-stay property features fully equipped kitchens, in-suite washer/dryers, and separate living areas. Weekly housekeeping, a well-stocked grocery delivery partnership, and a communal outdoor grill area make long-term stays feel like home.",
+    "Description_fr": "Un hotel de sejour prolonge a Aspen avec des suites entierement equipees comprenant cuisine et espace de vie.",
+    "Category": "Extended-Stay",
+    "Tags": [
+      "bar",
+      "business center",
+      "room service"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2020-11-11T00:00:00Z",
+    "Rating": 4.7,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -106.852404,
+        39.147929
+      ]
+    },
+    "Address": {
+      "StreetAddress": "7246 Maple Ave",
+      "City": "Aspen",
+      "StateProvince": "CO",
+      "PostalCode": "81611",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Presidential Suite, 1 King Bed (Valley View)",
+        "Description_fr": "Presidential Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Presidential Suite",
+        "BaseRate": 142.54,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "minibar",
+          "bathrobe",
+          "bluetooth speaker",
+          "smart tv"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "38",
+    "HotelName": "The Las Vegas Plaza",
+    "Description": "A premier business hotel in downtown Las Vegas with direct skybridge access to the convention center. Every room features dual monitors, ergonomic Herman Miller chairs, and noise-canceling panels. The executive floor lounge offers complimentary hors d'oeuvres, premium cocktails, and private meeting pods bookable by the hour.",
+    "Description_fr": "Un hotel d'affaires de premier plan au centre-ville de Las Vegas avec acces direct au centre de congres.",
+    "Category": "Business",
+    "Tags": [
+      "pet friendly",
+      "bicycle rental",
+      "valet parking"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2014-08-04T00:00:00Z",
+    "Rating": 3.7,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -115.108703,
+        36.203638
+      ]
+    },
+    "Address": {
+      "StreetAddress": "1382 Heritage Ln",
+      "City": "Las Vegas",
+      "StateProvince": "NV",
+      "PostalCode": "89101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Deluxe Room, 1 King Bed (Park View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur le jardin)",
+        "Type": "Deluxe Room",
+        "BaseRate": 392.09,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "sofa bed",
+          "smart tv",
+          "suite",
+          "tv"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "39",
+    "HotelName": "Hotel Royal",
+    "Description": "A registered historic property in the heart of Orlando's heritage district, this hotel occupies a beautifully preserved 1945 building. Period antiques furnish the common areas while guest rooms blend vintage charm with contemporary amenities. Evening ghost tours and historical walking guides depart from the ornate lobby.",
+    "Description_fr": "Un hotel historique magnifiquement restaure dans le quartier patrimonial de Orlando.",
+    "Category": "Historic",
+    "Tags": [
+      "pet friendly",
+      "sauna",
+      "valet parking",
+      "kids club"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2022-12-03T00:00:00Z",
+    "Rating": 3.3,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -81.398242,
+        28.525968
+      ]
+    },
+    "Address": {
+      "StreetAddress": "5382 Park Blvd",
+      "City": "Orlando",
+      "StateProvince": "FL",
+      "PostalCode": "32801",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Executive Suite, 1 King Bed (Cityscape View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Executive Suite",
+        "BaseRate": 486.17,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "fireplace",
+          "minibar",
+          "bidet",
+          "safe"
+        ]
+      },
+      {
+        "Description": "Standard Room, 1 Queen Bed (Valley View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur le jardin)",
+        "Type": "Standard Room",
+        "BaseRate": 450.81,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bidet",
+          "balcony",
+          "fireplace",
+          "minibar"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "40",
+    "HotelName": "Washington Azure Resort",
+    "Description": "This pioneering eco-friendly hotel in Washington is built from reclaimed timber and recycled steel. The living green wall in the atrium naturally purifies indoor air, while the kitchen composts one hundred percent of food waste. Electric vehicle charging stations and a bicycle-share fleet encourage car-free exploration.",
+    "Description_fr": "Un hotel ecologique certifie a Washington alliant durabilite et confort haut de gamme.",
+    "Category": "Eco-Friendly",
+    "Tags": [
+      "rooftop terrace",
+      "meeting rooms",
+      "mountain view",
+      "room service"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2014-03-06T00:00:00Z",
+    "Rating": 4.7,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -77.068815,
+        38.926485
+      ]
+    },
+    "Address": {
+      "StreetAddress": "2713 Canyon Rd",
+      "City": "Washington",
+      "StateProvince": "DC",
+      "PostalCode": "20001",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Suite, 1 King Bed (Cityscape View)",
+        "Description_fr": "Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Suite",
+        "BaseRate": 143.66,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": false,
+        "Tags": [
+          "safe",
+          "nespresso machine",
+          "suite"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "41",
+    "HotelName": "The Radiant Promenade",
+    "Description": "An opulent 5-star retreat in the heart of New York, featuring world-class dining, a full-service spa, and breathtaking river views. Guests enjoy marble-clad suites, a Michelin-starred restaurant, and personalized butler service. Perfect for discerning travelers who expect nothing but the finest accommodations.",
+    "Description_fr": "Un hotel de luxe exceptionnel au coeur de New York, offrant un service de conciergerie personnalise, un spa de classe mondiale et une cuisine gastronomique primee.",
+    "Category": "Luxury",
+    "Tags": [
+      "garden",
+      "free wifi",
+      "valet parking",
+      "ev charging"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2013-03-09T00:00:00Z",
+    "Rating": 3.8,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -73.990768,
+        40.749735
+      ]
+    },
+    "Address": {
+      "StreetAddress": "7168 Market St",
+      "City": "New York",
+      "StateProvince": "NY",
+      "PostalCode": "10001",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Double Room, 2 Queen Beds (Cityscape View)",
+        "Description_fr": "Double Room, 2 Queen Beds (Vue panoramique)",
+        "Type": "Double Room",
+        "BaseRate": 426.28,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "smart tv",
+          "bidet",
+          "jacuzzi tub",
+          "sofa bed"
+        ]
+      },
+      {
+        "Description": "Executive Suite, 1 King Bed (Lake View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Executive Suite",
+        "BaseRate": 501.11,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "balcony",
+          "hair dryer",
+          "tv",
+          "bluetooth speaker"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "42",
+    "HotelName": "Promenade Boutique",
+    "Description": "Tucked away on a charming San Francisco side street, this intimate boutique hotel offers a curated escape from the ordinary. With only 45 rooms, guests receive personalized attention from a staff that anticipates every need. The rooftop garden bar is a hidden gem among locals and travelers alike.",
+    "Description_fr": "Un charmant hotel-boutique a San Francisco ou art contemporain et confort intime se rencontrent dans un cadre unique.",
+    "Category": "Boutique",
+    "Tags": [
+      "kids club",
+      "gym",
+      "pet friendly",
+      "free wifi"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2025-01-03T00:00:00Z",
+    "Rating": 2.8,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -122.4675,
+        37.746465
+      ]
+    },
+    "Address": {
+      "StreetAddress": "2450 Garden Path",
+      "City": "San Francisco",
+      "StateProvince": "CA",
+      "PostalCode": "94102",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Executive Suite, 1 King Bed (River View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Executive Suite",
+        "BaseRate": 562.64,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "fireplace",
+          "balcony",
+          "bathroom shower",
+          "tv"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "43",
+    "HotelName": "Summit Canopy Inn",
+    "Description": "Escape to paradise at this stunning Chicago resort where relaxation meets adventure. Guests unwind at the oceanfront spa while thrill-seekers enjoy water sports, zipline tours, and guided nature hikes. The resort culinary program features cooking classes with the executive chef using locally harvested ingredients.",
+    "Description_fr": "Un complexe hotelier et spa prime a Chicago proposant des soins de bien-etre, un parcours de golf et une cuisine raffinee.",
+    "Category": "Resort and Spa",
+    "Tags": [
+      "airport shuttle",
+      "all-inclusive",
+      "ev charging",
+      "continental breakfast"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2021-09-18T00:00:00Z",
+    "Rating": 4.2,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -87.629067,
+        41.926933
+      ]
+    },
+    "Address": {
+      "StreetAddress": "9080 Main St",
+      "City": "Chicago",
+      "StateProvince": "IL",
+      "PostalCode": "60601",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Deluxe Room, 1 King Bed (Cityscape View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur le jardin)",
+        "Type": "Deluxe Room",
+        "BaseRate": 511.8,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bidet",
+          "suite",
+          "coffee maker"
+        ]
+      },
+      {
+        "Description": "Presidential Suite, 1 King Bed (Garden View)",
+        "Description_fr": "Presidential Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Presidential Suite",
+        "BaseRate": 217.28,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bidet",
+          "kitchenette"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "44",
+    "HotelName": "Grand Plaza Hotel",
+    "Description": "Ideal for budget-conscious travelers visiting Miami, this no-frills hotel delivers on the essentials: spotless rooms, reliable wifi, and a friendly front desk team available around the clock. The on-site self-service laundry and free parking make extended stays painless.",
+    "Description_fr": "Un hotel economique bien situe a Miami offrant des chambres propres et modernes avec petit-dejeuner gratuit.",
+    "Category": "Budget",
+    "Tags": [
+      "pet friendly",
+      "free wifi",
+      "wellness center"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2019-01-28T00:00:00Z",
+    "Rating": 4.1,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -80.176227,
+        25.739022
+      ]
+    },
+    "Address": {
+      "StreetAddress": "6030 Mountain Pass",
+      "City": "Miami",
+      "StateProvince": "FL",
+      "PostalCode": "33101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Deluxe Room, 1 King Bed (Mountain View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur le jardin)",
+        "Type": "Deluxe Room",
+        "BaseRate": 83.93,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": true,
+        "Tags": [
+          "fireplace",
+          "bathrobe",
+          "smart tv",
+          "bluetooth speaker"
+        ]
+      },
+      {
+        "Description": "Executive Suite, 1 King Bed (Skyline View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Executive Suite",
+        "BaseRate": 479.13,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "tv",
+          "jacuzzi tub",
+          "desk"
+        ]
+      },
+      {
+        "Description": "Suite, 1 King Bed (Park View)",
+        "Description_fr": "Suite, 1 King Bed (Vue sur la mer)",
+        "Type": "Suite",
+        "BaseRate": 230.41,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": true,
+        "Tags": [
+          "nespresso machine",
+          "sofa bed",
+          "suite"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "45",
+    "HotelName": "Grand Observatory Hotel",
+    "Description": "Designed for guests who need more than a hotel room, this Seattle extended-stay property features fully equipped kitchens, in-suite washer/dryers, and separate living areas. Weekly housekeeping, a well-stocked grocery delivery partnership, and a communal outdoor grill area make long-term stays feel like home.",
+    "Description_fr": "Un hotel de sejour prolonge a Seattle avec des suites entierement equipees comprenant cuisine et espace de vie.",
+    "Category": "Extended-Stay",
+    "Tags": [
+      "ev charging",
+      "gym",
+      "wellness center",
+      "airport shuttle",
+      "continental breakfast"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2015-06-15T00:00:00Z",
+    "Rating": 4.3,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -122.377864,
+        47.643204
+      ]
+    },
+    "Address": {
+      "StreetAddress": "5777 University Ave",
+      "City": "Seattle",
+      "StateProvince": "WA",
+      "PostalCode": "98101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Budget Room, 1 Full Bed (River View)",
+        "Description_fr": "Budget Room, 1 Full Bed (Vue sur la mer)",
+        "Type": "Budget Room",
+        "BaseRate": 218.62,
+        "BedOptions": "1 Full Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "minibar",
+          "fireplace"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "46",
+    "HotelName": "Grand Retreat Hotel",
+    "Description": "A premier business hotel in downtown Austin with direct skybridge access to the convention center. Every room features dual monitors, ergonomic Herman Miller chairs, and noise-canceling panels. The executive floor lounge offers complimentary hors d'oeuvres, premium cocktails, and private meeting pods bookable by the hour.",
+    "Description_fr": "Un hotel d'affaires de premier plan au centre-ville de Austin avec acces direct au centre de congres.",
+    "Category": "Business",
+    "Tags": [
+      "bar",
+      "gym",
+      "free wifi"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2024-10-10T00:00:00Z",
+    "Rating": 3.2,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -97.723702,
+        30.317063
+      ]
+    },
+    "Address": {
+      "StreetAddress": "3280 Oak Ave",
+      "City": "Austin",
+      "StateProvince": "TX",
+      "PostalCode": "73301",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Executive Suite, 1 King Bed (Park View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue sur la mer)",
+        "Type": "Executive Suite",
+        "BaseRate": 572.7,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bidet",
+          "balcony"
+        ]
+      },
+      {
+        "Description": "Presidential Suite, 1 King Bed (Lake View)",
+        "Description_fr": "Presidential Suite, 1 King Bed (Vue sur la mer)",
+        "Type": "Presidential Suite",
+        "BaseRate": 472.06,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "balcony",
+          "nespresso machine",
+          "kitchenette",
+          "sofa bed"
+        ]
+      },
+      {
+        "Description": "Penthouse Suite, 1 King Bed (Cityscape View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 121.25,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathrobe",
+          "bluetooth speaker",
+          "nespresso machine",
+          "sofa bed"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "47",
+    "HotelName": "Hotel Azure",
+    "Description": "A registered historic property in the heart of Nashville's heritage district, this hotel occupies a beautifully preserved 1912 building. Period antiques furnish the common areas while guest rooms blend vintage charm with contemporary amenities. Evening ghost tours and historical walking guides depart from the ornate lobby.",
+    "Description_fr": "Un hotel historique magnifiquement restaure dans le quartier patrimonial de Nashville.",
+    "Category": "Historic",
+    "Tags": [
+      "garden",
+      "valet parking",
+      "golf course"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2025-07-27T00:00:00Z",
+    "Rating": 3.5,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -86.77411,
+        36.125233
+      ]
+    },
+    "Address": {
+      "StreetAddress": "5195 Market St",
+      "City": "Nashville",
+      "StateProvince": "TN",
+      "PostalCode": "37201",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Suite, 1 King Bed (Garden View)",
+        "Description_fr": "Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Suite",
+        "BaseRate": 488.59,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": true,
+        "Tags": [
+          "iron",
+          "safe",
+          "desk",
+          "balcony"
+        ]
+      },
+      {
+        "Description": "Presidential Suite, 1 King Bed (Valley View)",
+        "Description_fr": "Presidential Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Presidential Suite",
+        "BaseRate": 359.16,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 4,
+        "SmokingAllowed": true,
+        "Tags": [
+          "smart tv",
+          "suite",
+          "balcony"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "48",
+    "HotelName": "The Retreat at Denver",
+    "Description": "A LEED Platinum-certified hotel in Denver that proves sustainability and luxury can coexist. Solar panels generate seventy percent of the building's energy, greywater recycling irrigates the organic rooftop garden, and every amenity is plastic-free. Guests sleep on organic cotton linens and dine on zero-waste cuisine.",
+    "Description_fr": "Un hotel ecologique certifie a Denver alliant durabilite et confort haut de gamme.",
+    "Category": "Eco-Friendly",
+    "Tags": [
+      "bicycle rental",
+      "restaurant",
+      "city view"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2018-05-20T00:00:00Z",
+    "Rating": 4.1,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -104.986952,
+        39.739457
+      ]
+    },
+    "Address": {
+      "StreetAddress": "2763 Commerce St",
+      "City": "Denver",
+      "StateProvince": "CO",
+      "PostalCode": "80201",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Family Suite, 2 Queen Beds (River View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur la ville)",
+        "Type": "Family Suite",
+        "BaseRate": 148.9,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "iron",
+          "kitchenette",
+          "nespresso machine"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "49",
+    "HotelName": "Silver Citadel Inn",
+    "Description": "Experience unparalleled elegance at this iconic Boston luxury hotel. From the crystal chandeliers in the grand lobby to the hand-crafted furnishings in every room, every detail speaks to refined taste. The rooftop infinity pool overlooks the glittering skyline while the concierge team curates bespoke city experiences.",
+    "Description_fr": "Un hotel de luxe exceptionnel au coeur de Boston, offrant un service de conciergerie personnalise, un spa de classe mondiale et une cuisine gastronomique primee.",
+    "Category": "Luxury",
+    "Tags": [
+      "all-inclusive",
+      "meeting rooms",
+      "laundry service"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2016-03-11T00:00:00Z",
+    "Rating": 3.7,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -71.022751,
+        42.342032
+      ]
+    },
+    "Address": {
+      "StreetAddress": "5659 Lakeview Rd",
+      "City": "Boston",
+      "StateProvince": "MA",
+      "PostalCode": "02101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Double Room, 2 Queen Beds (River View)",
+        "Description_fr": "Double Room, 2 Queen Beds (Vue sur la mer)",
+        "Type": "Double Room",
+        "BaseRate": 393.77,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bluetooth speaker",
+          "suite"
+        ]
+      },
+      {
+        "Description": "Penthouse Suite, 1 King Bed (Skyline View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 494.52,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "sofa bed",
+          "jacuzzi tub",
+          "smart tv",
+          "minibar"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "50",
+    "HotelName": "Hotel Noble",
+    "Description": "A one-of-a-kind boutique hotel in Portland that blends contemporary art with intimate comfort. Each of the 35 individually designed rooms tells a unique story through local artwork and artisan furniture. The on-site cafe serves farm-to-table cuisine sourced from nearby purveyors.",
+    "Description_fr": "Un charmant hotel-boutique a Portland ou art contemporain et confort intime se rencontrent dans un cadre unique.",
+    "Category": "Boutique",
+    "Tags": [
+      "ocean view",
+      "free wifi",
+      "bar",
+      "restaurant",
+      "spa"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2017-06-02T00:00:00Z",
+    "Rating": 3.8,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -122.721446,
+        45.514689
+      ]
+    },
+    "Address": {
+      "StreetAddress": "7711 Maple Ave",
+      "City": "Portland",
+      "StateProvince": "OR",
+      "PostalCode": "97201",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Penthouse Suite, 1 King Bed (Lake View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 194.06,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "fireplace",
+          "bathroom shower"
+        ]
+      },
+      {
+        "Description": "Presidential Suite, 1 King Bed (Skyline View)",
+        "Description_fr": "Presidential Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Presidential Suite",
+        "BaseRate": 329.05,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "smart tv",
+          "bluetooth speaker",
+          "jacuzzi tub",
+          "bathroom shower"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "51",
+    "HotelName": "New Orleans Grand Resort",
+    "Description": "An award-winning resort and spa destination in New Orleans offering complete rejuvenation. Spread across lush tropical grounds, the property features a championship golf course, six swimming pools, and a world-renowned wellness center with over forty treatment rooms. All-day dining options range from casual poolside fare to elegant tasting menus.",
+    "Description_fr": "Un complexe hotelier et spa prime a New Orleans proposant des soins de bien-etre, un parcours de golf et une cuisine raffinee.",
+    "Category": "Resort and Spa",
+    "Tags": [
+      "spa",
+      "kids club",
+      "laundry service",
+      "garden",
+      "room service"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2014-08-17T00:00:00Z",
+    "Rating": 2.6,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -90.075801,
+        29.961726
+      ]
+    },
+    "Address": {
+      "StreetAddress": "8447 Park Blvd",
+      "City": "New Orleans",
+      "StateProvince": "LA",
+      "PostalCode": "70112",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Budget Room, 1 Full Bed (Mountain View)",
+        "Description_fr": "Budget Room, 1 Full Bed (Vue sur la ville)",
+        "Type": "Budget Room",
+        "BaseRate": 99.7,
+        "BedOptions": "1 Full Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "smart tv",
+          "suite",
+          "hair dryer",
+          "safe"
+        ]
+      },
+      {
+        "Description": "Family Suite, 2 Queen Beds (Garden View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue panoramique)",
+        "Type": "Family Suite",
+        "BaseRate": 489.23,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "suite",
+          "kitchenette",
+          "balcony"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "52",
+    "HotelName": "Highland Resort & Suites",
+    "Description": "Ideal for budget-conscious travelers visiting San Diego, this no-frills hotel delivers on the essentials: spotless rooms, reliable wifi, and a friendly front desk team available around the clock. The on-site self-service laundry and free parking make extended stays painless.",
+    "Description_fr": "Un hotel economique bien situe a San Diego offrant des chambres propres et modernes avec petit-dejeuner gratuit.",
+    "Category": "Budget",
+    "Tags": [
+      "ski-in/ski-out",
+      "laundry service",
+      "valet parking",
+      "mountain view",
+      "pool",
+      "pet friendly"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2023-12-07T00:00:00Z",
+    "Rating": 3.6,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -117.170062,
+        32.743197
+      ]
+    },
+    "Address": {
+      "StreetAddress": "7727 Broadway",
+      "City": "San Diego",
+      "StateProvince": "CA",
+      "PostalCode": "92101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Deluxe Room, 1 King Bed (Skyline View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue panoramique)",
+        "Type": "Deluxe Room",
+        "BaseRate": 375.19,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "coffee maker",
+          "bluetooth speaker",
+          "hair dryer",
+          "iron"
+        ]
+      },
+      {
+        "Description": "Penthouse Suite, 1 King Bed (Valley View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 399.66,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "sofa bed",
+          "balcony",
+          "iron",
+          "tv"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "53",
+    "HotelName": "Pristine Inn & Suites",
+    "Description": "Whether relocating, on a project assignment, or simply exploring Savannah at a leisurely pace, this extended-stay hotel offers apartment-style suites with full kitchens, ergonomic home offices, and generous closet space. Complimentary evening socials help guests connect with fellow long-term travelers.",
+    "Description_fr": "Un hotel de sejour prolonge a Savannah avec des suites entierement equipees comprenant cuisine et espace de vie.",
+    "Category": "Extended-Stay",
+    "Tags": [
+      "beachfront",
+      "meeting rooms",
+      "tennis court",
+      "wellness center",
+      "all-inclusive"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2021-11-09T00:00:00Z",
+    "Rating": 4.3,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -81.075066,
+        32.052299
+      ]
+    },
+    "Address": {
+      "StreetAddress": "8825 Pine St",
+      "City": "Savannah",
+      "StateProvince": "GA",
+      "PostalCode": "31401",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Family Suite, 2 Queen Beds (River View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur la mer)",
+        "Type": "Family Suite",
+        "BaseRate": 576.95,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "suite",
+          "jacuzzi tub",
+          "iron"
+        ]
+      },
+      {
+        "Description": "Studio Room, 1 Queen Bed (Cityscape View)",
+        "Description_fr": "Studio Room, 1 Queen Bed (Vue sur la mer)",
+        "Type": "Studio Room",
+        "BaseRate": 432.72,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "fireplace",
+          "bluetooth speaker",
+          "kitchenette"
+        ]
+      },
+      {
+        "Description": "Double Room, 2 Queen Beds (River View)",
+        "Description_fr": "Double Room, 2 Queen Beds (Vue sur la ville)",
+        "Type": "Double Room",
+        "BaseRate": 369.67,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "sofa bed",
+          "bidet",
+          "kitchenette",
+          "balcony"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "54",
+    "HotelName": "Scottsdale Pearl Resort",
+    "Description": "A premier business hotel in downtown Scottsdale with direct skybridge access to the convention center. Every room features dual monitors, ergonomic Herman Miller chairs, and noise-canceling panels. The executive floor lounge offers complimentary hors d'oeuvres, premium cocktails, and private meeting pods bookable by the hour.",
+    "Description_fr": "Un hotel d'affaires de premier plan au centre-ville de Scottsdale avec acces direct au centre de congres.",
+    "Category": "Business",
+    "Tags": [
+      "spa",
+      "restaurant",
+      "airport shuttle",
+      "rooftop terrace"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2019-01-10T00:00:00Z",
+    "Rating": 4.9,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -111.919304,
+        33.45493
+      ]
+    },
+    "Address": {
+      "StreetAddress": "5490 Maple Ave",
+      "City": "Scottsdale",
+      "StateProvince": "AZ",
+      "PostalCode": "85251",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Studio Room, 1 Queen Bed (Garden View)",
+        "Description_fr": "Studio Room, 1 Queen Bed (Vue sur la mer)",
+        "Type": "Studio Room",
+        "BaseRate": 62.79,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathrobe",
+          "rainfall shower",
+          "bluetooth speaker",
+          "suite"
+        ]
+      },
+      {
+        "Description": "Deluxe Room, 1 King Bed (Cityscape View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur la ville)",
+        "Type": "Deluxe Room",
+        "BaseRate": 408.77,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathroom shower",
+          "iron"
+        ]
+      },
+      {
+        "Description": "Suite, 1 King Bed (Park View)",
+        "Description_fr": "Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Suite",
+        "BaseRate": 154.52,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": false,
+        "Tags": [
+          "tv",
+          "sofa bed"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "55",
+    "HotelName": "The Retreat at Honolulu",
+    "Description": "Step back in time at this lovingly restored 1885 landmark in Honolulu. Original architectural details including crown moldings, stained glass windows, and a sweeping grand staircase coexist with modern comforts like smart room controls and rainfall showers. The on-site museum chronicles the building's storied past.",
+    "Description_fr": "Un hotel historique magnifiquement restaure dans le quartier patrimonial de Honolulu.",
+    "Category": "Historic",
+    "Tags": [
+      "concierge",
+      "wellness center",
+      "ocean view",
+      "all-inclusive",
+      "business center"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2017-02-15T00:00:00Z",
+    "Rating": 3.4,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -157.877619,
+        21.297442
+      ]
+    },
+    "Address": {
+      "StreetAddress": "8234 Maple Ave",
+      "City": "Honolulu",
+      "StateProvince": "HI",
+      "PostalCode": "96801",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Suite, 1 King Bed (Cityscape View)",
+        "Description_fr": "Suite, 1 King Bed (Vue sur la mer)",
+        "Type": "Suite",
+        "BaseRate": 487.0,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": true,
+        "Tags": [
+          "desk",
+          "bathrobe",
+          "sofa bed",
+          "rainfall shower"
+        ]
+      },
+      {
+        "Description": "Standard Room, 1 Queen Bed (Lake View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur le jardin)",
+        "Type": "Standard Room",
+        "BaseRate": 421.39,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": true,
+        "Tags": [
+          "balcony",
+          "bluetooth speaker"
+        ]
+      },
+      {
+        "Description": "Executive Suite, 1 King Bed (Valley View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Executive Suite",
+        "BaseRate": 267.12,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "hair dryer",
+          "fireplace",
+          "jacuzzi tub"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "56",
+    "HotelName": "Charleston Hotel Hotel",
+    "Description": "A LEED Platinum-certified hotel in Charleston that proves sustainability and luxury can coexist. Solar panels generate seventy percent of the building's energy, greywater recycling irrigates the organic rooftop garden, and every amenity is plastic-free. Guests sleep on organic cotton linens and dine on zero-waste cuisine.",
+    "Description_fr": "Un hotel ecologique certifie a Charleston alliant durabilite et confort haut de gamme.",
+    "Category": "Eco-Friendly",
+    "Tags": [
+      "wellness center",
+      "continental breakfast",
+      "pet friendly",
+      "airport shuttle",
+      "ski-in/ski-out",
+      "garden"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2024-04-23T00:00:00Z",
+    "Rating": 4.6,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -79.922785,
+        32.735594
+      ]
+    },
+    "Address": {
+      "StreetAddress": "8362 Canyon Rd",
+      "City": "Charleston",
+      "StateProvince": "SC",
+      "PostalCode": "29401",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Budget Room, 1 Full Bed (Cityscape View)",
+        "Description_fr": "Budget Room, 1 Full Bed (Vue sur la mer)",
+        "Type": "Budget Room",
+        "BaseRate": 471.39,
+        "BedOptions": "1 Full Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": true,
+        "Tags": [
+          "bidet",
+          "minibar",
+          "nespresso machine",
+          "smart tv"
+        ]
+      },
+      {
+        "Description": "Double Room, 2 Queen Beds (Garden View)",
+        "Description_fr": "Double Room, 2 Queen Beds (Vue sur le jardin)",
+        "Type": "Double Room",
+        "BaseRate": 364.64,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "suite",
+          "nespresso machine"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "57",
+    "HotelName": "The Tranquil Oasis",
+    "Description": "Experience unparalleled elegance at this iconic Aspen luxury hotel. From the crystal chandeliers in the grand lobby to the hand-crafted furnishings in every room, every detail speaks to refined taste. The rooftop infinity pool overlooks the glittering skyline while the concierge team curates bespoke city experiences.",
+    "Description_fr": "Un hotel de luxe exceptionnel au coeur de Aspen, offrant un service de conciergerie personnalise, un spa de classe mondiale et une cuisine gastronomique primee.",
+    "Category": "Luxury",
+    "Tags": [
+      "beachfront",
+      "ev charging",
+      "valet parking",
+      "wellness center",
+      "pool",
+      "kids club"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2023-07-15T00:00:00Z",
+    "Rating": 4.9,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -106.780538,
+        39.231777
+      ]
+    },
+    "Address": {
+      "StreetAddress": "6155 Market St",
+      "City": "Aspen",
+      "StateProvince": "CO",
+      "PostalCode": "81611",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Standard Room, 1 Queen Bed (Ocean View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur la ville)",
+        "Type": "Standard Room",
+        "BaseRate": 372.28,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "rainfall shower",
+          "kitchenette"
+        ]
+      },
+      {
+        "Description": "Double Room, 2 Queen Beds (Mountain View)",
+        "Description_fr": "Double Room, 2 Queen Beds (Vue sur le jardin)",
+        "Type": "Double Room",
+        "BaseRate": 97.26,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "tv",
+          "jacuzzi tub",
+          "rainfall shower"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "58",
+    "HotelName": "Las Vegas Silver Resort",
+    "Description": "A one-of-a-kind boutique hotel in Las Vegas that blends contemporary art with intimate comfort. Each of the 53 individually designed rooms tells a unique story through local artwork and artisan furniture. The on-site cafe serves farm-to-table cuisine sourced from nearby purveyors.",
+    "Description_fr": "Un charmant hotel-boutique a Las Vegas ou art contemporain et confort intime se rencontrent dans un cadre unique.",
+    "Category": "Boutique",
+    "Tags": [
+      "meeting rooms",
+      "pool",
+      "valet parking"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2024-12-28T00:00:00Z",
+    "Rating": 4.0,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -115.184932,
+        36.193954
+      ]
+    },
+    "Address": {
+      "StreetAddress": "6591 Canyon Rd",
+      "City": "Las Vegas",
+      "StateProvince": "NV",
+      "PostalCode": "89101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Budget Room, 1 Full Bed (Lake View)",
+        "Description_fr": "Budget Room, 1 Full Bed (Vue sur le jardin)",
+        "Type": "Budget Room",
+        "BaseRate": 347.23,
+        "BedOptions": "1 Full Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "iron",
+          "smart tv"
+        ]
+      },
+      {
+        "Description": "Penthouse Suite, 1 King Bed (Garden View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 566.19,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": true,
+        "Tags": [
+          "safe",
+          "tv",
+          "rainfall shower",
+          "coffee maker"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "59",
+    "HotelName": "Haven Residence",
+    "Description": "An award-winning resort and spa destination in Orlando offering complete rejuvenation. Spread across lush tropical grounds, the property features a championship golf course, six swimming pools, and a world-renowned wellness center with over forty treatment rooms. All-day dining options range from casual poolside fare to elegant tasting menus.",
+    "Description_fr": "Un complexe hotelier et spa prime a Orlando proposant des soins de bien-etre, un parcours de golf et une cuisine raffinee.",
+    "Category": "Resort and Spa",
+    "Tags": [
+      "laundry service",
+      "continental breakfast",
+      "meeting rooms",
+      "beachfront",
+      "bicycle rental"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2020-07-05T00:00:00Z",
+    "Rating": 4.2,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -81.399211,
+        28.506688
+      ]
+    },
+    "Address": {
+      "StreetAddress": "8814 Promenade Walk",
+      "City": "Orlando",
+      "StateProvince": "FL",
+      "PostalCode": "32801",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Double Room, 2 Queen Beds (River View)",
+        "Description_fr": "Double Room, 2 Queen Beds (Vue sur la ville)",
+        "Type": "Double Room",
+        "BaseRate": 533.17,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "nespresso machine",
+          "iron",
+          "rainfall shower",
+          "jacuzzi tub"
+        ]
+      },
+      {
+        "Description": "Family Suite, 2 Queen Beds (Skyline View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur la mer)",
+        "Type": "Family Suite",
+        "BaseRate": 379.49,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathrobe",
+          "rainfall shower",
+          "suite",
+          "bluetooth speaker"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "60",
+    "HotelName": "Terrace Residence",
+    "Description": "A smart-value hotel in Washington that proves comfort does not require a premium price. Clean, modern rooms feature pillow-top mattresses, high-speed wifi, and a functional workspace. The complimentary breakfast buffet and 24-hour coffee station keep guests fueled for exploration, and the central location puts major attractions within walking distance.",
+    "Description_fr": "Un hotel economique bien situe a Washington offrant des chambres propres et modernes avec petit-dejeuner gratuit.",
+    "Category": "Budget",
+    "Tags": [
+      "airport shuttle",
+      "garden",
+      "city view",
+      "bar",
+      "kids club",
+      "free wifi"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2010-04-24T00:00:00Z",
+    "Rating": 3.3,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -77.075168,
+        38.957157
+      ]
+    },
+    "Address": {
+      "StreetAddress": "7847 Harbor Way",
+      "City": "Washington",
+      "StateProvince": "DC",
+      "PostalCode": "20001",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Double Room, 2 Queen Beds (Garden View)",
+        "Description_fr": "Double Room, 2 Queen Beds (Vue sur la ville)",
+        "Type": "Double Room",
+        "BaseRate": 409.21,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "kitchenette",
+          "minibar",
+          "suite"
+        ]
+      },
+      {
+        "Description": "Executive Suite, 1 King Bed (Park View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Executive Suite",
+        "BaseRate": 423.77,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "tv",
+          "minibar",
+          "desk",
+          "suite"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "61",
+    "HotelName": "Emerald Observatory Inn",
+    "Description": "Whether relocating, on a project assignment, or simply exploring New York at a leisurely pace, this extended-stay hotel offers apartment-style suites with full kitchens, ergonomic home offices, and generous closet space. Complimentary evening socials help guests connect with fellow long-term travelers.",
+    "Description_fr": "Un hotel de sejour prolonge a New York avec des suites entierement equipees comprenant cuisine et espace de vie.",
+    "Category": "Extended-Stay",
+    "Tags": [
+      "valet parking",
+      "business center",
+      "pet friendly",
+      "city view",
+      "golf course"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2017-11-22T00:00:00Z",
+    "Rating": 3.1,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -74.001944,
+        40.774736
+      ]
+    },
+    "Address": {
+      "StreetAddress": "8006 Promenade Walk",
+      "City": "New York",
+      "StateProvince": "NY",
+      "PostalCode": "10001",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Studio Room, 1 Queen Bed (Lake View)",
+        "Description_fr": "Studio Room, 1 Queen Bed (Vue panoramique)",
+        "Type": "Studio Room",
+        "BaseRate": 493.51,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": true,
+        "Tags": [
+          "bluetooth speaker",
+          "fireplace",
+          "desk",
+          "kitchenette"
+        ]
+      },
+      {
+        "Description": "Deluxe Room, 1 King Bed (River View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur le jardin)",
+        "Type": "Deluxe Room",
+        "BaseRate": 526.6,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "balcony",
+          "coffee maker",
+          "hair dryer",
+          "rainfall shower"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "62",
+    "HotelName": "The Promenade at San Francisco",
+    "Description": "A premier business hotel in downtown San Francisco with direct skybridge access to the convention center. Every room features dual monitors, ergonomic Herman Miller chairs, and noise-canceling panels. The executive floor lounge offers complimentary hors d'oeuvres, premium cocktails, and private meeting pods bookable by the hour.",
+    "Description_fr": "Un hotel d'affaires de premier plan au centre-ville de San Francisco avec acces direct au centre de congres.",
+    "Category": "Business",
+    "Tags": [
+      "bicycle rental",
+      "tennis court",
+      "gym"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2013-09-05T00:00:00Z",
+    "Rating": 4.8,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -122.445303,
+        37.786878
+      ]
+    },
+    "Address": {
+      "StreetAddress": "4136 Sunset Dr",
+      "City": "San Francisco",
+      "StateProvince": "CA",
+      "PostalCode": "94102",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Standard Room, 1 Queen Bed (Garden View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue panoramique)",
+        "Type": "Standard Room",
+        "BaseRate": 134.24,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "iron",
+          "minibar",
+          "balcony",
+          "coffee maker"
+        ]
+      },
+      {
+        "Description": "Presidential Suite, 1 King Bed (Skyline View)",
+        "Description_fr": "Presidential Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Presidential Suite",
+        "BaseRate": 393.62,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 4,
+        "SmokingAllowed": true,
+        "Tags": [
+          "bidet",
+          "bluetooth speaker",
+          "bathroom shower",
+          "coffee maker"
+        ]
+      },
+      {
+        "Description": "Penthouse Suite, 1 King Bed (Cityscape View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 345.88,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "suite",
+          "jacuzzi tub",
+          "coffee maker"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "63",
+    "HotelName": "The Chicago Pinnacle",
+    "Description": "A registered historic property in the heart of Chicago's heritage district, this hotel occupies a beautifully preserved 1901 building. Period antiques furnish the common areas while guest rooms blend vintage charm with contemporary amenities. Evening ghost tours and historical walking guides depart from the ornate lobby.",
+    "Description_fr": "Un hotel historique magnifiquement restaure dans le quartier patrimonial de Chicago.",
+    "Category": "Historic",
+    "Tags": [
+      "beachfront",
+      "bicycle rental",
+      "tennis court",
+      "gym",
+      "all-inclusive"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2010-10-05T00:00:00Z",
+    "Rating": 4.6,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -87.604575,
+        41.899371
+      ]
+    },
+    "Address": {
+      "StreetAddress": "6526 Market St",
+      "City": "Chicago",
+      "StateProvince": "IL",
+      "PostalCode": "60601",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Standard Room, 1 Queen Bed (Ocean View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue panoramique)",
+        "Type": "Standard Room",
+        "BaseRate": 264.79,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bluetooth speaker",
+          "tv",
+          "coffee maker",
+          "bathrobe"
+        ]
+      },
+      {
+        "Description": "Deluxe Room, 1 King Bed (Skyline View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur le jardin)",
+        "Type": "Deluxe Room",
+        "BaseRate": 408.24,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathroom shower",
+          "safe",
+          "nespresso machine"
+        ]
+      },
+      {
+        "Description": "Penthouse Suite, 1 King Bed (River View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 528.77,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bluetooth speaker",
+          "hair dryer",
+          "tv",
+          "minibar"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "64",
+    "HotelName": "The Miami Lodge",
+    "Description": "This pioneering eco-friendly hotel in Miami is built from reclaimed timber and recycled steel. The living green wall in the atrium naturally purifies indoor air, while the kitchen composts one hundred percent of food waste. Electric vehicle charging stations and a bicycle-share fleet encourage car-free exploration.",
+    "Description_fr": "Un hotel ecologique certifie a Miami alliant durabilite et confort haut de gamme.",
+    "Category": "Eco-Friendly",
+    "Tags": [
+      "spa",
+      "restaurant",
+      "airport shuttle",
+      "free wifi",
+      "bicycle rental"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2022-11-19T00:00:00Z",
+    "Rating": 3.4,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -80.175733,
+        25.720269
+      ]
+    },
+    "Address": {
+      "StreetAddress": "4840 Harbor Way",
+      "City": "Miami",
+      "StateProvince": "FL",
+      "PostalCode": "33101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Executive Suite, 1 King Bed (River View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Executive Suite",
+        "BaseRate": 386.78,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bidet",
+          "sofa bed",
+          "fireplace",
+          "coffee maker"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "65",
+    "HotelName": "Seattle Resort Hotel",
+    "Description": "Experience unparalleled elegance at this iconic Seattle luxury hotel. From the crystal chandeliers in the grand lobby to the hand-crafted furnishings in every room, every detail speaks to refined taste. The rooftop infinity pool overlooks the glittering skyline while the concierge team curates bespoke city experiences.",
+    "Description_fr": "Un hotel de luxe exceptionnel au coeur de Seattle, offrant un service de conciergerie personnalise, un spa de classe mondiale et une cuisine gastronomique primee.",
+    "Category": "Luxury",
+    "Tags": [
+      "restaurant",
+      "gym",
+      "pool",
+      "valet parking",
+      "ocean view"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2017-03-22T00:00:00Z",
+    "Rating": 2.7,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -122.344027,
+        47.570084
+      ]
+    },
+    "Address": {
+      "StreetAddress": "4934 Pine St",
+      "City": "Seattle",
+      "StateProvince": "WA",
+      "PostalCode": "98101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Family Suite, 2 Queen Beds (Cityscape View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue panoramique)",
+        "Type": "Family Suite",
+        "BaseRate": 131.54,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "rainfall shower",
+          "smart tv"
+        ]
+      },
+      {
+        "Description": "Deluxe Room, 1 King Bed (River View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue panoramique)",
+        "Type": "Deluxe Room",
+        "BaseRate": 108.38,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "minibar",
+          "fireplace",
+          "sofa bed",
+          "coffee maker"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "66",
+    "HotelName": "The Pinnacle at Austin",
+    "Description": "Tucked away on a charming Austin side street, this intimate boutique hotel offers a curated escape from the ordinary. With only 46 rooms, guests receive personalized attention from a staff that anticipates every need. The rooftop garden bar is a hidden gem among locals and travelers alike.",
+    "Description_fr": "Un charmant hotel-boutique a Austin ou art contemporain et confort intime se rencontrent dans un cadre unique.",
+    "Category": "Boutique",
+    "Tags": [
+      "pet friendly",
+      "business center",
+      "free wifi"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2022-10-07T00:00:00Z",
+    "Rating": 3.2,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -97.733877,
+        30.271763
+      ]
+    },
+    "Address": {
+      "StreetAddress": "9013 Main St",
+      "City": "Austin",
+      "StateProvince": "TX",
+      "PostalCode": "73301",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Studio Room, 1 Queen Bed (Valley View)",
+        "Description_fr": "Studio Room, 1 Queen Bed (Vue panoramique)",
+        "Type": "Studio Room",
+        "BaseRate": 117.76,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "coffee maker",
+          "sofa bed",
+          "fireplace"
+        ]
+      },
+      {
+        "Description": "Double Room, 2 Queen Beds (Lake View)",
+        "Description_fr": "Double Room, 2 Queen Beds (Vue sur le jardin)",
+        "Type": "Double Room",
+        "BaseRate": 237.94,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "rainfall shower",
+          "balcony",
+          "jacuzzi tub"
+        ]
+      },
+      {
+        "Description": "Presidential Suite, 1 King Bed (Valley View)",
+        "Description_fr": "Presidential Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Presidential Suite",
+        "BaseRate": 155.91,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "fireplace",
+          "jacuzzi tub",
+          "bluetooth speaker"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "67",
+    "HotelName": "The Atrium at Nashville",
+    "Description": "Escape to paradise at this stunning Nashville resort where relaxation meets adventure. Guests unwind at the oceanfront spa while thrill-seekers enjoy water sports, zipline tours, and guided nature hikes. The resort culinary program features cooking classes with the executive chef using locally harvested ingredients.",
+    "Description_fr": "Un complexe hotelier et spa prime a Nashville proposant des soins de bien-etre, un parcours de golf et une cuisine raffinee.",
+    "Category": "Resort and Spa",
+    "Tags": [
+      "all-inclusive",
+      "valet parking",
+      "free wifi",
+      "business center"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2017-07-15T00:00:00Z",
+    "Rating": 3.8,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -86.754366,
+        36.171559
+      ]
+    },
+    "Address": {
+      "StreetAddress": "8200 Park Blvd",
+      "City": "Nashville",
+      "StateProvince": "TN",
+      "PostalCode": "37201",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Suite, 1 King Bed (Harbor View)",
+        "Description_fr": "Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Suite",
+        "BaseRate": 99.93,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bluetooth speaker",
+          "bathroom shower",
+          "sofa bed",
+          "nespresso machine"
+        ]
+      },
+      {
+        "Description": "Penthouse Suite, 1 King Bed (Lake View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 254.14,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bidet",
+          "minibar",
+          "safe",
+          "iron"
+        ]
+      },
+      {
+        "Description": "Budget Room, 1 Full Bed (Skyline View)",
+        "Description_fr": "Budget Room, 1 Full Bed (Vue sur la ville)",
+        "Type": "Budget Room",
+        "BaseRate": 83.91,
+        "BedOptions": "1 Full Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "sofa bed",
+          "fireplace",
+          "rainfall shower",
+          "safe"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "68",
+    "HotelName": "Grand Boutique & Suites",
+    "Description": "Ideal for budget-conscious travelers visiting Denver, this no-frills hotel delivers on the essentials: spotless rooms, reliable wifi, and a friendly front desk team available around the clock. The on-site self-service laundry and free parking make extended stays painless.",
+    "Description_fr": "Un hotel economique bien situe a Denver offrant des chambres propres et modernes avec petit-dejeuner gratuit.",
+    "Category": "Budget",
+    "Tags": [
+      "pet friendly",
+      "valet parking",
+      "rooftop terrace",
+      "ocean view"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2013-06-21T00:00:00Z",
+    "Rating": 4.5,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -105.029364,
+        39.769205
+      ]
+    },
+    "Address": {
+      "StreetAddress": "3997 Heritage Ln",
+      "City": "Denver",
+      "StateProvince": "CO",
+      "PostalCode": "80201",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Budget Room, 1 Full Bed (Lake View)",
+        "Description_fr": "Budget Room, 1 Full Bed (Vue sur la ville)",
+        "Type": "Budget Room",
+        "BaseRate": 320.77,
+        "BedOptions": "1 Full Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "safe",
+          "smart tv",
+          "bathroom shower"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "69",
+    "HotelName": "Hotel Harbor",
+    "Description": "Whether relocating, on a project assignment, or simply exploring Boston at a leisurely pace, this extended-stay hotel offers apartment-style suites with full kitchens, ergonomic home offices, and generous closet space. Complimentary evening socials help guests connect with fellow long-term travelers.",
+    "Description_fr": "Un hotel de sejour prolonge a Boston avec des suites entierement equipees comprenant cuisine et espace de vie.",
+    "Category": "Extended-Stay",
+    "Tags": [
+      "all-inclusive",
+      "beachfront",
+      "airport shuttle",
+      "kids club"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2012-09-06T00:00:00Z",
+    "Rating": 4.4,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -71.072321,
+        42.329807
+      ]
+    },
+    "Address": {
+      "StreetAddress": "1868 Pine St",
+      "City": "Boston",
+      "StateProvince": "MA",
+      "PostalCode": "02101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Presidential Suite, 1 King Bed (Skyline View)",
+        "Description_fr": "Presidential Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Presidential Suite",
+        "BaseRate": 536.86,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathroom shower",
+          "rainfall shower",
+          "sofa bed"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "70",
+    "HotelName": "The Lighthouse at Portland",
+    "Description": "Engineered for the modern professional, this Portland business hotel combines productivity with comfort. High-speed fiber internet, a 24-hour business center with printing and shipping services, and same-day dry cleaning ensure nothing disrupts a tight schedule. The lobby cafe doubles as a co-working space.",
+    "Description_fr": "Un hotel d'affaires de premier plan au centre-ville de Portland avec acces direct au centre de congres.",
+    "Category": "Business",
+    "Tags": [
+      "tennis court",
+      "ocean view",
+      "continental breakfast",
+      "concierge",
+      "bicycle rental"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2011-01-16T00:00:00Z",
+    "Rating": 4.6,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -122.712847,
+        45.546722
+      ]
+    },
+    "Address": {
+      "StreetAddress": "9201 Heritage Ln",
+      "City": "Portland",
+      "StateProvince": "OR",
+      "PostalCode": "97201",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Family Suite, 2 Queen Beds (Mountain View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur la mer)",
+        "Type": "Family Suite",
+        "BaseRate": 229.11,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "jacuzzi tub",
+          "safe"
+        ]
+      },
+      {
+        "Description": "Deluxe Room, 1 King Bed (Harbor View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur le jardin)",
+        "Type": "Deluxe Room",
+        "BaseRate": 335.84,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bidet",
+          "balcony",
+          "sofa bed"
+        ]
+      },
+      {
+        "Description": "Suite, 1 King Bed (River View)",
+        "Description_fr": "Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Suite",
+        "BaseRate": 350.17,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathrobe",
+          "suite",
+          "bidet",
+          "bluetooth speaker"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "71",
+    "HotelName": "The Quarters at New Orleans",
+    "Description": "A registered historic property in the heart of New Orleans's heritage district, this hotel occupies a beautifully preserved 1945 building. Period antiques furnish the common areas while guest rooms blend vintage charm with contemporary amenities. Evening ghost tours and historical walking guides depart from the ornate lobby.",
+    "Description_fr": "Un hotel historique magnifiquement restaure dans le quartier patrimonial de New Orleans.",
+    "Category": "Historic",
+    "Tags": [
+      "ev charging",
+      "meeting rooms",
+      "free wifi"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2017-01-15T00:00:00Z",
+    "Rating": 2.8,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -90.095218,
+        29.98732
+      ]
+    },
+    "Address": {
+      "StreetAddress": "1426 Canyon Rd",
+      "City": "New Orleans",
+      "StateProvince": "LA",
+      "PostalCode": "70112",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Standard Room, 1 Queen Bed (Cityscape View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur la ville)",
+        "Type": "Standard Room",
+        "BaseRate": 181.41,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathrobe",
+          "smart tv",
+          "bluetooth speaker"
+        ]
+      },
+      {
+        "Description": "Family Suite, 2 Queen Beds (Cityscape View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur le jardin)",
+        "Type": "Family Suite",
+        "BaseRate": 204.65,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "kitchenette",
+          "suite",
+          "tv",
+          "smart tv"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "72",
+    "HotelName": "San Diego Residence Hotel",
+    "Description": "This pioneering eco-friendly hotel in San Diego is built from reclaimed timber and recycled steel. The living green wall in the atrium naturally purifies indoor air, while the kitchen composts one hundred percent of food waste. Electric vehicle charging stations and a bicycle-share fleet encourage car-free exploration.",
+    "Description_fr": "Un hotel ecologique certifie a San Diego alliant durabilite et confort haut de gamme.",
+    "Category": "Eco-Friendly",
+    "Tags": [
+      "bicycle rental",
+      "room service",
+      "ev charging",
+      "spa"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2023-02-21T00:00:00Z",
+    "Rating": 4.1,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -117.13164,
+        32.742588
+      ]
+    },
+    "Address": {
+      "StreetAddress": "6601 Heritage Ln",
+      "City": "San Diego",
+      "StateProvince": "CA",
+      "PostalCode": "92101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Executive Suite, 1 King Bed (River View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue sur la mer)",
+        "Type": "Executive Suite",
+        "BaseRate": 382.29,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "fireplace",
+          "jacuzzi tub"
+        ]
+      },
+      {
+        "Description": "Budget Room, 1 Full Bed (River View)",
+        "Description_fr": "Budget Room, 1 Full Bed (Vue sur le jardin)",
+        "Type": "Budget Room",
+        "BaseRate": 337.77,
+        "BedOptions": "1 Full Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "safe",
+          "balcony",
+          "rainfall shower",
+          "tv"
+        ]
+      },
+      {
+        "Description": "Family Suite, 2 Queen Beds (Harbor View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue panoramique)",
+        "Type": "Family Suite",
+        "BaseRate": 131.64,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "fireplace",
+          "iron"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "73",
+    "HotelName": "The Savannah Atrium",
+    "Description": "Experience unparalleled elegance at this iconic Savannah luxury hotel. From the crystal chandeliers in the grand lobby to the hand-crafted furnishings in every room, every detail speaks to refined taste. The rooftop infinity pool overlooks the glittering skyline while the concierge team curates bespoke city experiences.",
+    "Description_fr": "Un hotel de luxe exceptionnel au coeur de Savannah, offrant un service de conciergerie personnalise, un spa de classe mondiale et une cuisine gastronomique primee.",
+    "Category": "Luxury",
+    "Tags": [
+      "tennis court",
+      "gym",
+      "ev charging",
+      "garden",
+      "kids club"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2020-01-02T00:00:00Z",
+    "Rating": 3.7,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -81.139843,
+        32.109289
+      ]
+    },
+    "Address": {
+      "StreetAddress": "7530 Main St",
+      "City": "Savannah",
+      "StateProvince": "GA",
+      "PostalCode": "31401",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Penthouse Suite, 1 King Bed (Lake View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 505.41,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "hair dryer",
+          "fireplace",
+          "jacuzzi tub"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "74",
+    "HotelName": "Scottsdale Inn Hotel",
+    "Description": "A one-of-a-kind boutique hotel in Scottsdale that blends contemporary art with intimate comfort. Each of the 32 individually designed rooms tells a unique story through local artwork and artisan furniture. The on-site cafe serves farm-to-table cuisine sourced from nearby purveyors.",
+    "Description_fr": "Un charmant hotel-boutique a Scottsdale ou art contemporain et confort intime se rencontrent dans un cadre unique.",
+    "Category": "Boutique",
+    "Tags": [
+      "tennis court",
+      "sauna",
+      "golf course",
+      "business center"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2013-08-03T00:00:00Z",
+    "Rating": 2.7,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -111.96283,
+        33.466819
+      ]
+    },
+    "Address": {
+      "StreetAddress": "7292 Main St",
+      "City": "Scottsdale",
+      "StateProvince": "AZ",
+      "PostalCode": "85251",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Executive Suite, 1 King Bed (River View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Executive Suite",
+        "BaseRate": 195.2,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathrobe",
+          "tv",
+          "sofa bed"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "75",
+    "HotelName": "The Majestic Meridian",
+    "Description": "Escape to paradise at this stunning Honolulu resort where relaxation meets adventure. Guests unwind at the oceanfront spa while thrill-seekers enjoy water sports, zipline tours, and guided nature hikes. The resort culinary program features cooking classes with the executive chef using locally harvested ingredients.",
+    "Description_fr": "Un complexe hotelier et spa prime a Honolulu proposant des soins de bien-etre, un parcours de golf et une cuisine raffinee.",
+    "Category": "Resort and Spa",
+    "Tags": [
+      "gym",
+      "wellness center",
+      "ev charging",
+      "restaurant",
+      "bicycle rental",
+      "rooftop terrace"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2013-02-19T00:00:00Z",
+    "Rating": 2.7,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -157.835299,
+        21.292054
+      ]
+    },
+    "Address": {
+      "StreetAddress": "7036 Ocean Blvd",
+      "City": "Honolulu",
+      "StateProvince": "HI",
+      "PostalCode": "96801",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Family Suite, 2 Queen Beds (Cityscape View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur la ville)",
+        "Type": "Family Suite",
+        "BaseRate": 266.66,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "balcony",
+          "minibar"
+        ]
+      },
+      {
+        "Description": "Suite, 1 King Bed (Valley View)",
+        "Description_fr": "Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Suite",
+        "BaseRate": 148.61,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": false,
+        "Tags": [
+          "desk",
+          "balcony",
+          "rainfall shower"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "76",
+    "HotelName": "Hotel Sapphire",
+    "Description": "A smart-value hotel in Charleston that proves comfort does not require a premium price. Clean, modern rooms feature pillow-top mattresses, high-speed wifi, and a functional workspace. The complimentary breakfast buffet and 24-hour coffee station keep guests fueled for exploration, and the central location puts major attractions within walking distance.",
+    "Description_fr": "Un hotel economique bien situe a Charleston offrant des chambres propres et modernes avec petit-dejeuner gratuit.",
+    "Category": "Budget",
+    "Tags": [
+      "meeting rooms",
+      "ski-in/ski-out",
+      "pool",
+      "tennis court",
+      "beachfront"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2023-11-06T00:00:00Z",
+    "Rating": 2.8,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -79.904827,
+        32.821945
+      ]
+    },
+    "Address": {
+      "StreetAddress": "1196 Main St",
+      "City": "Charleston",
+      "StateProvince": "SC",
+      "PostalCode": "29401",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Double Room, 2 Queen Beds (Skyline View)",
+        "Description_fr": "Double Room, 2 Queen Beds (Vue sur le jardin)",
+        "Type": "Double Room",
+        "BaseRate": 387.73,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "sofa bed",
+          "jacuzzi tub"
+        ]
+      },
+      {
+        "Description": "Budget Room, 1 Full Bed (Skyline View)",
+        "Description_fr": "Budget Room, 1 Full Bed (Vue sur la mer)",
+        "Type": "Budget Room",
+        "BaseRate": 120.87,
+        "BedOptions": "1 Full Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bidet",
+          "minibar",
+          "nespresso machine"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "77",
+    "HotelName": "Azure Palace Inn",
+    "Description": "Designed for guests who need more than a hotel room, this Aspen extended-stay property features fully equipped kitchens, in-suite washer/dryers, and separate living areas. Weekly housekeeping, a well-stocked grocery delivery partnership, and a communal outdoor grill area make long-term stays feel like home.",
+    "Description_fr": "Un hotel de sejour prolonge a Aspen avec des suites entierement equipees comprenant cuisine et espace de vie.",
+    "Category": "Extended-Stay",
+    "Tags": [
+      "all-inclusive",
+      "ski-in/ski-out",
+      "city view",
+      "meeting rooms",
+      "airport shuttle"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2017-02-14T00:00:00Z",
+    "Rating": 3.6,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -106.855901,
+        39.20233
+      ]
+    },
+    "Address": {
+      "StreetAddress": "902 Maple Ave",
+      "City": "Aspen",
+      "StateProvince": "CO",
+      "PostalCode": "81611",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Penthouse Suite, 1 King Bed (River View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 405.88,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bidet",
+          "balcony",
+          "hair dryer",
+          "minibar"
+        ]
+      },
+      {
+        "Description": "Deluxe Room, 1 King Bed (Harbor View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur la ville)",
+        "Type": "Deluxe Room",
+        "BaseRate": 169.72,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "suite",
+          "fireplace"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "78",
+    "HotelName": "Hotel Golden",
+    "Description": "A premier business hotel in downtown Las Vegas with direct skybridge access to the convention center. Every room features dual monitors, ergonomic Herman Miller chairs, and noise-canceling panels. The executive floor lounge offers complimentary hors d'oeuvres, premium cocktails, and private meeting pods bookable by the hour.",
+    "Description_fr": "Un hotel d'affaires de premier plan au centre-ville de Las Vegas avec acces direct au centre de congres.",
+    "Category": "Business",
+    "Tags": [
+      "concierge",
+      "pet friendly",
+      "bar",
+      "wellness center",
+      "meeting rooms"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2013-09-01T00:00:00Z",
+    "Rating": 4.4,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -115.185396,
+        36.206193
+      ]
+    },
+    "Address": {
+      "StreetAddress": "4007 Broadway",
+      "City": "Las Vegas",
+      "StateProvince": "NV",
+      "PostalCode": "89101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Deluxe Room, 1 King Bed (River View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur la ville)",
+        "Type": "Deluxe Room",
+        "BaseRate": 240.9,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "hair dryer",
+          "nespresso machine",
+          "minibar"
+        ]
+      },
+      {
+        "Description": "Standard Room, 1 Queen Bed (Mountain View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur la mer)",
+        "Type": "Standard Room",
+        "BaseRate": 335.81,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bluetooth speaker",
+          "bathroom shower"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "79",
+    "HotelName": "The Observatory at Orlando",
+    "Description": "Step back in time at this lovingly restored 1901 landmark in Orlando. Original architectural details including crown moldings, stained glass windows, and a sweeping grand staircase coexist with modern comforts like smart room controls and rainfall showers. The on-site museum chronicles the building's storied past.",
+    "Description_fr": "Un hotel historique magnifiquement restaure dans le quartier patrimonial de Orlando.",
+    "Category": "Historic",
+    "Tags": [
+      "free wifi",
+      "airport shuttle",
+      "sauna",
+      "wellness center",
+      "rooftop terrace"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2019-04-15T00:00:00Z",
+    "Rating": 3.0,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -81.392373,
+        28.585486
+      ]
+    },
+    "Address": {
+      "StreetAddress": "3202 Garden Path",
+      "City": "Orlando",
+      "StateProvince": "FL",
+      "PostalCode": "32801",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Deluxe Room, 1 King Bed (Skyline View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue panoramique)",
+        "Type": "Deluxe Room",
+        "BaseRate": 124.47,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": true,
+        "Tags": [
+          "tv",
+          "bathrobe",
+          "iron",
+          "nespresso machine"
+        ]
+      },
+      {
+        "Description": "Executive Suite, 1 King Bed (Cityscape View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Executive Suite",
+        "BaseRate": 311.14,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": true,
+        "Tags": [
+          "jacuzzi tub",
+          "fireplace",
+          "minibar"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "80",
+    "HotelName": "Palace Inn",
+    "Description": "A LEED Platinum-certified hotel in Washington that proves sustainability and luxury can coexist. Solar panels generate seventy percent of the building's energy, greywater recycling irrigates the organic rooftop garden, and every amenity is plastic-free. Guests sleep on organic cotton linens and dine on zero-waste cuisine.",
+    "Description_fr": "Un hotel ecologique certifie a Washington alliant durabilite et confort haut de gamme.",
+    "Category": "Eco-Friendly",
+    "Tags": [
+      "pool",
+      "meeting rooms",
+      "beachfront",
+      "kids club",
+      "tennis court"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2014-05-28T00:00:00Z",
+    "Rating": 2.7,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -77.055399,
+        38.937282
+      ]
+    },
+    "Address": {
+      "StreetAddress": "5346 Ocean Blvd",
+      "City": "Washington",
+      "StateProvince": "DC",
+      "PostalCode": "20001",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Family Suite, 2 Queen Beds (Skyline View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur le jardin)",
+        "Type": "Family Suite",
+        "BaseRate": 346.09,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "rainfall shower",
+          "bluetooth speaker"
+        ]
+      },
+      {
+        "Description": "Deluxe Room, 1 King Bed (Lake View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue panoramique)",
+        "Type": "Deluxe Room",
+        "BaseRate": 110.22,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "nespresso machine",
+          "rainfall shower"
+        ]
+      },
+      {
+        "Description": "Double Room, 2 Queen Beds (Harbor View)",
+        "Description_fr": "Double Room, 2 Queen Beds (Vue sur la ville)",
+        "Type": "Double Room",
+        "BaseRate": 105.84,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "nespresso machine",
+          "balcony"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "81",
+    "HotelName": "The Crest at New York",
+    "Description": "An opulent 4-star retreat in the heart of New York, featuring world-class dining, a full-service spa, and breathtaking valley views. Guests enjoy marble-clad suites, a Michelin-starred restaurant, and personalized butler service. Perfect for discerning travelers who expect nothing but the finest accommodations.",
+    "Description_fr": "Un hotel de luxe exceptionnel au coeur de New York, offrant un service de conciergerie personnalise, un spa de classe mondiale et une cuisine gastronomique primee.",
+    "Category": "Luxury",
+    "Tags": [
+      "restaurant",
+      "concierge",
+      "ocean view",
+      "rooftop terrace"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2022-11-10T00:00:00Z",
+    "Rating": 4.9,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -74.009683,
+        40.797468
+      ]
+    },
+    "Address": {
+      "StreetAddress": "510 Lakeview Rd",
+      "City": "New York",
+      "StateProvince": "NY",
+      "PostalCode": "10001",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Deluxe Room, 1 King Bed (Park View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur la mer)",
+        "Type": "Deluxe Room",
+        "BaseRate": 253.47,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "smart tv",
+          "jacuzzi tub"
+        ]
+      },
+      {
+        "Description": "Budget Room, 1 Full Bed (Mountain View)",
+        "Description_fr": "Budget Room, 1 Full Bed (Vue sur la ville)",
+        "Type": "Budget Room",
+        "BaseRate": 108.82,
+        "BedOptions": "1 Full Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "jacuzzi tub",
+          "tv",
+          "desk",
+          "fireplace"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "82",
+    "HotelName": "The Residence at San Francisco",
+    "Description": "A one-of-a-kind boutique hotel in San Francisco that blends contemporary art with intimate comfort. Each of the 26 individually designed rooms tells a unique story through local artwork and artisan furniture. The on-site cafe serves farm-to-table cuisine sourced from nearby purveyors.",
+    "Description_fr": "Un charmant hotel-boutique a San Francisco ou art contemporain et confort intime se rencontrent dans un cadre unique.",
+    "Category": "Boutique",
+    "Tags": [
+      "spa",
+      "bicycle rental",
+      "meeting rooms"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2024-02-28T00:00:00Z",
+    "Rating": 3.0,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -122.386464,
+        37.758055
+      ]
+    },
+    "Address": {
+      "StreetAddress": "700 Canyon Rd",
+      "City": "San Francisco",
+      "StateProvince": "CA",
+      "PostalCode": "94102",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Suite, 1 King Bed (Ocean View)",
+        "Description_fr": "Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Suite",
+        "BaseRate": 166.98,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": false,
+        "Tags": [
+          "kitchenette",
+          "minibar",
+          "hair dryer"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "83",
+    "HotelName": "The Crimson Lodge",
+    "Description": "Escape to paradise at this stunning Chicago resort where relaxation meets adventure. Guests unwind at the oceanfront spa while thrill-seekers enjoy water sports, zipline tours, and guided nature hikes. The resort culinary program features cooking classes with the executive chef using locally harvested ingredients.",
+    "Description_fr": "Un complexe hotelier et spa prime a Chicago proposant des soins de bien-etre, un parcours de golf et une cuisine raffinee.",
+    "Category": "Resort and Spa",
+    "Tags": [
+      "pet friendly",
+      "room service",
+      "sauna",
+      "concierge"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2017-09-26T00:00:00Z",
+    "Rating": 4.1,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -87.677847,
+        41.86635
+      ]
+    },
+    "Address": {
+      "StreetAddress": "5884 Promenade Walk",
+      "City": "Chicago",
+      "StateProvince": "IL",
+      "PostalCode": "60601",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Family Suite, 2 Queen Beds (River View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue panoramique)",
+        "Type": "Family Suite",
+        "BaseRate": 537.04,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bidet",
+          "iron"
+        ]
+      },
+      {
+        "Description": "Studio Room, 1 Queen Bed (Harbor View)",
+        "Description_fr": "Studio Room, 1 Queen Bed (Vue sur le jardin)",
+        "Type": "Studio Room",
+        "BaseRate": 357.36,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "minibar",
+          "hair dryer"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "84",
+    "HotelName": "Miami Pristine Resort",
+    "Description": "Ideal for budget-conscious travelers visiting Miami, this no-frills hotel delivers on the essentials: spotless rooms, reliable wifi, and a friendly front desk team available around the clock. The on-site self-service laundry and free parking make extended stays painless.",
+    "Description_fr": "Un hotel economique bien situe a Miami offrant des chambres propres et modernes avec petit-dejeuner gratuit.",
+    "Category": "Budget",
+    "Tags": [
+      "continental breakfast",
+      "free wifi",
+      "pool",
+      "golf course",
+      "ev charging"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2021-01-23T00:00:00Z",
+    "Rating": 3.3,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -80.171744,
+        25.806456
+      ]
+    },
+    "Address": {
+      "StreetAddress": "9235 Park Blvd",
+      "City": "Miami",
+      "StateProvince": "FL",
+      "PostalCode": "33101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Standard Room, 1 Queen Bed (Garden View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur la mer)",
+        "Type": "Standard Room",
+        "BaseRate": 345.88,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "iron",
+          "bathrobe",
+          "safe",
+          "bidet"
+        ]
+      },
+      {
+        "Description": "Studio Room, 1 Queen Bed (Mountain View)",
+        "Description_fr": "Studio Room, 1 Queen Bed (Vue sur le jardin)",
+        "Type": "Studio Room",
+        "BaseRate": 487.26,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "tv",
+          "iron",
+          "sofa bed",
+          "kitchenette"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "85",
+    "HotelName": "Emerald Quarters Inn",
+    "Description": "Whether relocating, on a project assignment, or simply exploring Seattle at a leisurely pace, this extended-stay hotel offers apartment-style suites with full kitchens, ergonomic home offices, and generous closet space. Complimentary evening socials help guests connect with fellow long-term travelers.",
+    "Description_fr": "Un hotel de sejour prolonge a Seattle avec des suites entierement equipees comprenant cuisine et espace de vie.",
+    "Category": "Extended-Stay",
+    "Tags": [
+      "free wifi",
+      "continental breakfast",
+      "pool"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2025-03-23T00:00:00Z",
+    "Rating": 3.6,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -122.285226,
+        47.625556
+      ]
+    },
+    "Address": {
+      "StreetAddress": "5847 Harbor Way",
+      "City": "Seattle",
+      "StateProvince": "WA",
+      "PostalCode": "98101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Studio Room, 1 Queen Bed (Mountain View)",
+        "Description_fr": "Studio Room, 1 Queen Bed (Vue sur la mer)",
+        "Type": "Studio Room",
+        "BaseRate": 555.65,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": true,
+        "Tags": [
+          "balcony",
+          "fireplace"
+        ]
+      },
+      {
+        "Description": "Standard Room, 1 Queen Bed (Ocean View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur la mer)",
+        "Type": "Standard Room",
+        "BaseRate": 139.75,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "balcony",
+          "safe",
+          "nespresso machine",
+          "kitchenette"
+        ]
+      },
+      {
+        "Description": "Executive Suite, 1 King Bed (Mountain View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Executive Suite",
+        "BaseRate": 417.55,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "safe",
+          "fireplace",
+          "jacuzzi tub",
+          "bathroom shower"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "86",
+    "HotelName": "Crimson Observatory Inn",
+    "Description": "Engineered for the modern professional, this Austin business hotel combines productivity with comfort. High-speed fiber internet, a 24-hour business center with printing and shipping services, and same-day dry cleaning ensure nothing disrupts a tight schedule. The lobby cafe doubles as a co-working space.",
+    "Description_fr": "Un hotel d'affaires de premier plan au centre-ville de Austin avec acces direct au centre de congres.",
+    "Category": "Business",
+    "Tags": [
+      "tennis court",
+      "meeting rooms",
+      "laundry service",
+      "spa",
+      "concierge",
+      "continental breakfast"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2012-02-24T00:00:00Z",
+    "Rating": 3.1,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -97.792972,
+        30.255794
+      ]
+    },
+    "Address": {
+      "StreetAddress": "6876 Riverside Dr",
+      "City": "Austin",
+      "StateProvince": "TX",
+      "PostalCode": "73301",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Presidential Suite, 1 King Bed (Lake View)",
+        "Description_fr": "Presidential Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Presidential Suite",
+        "BaseRate": 405.4,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bluetooth speaker",
+          "balcony"
+        ]
+      },
+      {
+        "Description": "Double Room, 2 Queen Beds (Park View)",
+        "Description_fr": "Double Room, 2 Queen Beds (Vue sur la ville)",
+        "Type": "Double Room",
+        "BaseRate": 590.48,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "minibar",
+          "fireplace"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "87",
+    "HotelName": "Nashville Serene Resort",
+    "Description": "A registered historic property in the heart of Nashville's heritage district, this hotel occupies a beautifully preserved 1885 building. Period antiques furnish the common areas while guest rooms blend vintage charm with contemporary amenities. Evening ghost tours and historical walking guides depart from the ornate lobby.",
+    "Description_fr": "Un hotel historique magnifiquement restaure dans le quartier patrimonial de Nashville.",
+    "Category": "Historic",
+    "Tags": [
+      "valet parking",
+      "pool",
+      "rooftop terrace"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2016-07-23T00:00:00Z",
+    "Rating": 2.8,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -86.776189,
+        36.205257
+      ]
+    },
+    "Address": {
+      "StreetAddress": "8850 Pine St",
+      "City": "Nashville",
+      "StateProvince": "TN",
+      "PostalCode": "37201",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Deluxe Room, 1 King Bed (Ocean View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue sur la mer)",
+        "Type": "Deluxe Room",
+        "BaseRate": 244.57,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathrobe",
+          "minibar",
+          "suite"
+        ]
+      },
+      {
+        "Description": "Presidential Suite, 1 King Bed (Valley View)",
+        "Description_fr": "Presidential Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Presidential Suite",
+        "BaseRate": 391.36,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "coffee maker",
+          "rainfall shower",
+          "bathrobe"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "88",
+    "HotelName": "The Denver Crest",
+    "Description": "A LEED Platinum-certified hotel in Denver that proves sustainability and luxury can coexist. Solar panels generate seventy percent of the building's energy, greywater recycling irrigates the organic rooftop garden, and every amenity is plastic-free. Guests sleep on organic cotton linens and dine on zero-waste cuisine.",
+    "Description_fr": "Un hotel ecologique certifie a Denver alliant durabilite et confort haut de gamme.",
+    "Category": "Eco-Friendly",
+    "Tags": [
+      "spa",
+      "pet friendly",
+      "pool",
+      "airport shuttle"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2012-02-10T00:00:00Z",
+    "Rating": 3.2,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -104.961812,
+        39.736294
+      ]
+    },
+    "Address": {
+      "StreetAddress": "4342 Market St",
+      "City": "Denver",
+      "StateProvince": "CO",
+      "PostalCode": "80201",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Family Suite, 2 Queen Beds (Skyline View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur le jardin)",
+        "Type": "Family Suite",
+        "BaseRate": 504.89,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bidet",
+          "bluetooth speaker",
+          "desk",
+          "safe"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "89",
+    "HotelName": "Boston Serene Resort",
+    "Description": "Experience unparalleled elegance at this iconic Boston luxury hotel. From the crystal chandeliers in the grand lobby to the hand-crafted furnishings in every room, every detail speaks to refined taste. The rooftop infinity pool overlooks the glittering skyline while the concierge team curates bespoke city experiences.",
+    "Description_fr": "Un hotel de luxe exceptionnel au coeur de Boston, offrant un service de conciergerie personnalise, un spa de classe mondiale et une cuisine gastronomique primee.",
+    "Category": "Luxury",
+    "Tags": [
+      "ocean view",
+      "business center",
+      "free wifi",
+      "bicycle rental",
+      "laundry service"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2023-11-28T00:00:00Z",
+    "Rating": 4.6,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -71.015264,
+        42.367371
+      ]
+    },
+    "Address": {
+      "StreetAddress": "3861 Promenade Walk",
+      "City": "Boston",
+      "StateProvince": "MA",
+      "PostalCode": "02101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Suite, 1 King Bed (Valley View)",
+        "Description_fr": "Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Suite",
+        "BaseRate": 466.2,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": false,
+        "Tags": [
+          "safe",
+          "minibar",
+          "kitchenette",
+          "rainfall shower"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "90",
+    "HotelName": "The Portland Observatory",
+    "Description": "A one-of-a-kind boutique hotel in Portland that blends contemporary art with intimate comfort. Each of the 27 individually designed rooms tells a unique story through local artwork and artisan furniture. The on-site cafe serves farm-to-table cuisine sourced from nearby purveyors.",
+    "Description_fr": "Un charmant hotel-boutique a Portland ou art contemporain et confort intime se rencontrent dans un cadre unique.",
+    "Category": "Boutique",
+    "Tags": [
+      "room service",
+      "ev charging",
+      "bar",
+      "spa"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2013-10-25T00:00:00Z",
+    "Rating": 2.9,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -122.716401,
+        45.493809
+      ]
+    },
+    "Address": {
+      "StreetAddress": "8776 Sunset Dr",
+      "City": "Portland",
+      "StateProvince": "OR",
+      "PostalCode": "97201",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Deluxe Room, 1 King Bed (Ocean View)",
+        "Description_fr": "Deluxe Room, 1 King Bed (Vue panoramique)",
+        "Type": "Deluxe Room",
+        "BaseRate": 169.03,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "balcony",
+          "hair dryer",
+          "fireplace",
+          "minibar"
+        ]
+      },
+      {
+        "Description": "Penthouse Suite, 1 King Bed (Valley View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 358.1,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "nespresso machine",
+          "smart tv",
+          "coffee maker"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "91",
+    "HotelName": "The Manor at New Orleans",
+    "Description": "An award-winning resort and spa destination in New Orleans offering complete rejuvenation. Spread across lush tropical grounds, the property features a championship golf course, six swimming pools, and a world-renowned wellness center with over forty treatment rooms. All-day dining options range from casual poolside fare to elegant tasting menus.",
+    "Description_fr": "Un complexe hotelier et spa prime a New Orleans proposant des soins de bien-etre, un parcours de golf et une cuisine raffinee.",
+    "Category": "Resort and Spa",
+    "Tags": [
+      "spa",
+      "kids club",
+      "rooftop terrace",
+      "ski-in/ski-out",
+      "free wifi",
+      "sauna"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2022-09-19T00:00:00Z",
+    "Rating": 4.3,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -90.118605,
+        29.920376
+      ]
+    },
+    "Address": {
+      "StreetAddress": "3289 Broadway",
+      "City": "New Orleans",
+      "StateProvince": "LA",
+      "PostalCode": "70112",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Studio Room, 1 Queen Bed (Ocean View)",
+        "Description_fr": "Studio Room, 1 Queen Bed (Vue sur le jardin)",
+        "Type": "Studio Room",
+        "BaseRate": 70.92,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "jacuzzi tub",
+          "hair dryer",
+          "bluetooth speaker"
+        ]
+      },
+      {
+        "Description": "Family Suite, 2 Queen Beds (Valley View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur la ville)",
+        "Type": "Family Suite",
+        "BaseRate": 586.07,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "fireplace",
+          "hair dryer",
+          "rainfall shower"
+        ]
+      },
+      {
+        "Description": "Executive Suite, 1 King Bed (Skyline View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Executive Suite",
+        "BaseRate": 174.14,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": true,
+        "Tags": [
+          "bluetooth speaker",
+          "nespresso machine",
+          "kitchenette"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "92",
+    "HotelName": "Atrium Boutique",
+    "Description": "Ideal for budget-conscious travelers visiting San Diego, this no-frills hotel delivers on the essentials: spotless rooms, reliable wifi, and a friendly front desk team available around the clock. The on-site self-service laundry and free parking make extended stays painless.",
+    "Description_fr": "Un hotel economique bien situe a San Diego offrant des chambres propres et modernes avec petit-dejeuner gratuit.",
+    "Category": "Budget",
+    "Tags": [
+      "all-inclusive",
+      "restaurant",
+      "beachfront",
+      "pool",
+      "free wifi",
+      "pet friendly"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2016-11-08T00:00:00Z",
+    "Rating": 4.4,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -117.14333,
+        32.692608
+      ]
+    },
+    "Address": {
+      "StreetAddress": "6710 Heritage Ln",
+      "City": "San Diego",
+      "StateProvince": "CA",
+      "PostalCode": "92101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Presidential Suite, 1 King Bed (Lake View)",
+        "Description_fr": "Presidential Suite, 1 King Bed (Vue sur le jardin)",
+        "Type": "Presidential Suite",
+        "BaseRate": 155.89,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathroom shower",
+          "suite",
+          "kitchenette"
+        ]
+      },
+      {
+        "Description": "Studio Room, 1 Queen Bed (Skyline View)",
+        "Description_fr": "Studio Room, 1 Queen Bed (Vue sur le jardin)",
+        "Type": "Studio Room",
+        "BaseRate": 199.67,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "minibar",
+          "jacuzzi tub",
+          "coffee maker",
+          "sofa bed"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "93",
+    "HotelName": "The Grand Quarters",
+    "Description": "Designed for guests who need more than a hotel room, this Savannah extended-stay property features fully equipped kitchens, in-suite washer/dryers, and separate living areas. Weekly housekeeping, a well-stocked grocery delivery partnership, and a communal outdoor grill area make long-term stays feel like home.",
+    "Description_fr": "Un hotel de sejour prolonge a Savannah avec des suites entierement equipees comprenant cuisine et espace de vie.",
+    "Category": "Extended-Stay",
+    "Tags": [
+      "ski-in/ski-out",
+      "all-inclusive",
+      "business center",
+      "airport shuttle",
+      "golf course"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2020-05-21T00:00:00Z",
+    "Rating": 5.0,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -81.078691,
+        32.120137
+      ]
+    },
+    "Address": {
+      "StreetAddress": "4896 Elm St",
+      "City": "Savannah",
+      "StateProvince": "GA",
+      "PostalCode": "31401",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Executive Suite, 1 King Bed (Valley View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Executive Suite",
+        "BaseRate": 196.07,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": true,
+        "Tags": [
+          "jacuzzi tub",
+          "nespresso machine",
+          "sofa bed"
+        ]
+      },
+      {
+        "Description": "Studio Room, 1 Queen Bed (Ocean View)",
+        "Description_fr": "Studio Room, 1 Queen Bed (Vue panoramique)",
+        "Type": "Studio Room",
+        "BaseRate": 599.68,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": true,
+        "Tags": [
+          "suite",
+          "jacuzzi tub",
+          "bathroom shower"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "94",
+    "HotelName": "Serene Lighthouse Inn",
+    "Description": "A premier business hotel in downtown Scottsdale with direct skybridge access to the convention center. Every room features dual monitors, ergonomic Herman Miller chairs, and noise-canceling panels. The executive floor lounge offers complimentary hors d'oeuvres, premium cocktails, and private meeting pods bookable by the hour.",
+    "Description_fr": "Un hotel d'affaires de premier plan au centre-ville de Scottsdale avec acces direct au centre de congres.",
+    "Category": "Business",
+    "Tags": [
+      "sauna",
+      "airport shuttle",
+      "kids club",
+      "wellness center",
+      "spa"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2023-06-12T00:00:00Z",
+    "Rating": 4.7,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -111.950044,
+        33.473605
+      ]
+    },
+    "Address": {
+      "StreetAddress": "1930 Promenade Walk",
+      "City": "Scottsdale",
+      "StateProvince": "AZ",
+      "PostalCode": "85251",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Presidential Suite, 1 King Bed (Lake View)",
+        "Description_fr": "Presidential Suite, 1 King Bed (Vue sur la mer)",
+        "Type": "Presidential Suite",
+        "BaseRate": 452.33,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "suite",
+          "bluetooth speaker"
+        ]
+      },
+      {
+        "Description": "Double Room, 2 Queen Beds (Mountain View)",
+        "Description_fr": "Double Room, 2 Queen Beds (Vue sur la mer)",
+        "Type": "Double Room",
+        "BaseRate": 513.93,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathrobe",
+          "jacuzzi tub",
+          "safe",
+          "bluetooth speaker"
+        ]
+      },
+      {
+        "Description": "Executive Suite, 1 King Bed (Garden View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue sur la mer)",
+        "Type": "Executive Suite",
+        "BaseRate": 361.87,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "fireplace",
+          "minibar"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "95",
+    "HotelName": "The Coastal Lodge",
+    "Description": "Step back in time at this lovingly restored 1938 landmark in Honolulu. Original architectural details including crown moldings, stained glass windows, and a sweeping grand staircase coexist with modern comforts like smart room controls and rainfall showers. The on-site museum chronicles the building's storied past.",
+    "Description_fr": "Un hotel historique magnifiquement restaure dans le quartier patrimonial de Honolulu.",
+    "Category": "Historic",
+    "Tags": [
+      "tennis court",
+      "beachfront",
+      "kids club"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2015-02-05T00:00:00Z",
+    "Rating": 2.9,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -157.846852,
+        21.320249
+      ]
+    },
+    "Address": {
+      "StreetAddress": "6610 Mountain Pass",
+      "City": "Honolulu",
+      "StateProvince": "HI",
+      "PostalCode": "96801",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Family Suite, 2 Queen Beds (Lake View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue panoramique)",
+        "Type": "Family Suite",
+        "BaseRate": 530.25,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": false,
+        "Tags": [
+          "balcony",
+          "desk"
+        ]
+      },
+      {
+        "Description": "Penthouse Suite, 1 King Bed (Ocean View)",
+        "Description_fr": "Penthouse Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Penthouse Suite",
+        "BaseRate": 542.13,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "balcony",
+          "fireplace",
+          "bathrobe"
+        ]
+      },
+      {
+        "Description": "Standard Room, 1 Queen Bed (River View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur le jardin)",
+        "Type": "Standard Room",
+        "BaseRate": 592.78,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "tv",
+          "coffee maker",
+          "smart tv"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "96",
+    "HotelName": "The Palace at Charleston",
+    "Description": "A LEED Platinum-certified hotel in Charleston that proves sustainability and luxury can coexist. Solar panels generate seventy percent of the building's energy, greywater recycling irrigates the organic rooftop garden, and every amenity is plastic-free. Guests sleep on organic cotton linens and dine on zero-waste cuisine.",
+    "Description_fr": "Un hotel ecologique certifie a Charleston alliant durabilite et confort haut de gamme.",
+    "Category": "Eco-Friendly",
+    "Tags": [
+      "pool",
+      "beachfront",
+      "all-inclusive",
+      "wellness center"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2019-08-24T00:00:00Z",
+    "Rating": 4.6,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -79.929071,
+        32.778912
+      ]
+    },
+    "Address": {
+      "StreetAddress": "7106 Park Blvd",
+      "City": "Charleston",
+      "StateProvince": "SC",
+      "PostalCode": "29401",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Double Room, 2 Queen Beds (Harbor View)",
+        "Description_fr": "Double Room, 2 Queen Beds (Vue sur la mer)",
+        "Type": "Double Room",
+        "BaseRate": 434.49,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 4,
+        "SmokingAllowed": false,
+        "Tags": [
+          "jacuzzi tub",
+          "balcony",
+          "safe"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "97",
+    "HotelName": "Pristine Residence & Suites",
+    "Description": "An opulent 4-star retreat in the heart of Aspen, featuring world-class dining, a full-service spa, and breathtaking harbor views. Guests enjoy marble-clad suites, a Michelin-starred restaurant, and personalized butler service. Perfect for discerning travelers who expect nothing but the finest accommodations.",
+    "Description_fr": "Un hotel de luxe exceptionnel au coeur de Aspen, offrant un service de conciergerie personnalise, un spa de classe mondiale et une cuisine gastronomique primee.",
+    "Category": "Luxury",
+    "Tags": [
+      "free wifi",
+      "wellness center",
+      "bar",
+      "room service"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2018-12-05T00:00:00Z",
+    "Rating": 4.2,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -106.825617,
+        39.230962
+      ]
+    },
+    "Address": {
+      "StreetAddress": "8382 University Ave",
+      "City": "Aspen",
+      "StateProvince": "CO",
+      "PostalCode": "81611",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Standard Room, 1 Queen Bed (Valley View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur la ville)",
+        "Type": "Standard Room",
+        "BaseRate": 126.5,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "tv",
+          "sofa bed",
+          "hair dryer",
+          "bidet"
+        ]
+      },
+      {
+        "Description": "Budget Room, 1 Full Bed (Harbor View)",
+        "Description_fr": "Budget Room, 1 Full Bed (Vue panoramique)",
+        "Type": "Budget Room",
+        "BaseRate": 412.92,
+        "BedOptions": "1 Full Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "tv",
+          "safe"
+        ]
+      },
+      {
+        "Description": "Suite, 1 King Bed (River View)",
+        "Description_fr": "Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Suite",
+        "BaseRate": 355.52,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": false,
+        "Tags": [
+          "balcony",
+          "desk",
+          "coffee maker"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "98",
+    "HotelName": "Las Vegas Residence Hotel",
+    "Description": "A one-of-a-kind boutique hotel in Las Vegas that blends contemporary art with intimate comfort. Each of the 32 individually designed rooms tells a unique story through local artwork and artisan furniture. The on-site cafe serves farm-to-table cuisine sourced from nearby purveyors.",
+    "Description_fr": "Un charmant hotel-boutique a Las Vegas ou art contemporain et confort intime se rencontrent dans un cadre unique.",
+    "Category": "Boutique",
+    "Tags": [
+      "bicycle rental",
+      "city view",
+      "room service",
+      "pet friendly",
+      "ski-in/ski-out"
+    ],
+    "ParkingIncluded": false,
+    "LastRenovationDate": "2013-11-08T00:00:00Z",
+    "Rating": 2.7,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -115.144125,
+        36.217629
+      ]
+    },
+    "Address": {
+      "StreetAddress": "4328 Canyon Rd",
+      "City": "Las Vegas",
+      "StateProvince": "NV",
+      "PostalCode": "89101",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Family Suite, 2 Queen Beds (Garden View)",
+        "Description_fr": "Family Suite, 2 Queen Beds (Vue sur la ville)",
+        "Type": "Family Suite",
+        "BaseRate": 81.27,
+        "BedOptions": "2 Queen Beds",
+        "SleepsCount": 5,
+        "SmokingAllowed": true,
+        "Tags": [
+          "desk",
+          "bluetooth speaker",
+          "fireplace"
+        ]
+      },
+      {
+        "Description": "Suite, 1 King Bed (Mountain View)",
+        "Description_fr": "Suite, 1 King Bed (Vue sur la ville)",
+        "Type": "Suite",
+        "BaseRate": 108.05,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 3,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathroom shower",
+          "bluetooth speaker"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "99",
+    "HotelName": "The Golden Citadel",
+    "Description": "An award-winning resort and spa destination in Orlando offering complete rejuvenation. Spread across lush tropical grounds, the property features a championship golf course, six swimming pools, and a world-renowned wellness center with over forty treatment rooms. All-day dining options range from casual poolside fare to elegant tasting menus.",
+    "Description_fr": "Un complexe hotelier et spa prime a Orlando proposant des soins de bien-etre, un parcours de golf et une cuisine raffinee.",
+    "Category": "Resort and Spa",
+    "Tags": [
+      "restaurant",
+      "tennis court",
+      "meeting rooms"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2020-07-13T00:00:00Z",
+    "Rating": 2.7,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -81.332969,
+        28.515483
+      ]
+    },
+    "Address": {
+      "StreetAddress": "6320 Promenade Walk",
+      "City": "Orlando",
+      "StateProvince": "FL",
+      "PostalCode": "32801",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Standard Room, 1 Queen Bed (Valley View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur la mer)",
+        "Type": "Standard Room",
+        "BaseRate": 520.07,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "bathrobe",
+          "fireplace",
+          "kitchenette",
+          "smart tv"
+        ]
+      }
+    ]
+  },
+  {
+    "@search.action": "upload",
+    "HotelId": "100",
+    "HotelName": "Grand Meridian Hotel",
+    "Description": "A smart-value hotel in Washington that proves comfort does not require a premium price. Clean, modern rooms feature pillow-top mattresses, high-speed wifi, and a functional workspace. The complimentary breakfast buffet and 24-hour coffee station keep guests fueled for exploration, and the central location puts major attractions within walking distance.",
+    "Description_fr": "Un hotel economique bien situe a Washington offrant des chambres propres et modernes avec petit-dejeuner gratuit.",
+    "Category": "Budget",
+    "Tags": [
+      "ev charging",
+      "laundry service",
+      "beachfront",
+      "ocean view",
+      "concierge",
+      "continental breakfast"
+    ],
+    "ParkingIncluded": true,
+    "LastRenovationDate": "2025-11-21T00:00:00Z",
+    "Rating": 4.3,
+    "Location": {
+      "type": "Point",
+      "coordinates": [
+        -77.048412,
+        38.941103
+      ]
+    },
+    "Address": {
+      "StreetAddress": "9148 University Ave",
+      "City": "Washington",
+      "StateProvince": "DC",
+      "PostalCode": "20001",
+      "Country": "USA"
+    },
+    "Rooms": [
+      {
+        "Description": "Executive Suite, 1 King Bed (Harbor View)",
+        "Description_fr": "Executive Suite, 1 King Bed (Vue panoramique)",
+        "Type": "Executive Suite",
+        "BaseRate": 525.78,
+        "BedOptions": "1 King Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": true,
+        "Tags": [
+          "balcony",
+          "bluetooth speaker",
+          "bathroom shower",
+          "safe"
+        ]
+      },
+      {
+        "Description": "Standard Room, 1 Queen Bed (Lake View)",
+        "Description_fr": "Standard Room, 1 Queen Bed (Vue sur la ville)",
+        "Type": "Standard Room",
+        "BaseRate": 201.26,
+        "BedOptions": "1 Queen Bed",
+        "SleepsCount": 2,
+        "SmokingAllowed": false,
+        "Tags": [
+          "coffee maker",
+          "nespresso machine",
+          "iron"
+        ]
+      }
+    ]
+  }
+]
