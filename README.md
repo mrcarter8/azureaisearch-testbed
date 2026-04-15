@@ -169,7 +169,7 @@ Use GitHub Copilot as a test orchestrator, bug investigator, and telemetry explo
 1. Open the repo root in VS Code
 2. Ensure the [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) and [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat) extensions are installed
 3. Install the [Azure DevOps MCP server](https://github.com/nicholasgriffintn/azure-devops-mcp) for bug filing
-4. Install the [Kusto MCP server](https://github.com/nicholasgriffintn/kusto-mcp) for telemetry queries
+4. Install the [Azure MCP extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.azure-mcp) — provides Kusto telemetry queries, resource lookups, and more
 
 **What Copilot can do in this repo:**
 
@@ -185,7 +185,9 @@ Use GitHub Copilot as a test orchestrator, bug investigator, and telemetry explo
 
 Copilot is configured via:
 - [`.github/copilot-instructions.md`](.github/copilot-instructions.md) — project context, ADO defaults, bug field templates
-- Instruction files in VS Code user prompts — bug filing format, investigation workflows, code navigation
+- [`.github/ado-bug-filing.instructions.md`](.github/ado-bug-filing.instructions.md) — bug filing format, duplicate detection, repro steps HTML structure
+- [`.github/bug-investigation.instructions.md`](.github/bug-investigation.instructions.md) — Kusto telemetry workflows, table catalog, ActivityId tracing
+- [`.github/code-navigation.instructions.md`](.github/code-navigation.instructions.md) — AzureSearch repo structure, telemetry-to-code mapping
 
 ## Test Execution Model
 
