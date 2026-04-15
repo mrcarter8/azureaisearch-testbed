@@ -37,8 +37,8 @@ PHASE_MAP: dict[str, tuple[int, str]] = {
     "test_10_skillsets":          (10, "Skillsets"),
     "test_11_vectorization":      (11, "Vectorization"),
     "test_12_agentic":            (12, "Agentic Retrieval"),
-    "test_13_service_behavior": (13, "Service Behavior"),
-    "test_14_service_limits":     (14, "Service Limits"),
+    "test_13_serverless_behavior": (13, "Service Behavior"),
+    "test_14_serverless_limits":  (14, "Service Limits"),
     "test_15_filters":               (15, "Advanced Filters"),
     "test_16_scoring":               (16, "Scoring Profiles"),
     "test_17_semantic":              (17, "Semantic Deep-Dive"),
@@ -278,6 +278,14 @@ TEST_METADATA: dict[str, tuple[str, str]] = {
     "test_lim_12_usage_tracks_resource_count":        ("GET PUT GET DELETE", "indexesCount.usage increments on create"),
     "test_lim_13_list_indexes_throttle":              ("GET (×30)",        "Rapid-fire GET /indexes — observe 429 throttle"),
     "test_lim_14_servicestats_throttle":              ("GET (×30)",        "Rapid-fire GET /servicestats — observe 429 throttle"),
+    "test_lim_15_document_count_counter":             ("GET",              "documentCount counter — quota null on serverless"),
+    "test_lim_16_storage_size_counter":               ("GET",              "storageSize counter — quota and usage"),
+    "test_lim_17_max_field_nesting_depth":            ("GET",              "maxFieldNestingDepthPerIndex == 10"),
+    "test_lim_18_max_complex_collection_fields":      ("GET",              "maxComplexCollectionFieldsPerIndex == 40"),
+    "test_lim_19_max_complex_objects_in_collections": ("GET",              "maxComplexObjectsInCollectionsPerDocument == 3000"),
+    "test_lim_20_max_cumulative_indexer_runtime_null": ("GET",             "maxCumulativeIndexerRuntimeSeconds null"),
+    "test_lim_21_indexers_runtime_section":           ("GET",              "indexersRuntime section present"),
+    "test_lim_22_servicestats_all_sections":          ("GET",              "servicestats completeness — all counters + limits"),
     # ── Phase 12: Agentic Retrieval ──────────────────────────────────────
     "test_agt_01_create_knowledge_source":            ("PUT",              "Create search-index knowledge source"),
     "test_agt_02_get_knowledge_source":               ("GET",              "Read knowledge source"),
@@ -338,6 +346,7 @@ TEST_METADATA: dict[str, tuple[str, str]] = {
     "test_scr_12_profile_plus_semantic":            ("POST",             "Profile + semantic reranking"),
     "test_scr_13_tag_scoring_profile":              ("PUT POST POST DELETE", "Tag scoring profile (temp index)"),
     "test_scr_14_text_weights_profile":             ("PUT POST POST POST DELETE", "Text weights profile (temp index)"),
+    "test_scr_15_write_to_read_latency":            ("PUT POST POST DELETE", "Write-to-read latency measurement"),
     # ── Phase 17: Semantic Deep-Dive ─────────────────────────────────────
     "test_sem_01_reranker_score_ordering":          ("POST",             "Semantic rerankerScore descending"),
     "test_sem_02_extractive_answers":               ("POST",             "Extractive answers structure"),
@@ -552,8 +561,10 @@ class FailureReporter:
         """Write all reports to *results_dir*."""
         self._write_json()
         self._write_markdown()
+        self._write_failure_summary_html()
         self._save_persistent()
         self._write_dashboard()
+        self._write_dashboard_html()
 
     def _write_json(self) -> None:
         report = {
@@ -611,6 +622,105 @@ class FailureReporter:
 
         path = self.results_dir / "failure_summary.md"
         path.write_text("".join(lines), encoding="utf-8")
+
+    def _write_failure_summary_html(self) -> None:
+        """Render *failure_summary.html* — a styled HTML failure report."""
+        ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+
+        def _esc(text: str) -> str:
+            """Escape HTML special characters."""
+            return (text.replace("&", "&amp;").replace("<", "&lt;")
+                    .replace(">", "&gt;").replace('"', "&quot;"))
+
+        parts: list[str] = []
+        parts.append(f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Failure Summary — Azure AI Search</title>
+<style>
+  :root {{ --pass: #0e8a16; --fail: #d73a49; --skip: #6a737d; --blue: #0078d4; --bg: #fff; --border: #d0d7de; --hover: #f6f8fa; }}
+  body {{ font-family: 'Segoe UI', -apple-system, sans-serif; font-size: 14px; color: #1f2328; max-width: 1100px; margin: 0 auto; padding: 24px 16px; background: var(--bg); }}
+  h1 {{ color: var(--blue); font-size: 22px; border-bottom: 2px solid var(--blue); padding-bottom: 8px; }}
+  h2 {{ color: #1f2328; font-size: 18px; margin-top: 32px; }}
+  h3 {{ color: #1f2328; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); }}
+  .summary-bar {{ background: #f6f8fa; border: 1px solid var(--border); border-radius: 6px; padding: 12px 20px; margin: 16px 0 24px; display: flex; gap: 24px; flex-wrap: wrap; }}
+  .summary-bar .stat {{ font-size: 15px; }} .summary-bar .stat strong {{ font-size: 20px; }}
+  .stat-pass strong {{ color: var(--pass); }} .stat-fail strong {{ color: var(--fail); }} .stat-skip strong {{ color: var(--skip); }}
+  table {{ border-collapse: collapse; width: 100%; margin: 12px 0; }} th, td {{ border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; }}
+  th {{ background: #f6f8fa; font-weight: 600; font-size: 13px; }} tr:hover {{ background: var(--hover); }}
+  pre {{ background: #f6f8fa; border: 1px solid var(--border); border-radius: 6px; padding: 12px; overflow-x: auto; font-size: 12px; font-family: 'Cascadia Code', Consolas, monospace; }}
+  code {{ font-family: inherit; }} .mono {{ font-family: 'Cascadia Code', Consolas, monospace; font-size: 12px; }}
+  .badge {{ display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #fff; }}
+  .badge-fail {{ background: var(--fail); }}
+  details {{ margin: 8px 0; }} details summary {{ cursor: pointer; font-weight: 600; color: var(--blue); }}
+  .detail-section {{ margin: 8px 0 8px 12px; }}
+</style>
+</head>
+<body>
+<h1>Azure AI Search — Failure Summary</h1>
+<div class="summary-bar">
+  <span class="stat stat-pass">Passed: <strong>{self.passed}</strong></span>
+  <span class="stat stat-fail">Failed: <strong>{len(self.failures)}</strong></span>
+  <span class="stat stat-skip">Skipped: <strong>{self.skipped}</strong></span>
+  <span class="stat">Total: <strong>{self.total_tests}</strong></span>
+  <span class="stat" style="margin-left:auto; font-size:12px; color:#6a737d;">{ts}</span>
+</div>
+""")
+
+        if not self.failures:
+            parts.append("<p style='color:var(--pass); font-weight:600; font-size:16px;'>All tests passed.</p>\n")
+        else:
+            # Summary table
+            parts.append("<h2>Failure Overview</h2>\n<table>\n")
+            parts.append("<tr><th>#</th><th>Test ID</th><th>Status</th><th>x-ms-request-id</th><th>Error</th></tr>\n")
+            for i, f in enumerate(self.failures, 1):
+                req_id = _esc(f.x_ms_request_id or "—")
+                error = _esc(f.error_message[:150].replace("\n", " "))
+                status = _esc(f.actual[:30])
+                parts.append(f'<tr><td>{i}</td><td><a href="#fail-{i}">{_esc(f.test_id)}</a></td>'
+                             f'<td><span class="badge badge-fail">{status}</span></td>'
+                             f'<td class="mono">{req_id}</td><td>{error}</td></tr>\n')
+            parts.append("</table>\n")
+
+            # Detailed failures
+            parts.append("<h2>Detailed Failures</h2>\n")
+            for i, f in enumerate(self.failures, 1):
+                parts.append(f'<h3 id="fail-{i}">{i}. {_esc(f.test_id)} — {_esc(f.test_name)}</h3>\n')
+                parts.append("<table>\n")
+                parts.append(f"<tr><td><strong>Expected</strong></td><td>{_esc(f.expected)}</td></tr>\n")
+                parts.append(f"<tr><td><strong>Actual</strong></td><td>{_esc(f.actual)}</td></tr>\n")
+                parts.append(f'<tr><td><strong>x-ms-request-id</strong></td><td class="mono">{_esc(f.x_ms_request_id or "—")}</td></tr>\n')
+                if f.elapsed_ms:
+                    parts.append(f"<tr><td><strong>Elapsed</strong></td><td>{f.elapsed_ms:.0f} ms</td></tr>\n")
+                parts.append(f"<tr><td><strong>Timestamp</strong></td><td>{_esc(f.timestamp)}</td></tr>\n")
+                parts.append("</table>\n")
+
+                if f.http_request:
+                    method = _esc(f.http_request.get("method", "?"))
+                    url = _esc(f.http_request.get("url", "?"))
+                    parts.append(f"<details><summary>Request: {method} {url}</summary>\n<div class='detail-section'>\n")
+                    body = f.http_request.get("body")
+                    if body:
+                        parts.append(f"<pre>{_esc(json.dumps(body, indent=2)[:2000])}</pre>\n")
+                    parts.append("</div></details>\n")
+
+                if f.http_response:
+                    sc = f.http_response.get("status_code", "?")
+                    parts.append(f"<details><summary>Response ({sc})</summary>\n<div class='detail-section'>\n")
+                    resp_body = f.http_response.get("body")
+                    if resp_body:
+                        if isinstance(resp_body, dict):
+                            parts.append(f"<pre>{_esc(json.dumps(resp_body, indent=2)[:3000])}</pre>\n")
+                        else:
+                            parts.append(f"<pre>{_esc(str(resp_body)[:3000])}</pre>\n")
+                    parts.append("</div></details>\n")
+
+                parts.append(f"<details open><summary>Error</summary>\n<pre>{_esc(f.error_message[:3000])}</pre>\n</details>\n")
+
+        parts.append("</body>\n</html>\n")
+        path = self.results_dir / "failure_summary.html"
+        path.write_text("".join(parts), encoding="utf-8")
 
     def _write_dashboard(self) -> None:
         """Render *test_log.md* — a consolidated dashboard of all test results.
@@ -694,3 +804,177 @@ class FailureReporter:
 
         path = self.results_dir / "test_log.md"
         path.write_text("".join(lines), encoding="utf-8")
+
+    def _write_dashboard_html(self) -> None:
+        """Render *test_log.html* — a styled HTML dashboard of all test results."""
+        data = self._persistent
+        if not data:
+            return
+
+        def _esc(text: str) -> str:
+            return (text.replace("&", "&amp;").replace("<", "&lt;")
+                    .replace(">", "&gt;").replace('"', "&quot;"))
+
+        # Group entries by phase
+        by_phase: dict[int, list[dict]] = {}
+        for entry in data.values():
+            pn = entry.get("phase_num", 99)
+            by_phase.setdefault(pn, []).append(entry)
+        for pn in by_phase:
+            by_phase[pn].sort(key=lambda e: e.get("test_id", ""))
+
+        # Counts
+        total = len(data)
+        passed = sum(1 for e in data.values() if e.get("result") == "PASS")
+        failed = sum(1 for e in data.values() if e.get("result") == "FAIL")
+        skipped = sum(1 for e in data.values() if e.get("result") == "SKIP")
+        xfailed = sum(1 for e in data.values() if e.get("result") == "XFAIL")
+        ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+
+        # Pass rate for progress bar
+        pass_pct = (passed / total * 100) if total > 0 else 0
+
+        parts: list[str] = []
+        parts.append(f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Test Results — Azure AI Search</title>
+<style>
+  :root {{ --pass: #0e8a16; --fail: #d73a49; --skip: #6a737d; --xfail: #9a6700; --blue: #0078d4; --bg: #fff; --border: #d0d7de; --hover: #f6f8fa; }}
+  * {{ box-sizing: border-box; }}
+  body {{ font-family: 'Segoe UI', -apple-system, sans-serif; font-size: 14px; color: #1f2328; max-width: 1200px; margin: 0 auto; padding: 24px 16px; background: var(--bg); }}
+  h1 {{ color: var(--blue); font-size: 24px; margin-bottom: 4px; }}
+  .timestamp {{ color: #6a737d; font-size: 12px; margin-bottom: 16px; }}
+  /* Summary cards */
+  .cards {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin: 16px 0 24px; }}
+  .card {{ background: #f6f8fa; border: 1px solid var(--border); border-radius: 8px; padding: 16px; text-align: center; }}
+  .card .number {{ font-size: 28px; font-weight: 700; }} .card .label {{ font-size: 12px; color: #6a737d; text-transform: uppercase; letter-spacing: 0.5px; }}
+  .card-pass .number {{ color: var(--pass); }} .card-fail .number {{ color: var(--fail); }} .card-skip .number {{ color: var(--skip); }}
+  /* Progress bar */
+  .progress-bar {{ background: #e1e4e8; border-radius: 8px; height: 8px; margin: 0 0 24px; overflow: hidden; }}
+  .progress-fill {{ height: 100%; border-radius: 8px; transition: width 0.3s; }}
+  /* Table of contents */
+  .toc {{ background: #f6f8fa; border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 0 0 24px; }}
+  .toc h2 {{ margin: 0 0 8px; font-size: 14px; color: #1f2328; }}
+  .toc-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 4px 16px; }}
+  .toc a {{ text-decoration: none; color: var(--blue); font-size: 13px; }}
+  .toc a:hover {{ text-decoration: underline; }}
+  .toc .phase-stat {{ color: #6a737d; font-size: 12px; }}
+  /* Phase sections */
+  .phase {{ margin: 32px 0 0; }}
+  .phase-header {{ display: flex; align-items: baseline; gap: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--blue); margin-bottom: 12px; }}
+  .phase-header h2 {{ margin: 0; font-size: 18px; color: var(--blue); }}
+  .phase-header .counts {{ font-size: 13px; color: #6a737d; }}
+  /* Test table */
+  table {{ border-collapse: collapse; width: 100%; margin: 0 0 8px; }}
+  th {{ background: #f6f8fa; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.3px; color: #656d76; position: sticky; top: 0; }}
+  th, td {{ border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: middle; }}
+  tr:hover {{ background: var(--hover); }}
+  .col-test {{ width: 70px; white-space: nowrap; font-weight: 600; }}
+  .col-http {{ width: 100px; font-family: 'Cascadia Code', Consolas, monospace; font-size: 12px; color: #656d76; }}
+  .col-op {{ }}
+  .col-result {{ width: 70px; text-align: center; }}
+  .col-run {{ width: 140px; font-size: 12px; color: #656d76; white-space: nowrap; }}
+  .col-bug {{ min-width: 100px; max-width: 260px; text-align: center; font-size: 12px; }}
+  /* Result badges */
+  .badge {{ display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #fff; }}
+  .badge-pass {{ background: var(--pass); }} .badge-fail {{ background: var(--fail); }} .badge-skip {{ background: var(--skip); }} .badge-xfail {{ background: var(--xfail); }}
+  a.bug-link {{ color: var(--fail); font-weight: 600; text-decoration: none; }} a.bug-link:hover {{ text-decoration: underline; }}
+  .bug-note {{ color: #656d76; font-size: 11px; cursor: help; }}
+</style>
+</head>
+<body>
+<h1>Azure AI Search — Test Results</h1>
+<div class="timestamp">Last updated: {ts}</div>
+
+<div class="cards">
+  <div class="card"><div class="number">{total}</div><div class="label">Total</div></div>
+  <div class="card card-pass"><div class="number">{passed}</div><div class="label">Passed</div></div>
+  <div class="card card-fail"><div class="number">{failed}</div><div class="label">Failed</div></div>
+  <div class="card card-skip"><div class="number">{skipped}</div><div class="label">Skipped</div></div>
+</div>
+
+<div class="progress-bar"><div class="progress-fill" style="width:{pass_pct:.1f}%; background: linear-gradient(90deg, var(--pass), #2ea043);"></div></div>
+""")
+
+        # Table of contents
+        parts.append('<div class="toc"><h2>Phases</h2><div class="toc-grid">\n')
+        for phase_num in sorted(by_phase.keys()):
+            entries = by_phase[phase_num]
+            phase_label = entries[0].get("phase", f"Phase {phase_num}")
+            pp = sum(1 for e in entries if e.get("result") == "PASS")
+            pt = len(entries)
+            pf = sum(1 for e in entries if e.get("result") == "FAIL")
+            stat_class = "color:var(--fail)" if pf > 0 else "color:var(--pass)"
+            parts.append(f'<div><a href="#phase-{phase_num}">{_esc(phase_label)}</a> '
+                         f'<span class="phase-stat" style="{stat_class}">{pp}/{pt}</span></div>\n')
+        parts.append('</div></div>\n')
+
+        # Phase tables
+        for phase_num in sorted(by_phase.keys()):
+            entries = by_phase[phase_num]
+            phase_label = entries[0].get("phase", f"Phase {phase_num}")
+            pp = sum(1 for e in entries if e.get("result") == "PASS")
+            pf = sum(1 for e in entries if e.get("result") == "FAIL")
+            ps = sum(1 for e in entries if e.get("result") == "SKIP")
+            pt = len(entries)
+
+            parts.append(f'<div class="phase" id="phase-{phase_num}">\n')
+            parts.append(f'<div class="phase-header"><h2>{_esc(phase_label)}</h2>')
+            parts.append(f'<span class="counts">{pp} passed')
+            if pf:
+                parts.append(f', <span style="color:var(--fail)">{pf} failed</span>')
+            if ps:
+                parts.append(f', {ps} skipped')
+            parts.append(f' / {pt} total</span></div>\n')
+
+            parts.append("<table>\n<tr><th class='col-test'>Test</th><th class='col-http'>HTTP</th>"
+                         "<th class='col-op'>Operation</th><th class='col-result'>Result</th>"
+                         "<th class='col-run'>Last Run</th><th class='col-bug'>Bug</th></tr>\n")
+
+            for e in entries:
+                tid = e.get("test_id", "?")
+                desc = e.get("description", "").strip()
+                short_id = desc.split(":")[0].strip() if ":" in desc else tid
+
+                http_verbs = e.get("http_verbs", "")
+                if not http_verbs and tid in TEST_METADATA:
+                    http_verbs = TEST_METADATA[tid][0]
+
+                operation = e.get("operation", "")
+                if not operation and tid in TEST_METADATA:
+                    operation = TEST_METADATA[tid][1]
+                if not operation:
+                    operation = desc.split(":", 1)[1].strip() if ":" in desc else desc
+                if len(operation) > 65:
+                    operation = operation[:62] + "..."
+
+                result = e.get("result", "?")
+                badge_class = {"PASS": "badge-pass", "FAIL": "badge-fail", "SKIP": "badge-skip", "XFAIL": "badge-xfail"}.get(result, "")
+                result_html = f'<span class="badge {badge_class}">{_esc(result)}</span>'
+
+                last_run = _esc(e.get("last_run", "—"))
+
+                bug_url = e.get("bug_url", "")
+                if bug_url and bug_url.startswith("http"):
+                    # Extract work item ID from ADO URL (last path segment)
+                    wi_id = bug_url.rstrip("/").rsplit("/", 1)[-1]
+                    bug_html = f'<a class="bug-link" href="{_esc(bug_url)}" title="View bug">#{wi_id}</a>'
+                elif bug_url:
+                    bug_html = f'<span class="bug-note">{_esc(bug_url)}</span>'
+                else:
+                    bug_html = ""
+
+                parts.append(f"<tr><td class='col-test'>{_esc(short_id)}</td>"
+                             f"<td class='col-http'>{_esc(http_verbs)}</td>"
+                             f"<td class='col-op'>{_esc(operation)}</td>"
+                             f"<td class='col-result'>{result_html}</td>"
+                             f"<td class='col-run'>{last_run}</td>"
+                             f"<td class='col-bug'>{bug_html}</td></tr>\n")
+
+            parts.append("</table>\n</div>\n")
+
+        parts.append("</body>\n</html>\n")
+        path = self.results_dir / "test_log.html"
+        path.write_text("".join(parts), encoding="utf-8")

@@ -29,8 +29,9 @@ smoke-tests/results/junit.xml
 smoke-tests/results/test_results.json
 smoke-tests/results/failure_report.json
 smoke-tests/results/failure_summary.md
+smoke-tests/results/failure_summary.html
 smoke-tests/results/test_log.md
-smoke-tests/results/known_bugs.json
+smoke-tests/results/test_log.html
 
 # ── Investigation scratch (ephemeral diagnostic scripts/data) ────────────────
 smoke-tests/scratch/

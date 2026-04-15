@@ -343,7 +343,7 @@ _reporter: FailureReporter | None = None
 def _session_reporter(reporter):
     global _reporter
     _reporter = reporter
-    # Load known bugs from results/known_bugs.json
+    # Load known bugs from SKU-specific results directory
     bugs_path = reporter.results_dir / "known_bugs.json"
     if bugs_path.exists():
         import json

@@ -36,11 +36,13 @@ Result files generated per SKU (gitignored — generated on the client):
 
 | File | Description |
 |------|-------------|
-| `results/{sku}/test_log.md` | Results dashboard — every test with result, timestamp, and linked ADO bug |
+| `results/{sku}/test_log.html` | **Results dashboard** — styled HTML with pass/fail badges, progress bar, phase navigation |
+| `results/{sku}/failure_summary.html` | **Failure details** — styled HTML with expandable request/response context |
+| `results/{sku}/test_log.md` | Results dashboard (Markdown fallback) |
+| `results/{sku}/failure_summary.md` | Failure summary (Markdown fallback) |
 | `results/{sku}/known_bugs.json` | ADO bug links for tracked failures |
 | `results/{sku}/junit.xml` | JUnit XML for CI integration |
 | `results/{sku}/failure_report.json` | Structured failure data with HTTP context |
-| `results/{sku}/failure_summary.md` | Human-readable failure summary |
 | `results/{sku}/test_results.json` | Full test results |
 
 Phase-level notes are shared across SKUs in `results/phases/`.
