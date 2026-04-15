@@ -1,4 +1,4 @@
-# Phase 14 — Serverless Limits
+# Phase 14 — Service Limits
 
 **API:** Data plane `2025-11-01-preview`  
 **Result:** 13/14 passed, 1 skipped

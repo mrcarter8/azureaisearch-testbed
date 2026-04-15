@@ -21,7 +21,7 @@ class TestServiceStats:
         assert "counters" in data, "No counters in servicestats"
 
     def test_msc_10_serverless_stats_limits(self, rest):
-        """MSC-10: Serverless service stats include appropriate limits."""
+        """MSC-10: Service stats include appropriate limits."""
         resp = rest.get("/servicestats")
         assert_status(resp, 200)
         data = resp.json()

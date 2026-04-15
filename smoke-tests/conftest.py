@@ -1,5 +1,5 @@
 """
-conftest.py — Shared pytest fixtures for the Serverless bug-bash test suite.
+conftest.py — Shared pytest fixtures for the Azure AI Search test suite.
 
 Provides:
   - Environment config loaded from .env
@@ -7,7 +7,6 @@ Provides:
   - Unique per-session resource names (``smoke-{uuid}``)
   - AOAI configuration
   - FailureReporter integration (captures every failure with HTTP context)
-  - Session-scoped teardown (deletes all ``smoke-*`` resources)
 """
 
 from __future__ import annotations
@@ -104,6 +103,11 @@ def service_name() -> str:
 @pytest.fixture(scope="session")
 def search_location() -> str:
     return _env("SEARCH_LOCATION", default="centraluseuap")
+
+
+@pytest.fixture(scope="session")
+def search_sku() -> str:
+    return _env("SEARCH_SKU")
 
 
 # ── Fixtures — auth headers ──────────────────────────────────────────────────
@@ -307,8 +311,8 @@ def sample_data_dir() -> str:
 # ── Reporter + pytest hooks ──────────────────────────────────────────────────
 
 @pytest.fixture(scope="session")
-def reporter() -> FailureReporter:
-    return FailureReporter(results_dir=os.path.join(os.path.dirname(__file__), "results"))
+def reporter(search_sku) -> FailureReporter:
+    return FailureReporter(results_dir=os.path.join(os.path.dirname(__file__), "results", search_sku))
 
 
 def pytest_configure(config):
@@ -325,7 +329,8 @@ def pytest_configure(config):
     config.addinivalue_line("markers", "skillsets: AI enrichment skillset tests")
     config.addinivalue_line("markers", "vectorization: integrated vectorization tests")
     config.addinivalue_line("markers", "agentic: agentic retrieval tests")
-    config.addinivalue_line("markers", "serverless: serverless-specific behavioral tests")
+    config.addinivalue_line("markers", "service_behavior: service-specific behavioral tests")
+    config.addinivalue_line("markers", "service_limits: SKU limits validation tests")
     config.addinivalue_line("markers", "networking: networking tests (requires VNET)")
     config.addinivalue_line("markers", "gate: gate test — failure aborts the run")
 
@@ -335,7 +340,7 @@ _reporter: FailureReporter | None = None
 
 
 @pytest.fixture(scope="session", autouse=True)
-def _session_reporter(reporter) -> Generator:
+def _session_reporter(reporter):
     global _reporter
     _reporter = reporter
     # Load known bugs from results/known_bugs.json

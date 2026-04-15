@@ -1,8 +1,0 @@
-{
-  "test_svc_05_list_services_in_subscription": "https://msdata.visualstudio.com/Azure%20Search/_workitems/edit/5175978",
-  "test_neg_01_reject_replica_count": "https://msdata.visualstudio.com/Azure%20Search/_workitems/edit/4907459",
-  "test_neg_02_reject_partition_count": "https://msdata.visualstudio.com/Azure%20Search/_workitems/edit/4907459",
-  "test_idx_16_alias_create_rejected_quota": "https://msdata.visualstudio.com/Azure%20Search/_workitems/edit/5177274",
-  "serverless_searchunitsize_zero_in_telemetry": "https://msdata.visualstudio.com/Azure%20Search/_workitems/edit/5177583",
-  "knowledge_source_searchfields_wildcard_validation": "https://msdata.visualstudio.com/Azure%20Search/_workitems/edit/5179740"
-}

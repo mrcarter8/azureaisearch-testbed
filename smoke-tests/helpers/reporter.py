@@ -1,5 +1,5 @@
 """
-reporter.py — Failure report generator for the Serverless bug-bash test suite.
+reporter.py — Failure report generator for the Azure AI Search test suite.
 
 Collects every test failure with full HTTP context (request, response,
 x-ms-request-id) and writes:
@@ -37,8 +37,8 @@ PHASE_MAP: dict[str, tuple[int, str]] = {
     "test_10_skillsets":          (10, "Skillsets"),
     "test_11_vectorization":      (11, "Vectorization"),
     "test_12_agentic":            (12, "Agentic Retrieval"),
-    "test_13_serverless_behavior": (13, "Serverless Behavior"),
-    "test_14_serverless_limits":     (14, "Serverless Limits"),
+    "test_13_service_behavior": (13, "Service Behavior"),
+    "test_14_service_limits":     (14, "Service Limits"),
     "test_15_filters":               (15, "Advanced Filters"),
     "test_16_scoring":               (16, "Scoring Profiles"),
     "test_17_semantic":              (17, "Semantic Deep-Dive"),
@@ -52,8 +52,8 @@ PHASE_MAP: dict[str, tuple[int, str]] = {
 
 TEST_METADATA: dict[str, tuple[str, str]] = {
     # ── Phase 1: Control Plane ───────────────────────────────────────────
-    "test_svc_01_create_serverless_minimal":      ("PUT",               "Create serverless service (minimal)"),
-    "test_svc_02_create_serverless_with_options":  ("GET",              "Read service (validate serverless SKU)"),
+    "test_svc_01_create_serverless_minimal":      ("PUT",               "Create service (minimal)"),
+    "test_svc_02_create_serverless_with_options":  ("GET",              "Read service (validate SKU)"),
     "test_svc_03_get_service":                     ("GET",              "Read service"),
     "test_svc_04_list_services_in_rg":             ("GET",              "List services in resource group"),
     "test_svc_05_list_services_in_subscription":   ("GET",              "List services in subscription (paginated)"),
@@ -201,7 +201,7 @@ TEST_METADATA: dict[str, tuple[str, str]] = {
     "test_msc_07_if_none_match":                   ("PUT",              "PUT with If-None-Match:* (rejected 412)"),
     "test_msc_08_invalid_json":                    ("POST",             "Malformed JSON body (rejected 400)"),
     "test_msc_09_unknown_field_in_select":         ("POST",             "Select nonexistent field (rejected)"),
-    "test_msc_10_serverless_stats_limits":         ("GET",              "Serverless stats limits check"),
+    "test_msc_10_serverless_stats_limits":         ("GET",              "Service stats limits check"),
     # ── Phase 9: Indexers ────────────────────────────────────────────────
     "test_ixr_01_create_datasource_blob":          ("PUT",              "Create Blob data source"),
     "test_ixr_02_create_datasource_cosmos":        ("PUT",              "Create Cosmos DB data source"),
@@ -263,11 +263,11 @@ TEST_METADATA: dict[str, tuple[str, str]] = {
     "test_vec_17_multi_text_vector_queries":       ("POST",             "Multiple kind:text vectorQueries"),
     "test_vec_18_quantization_with_vectorizer":    ("DELETE PUT POST POST DELETE", "Scalar quantization + AOAI vectorizer query"),
     "test_vec_19_cleanup_e2e_index":               ("DELETE GET",       "Delete E2E vectorization index + verify"),
-    # ── Phase 14: Serverless Limits ───────────────────────────────────────
-    "test_lim_01_servicestats_index_quota":          ("GET",              "indexesCount quota >= serverless minimum"),
-    "test_lim_02_servicestats_indexer_quota":         ("GET",              "indexersCount quota >= serverless minimum"),
-    "test_lim_03_servicestats_datasource_quota":      ("GET",              "dataSourcesCount quota >= serverless minimum"),
-    "test_lim_04_servicestats_skillset_quota":        ("GET",              "skillsetCount quota >= serverless minimum"),
+    # ── Phase 14: Service Limits ───────────────────────────────────────
+    "test_lim_01_servicestats_index_quota":          ("GET",              "indexesCount quota present and valid"),
+    "test_lim_02_servicestats_indexer_quota":         ("GET",              "indexersCount quota present and valid"),
+    "test_lim_03_servicestats_datasource_quota":      ("GET",              "dataSourcesCount quota present and valid"),
+    "test_lim_04_servicestats_skillset_quota":        ("GET",              "skillsetCount quota present and valid"),
     "test_lim_05_servicestats_synonym_map_quota":     ("GET",              "synonymMaps quota == 20"),
     "test_lim_06_servicestats_alias_quota_zero":      ("GET",              "aliasesCount quota == 0 (not supported)"),
     "test_lim_07_max_storage_per_index":              ("GET",              "maxStoragePerIndex > 0 in limits section"),
@@ -381,7 +381,7 @@ TEST_METADATA: dict[str, tuple[str, str]] = {
     "test_adv_10_boosted_term":                     ("POST POST",        "Boosted term (luxury^5)"),
     "test_adv_11_french_text_search":               ("POST",             "French text search on Description_fr"),
     "test_adv_12_regex_query_validated":            ("POST",             "Regex /[Hh]otel/ validated"),
-    # ── Phase 13: Serverless Behavior ────────────────────────────────────
+    # ── Phase 13: Service Behavior ────────────────────────────────────
     "test_sls_01_cold_start_latency":                 ("POST",             "Cold start query latency < 30s"),
     "test_sls_02_index_creation_latency":             ("PUT DELETE",       "Index creation latency < 30s"),
     "test_sls_03_indexer_throughput":                  ("GET",              "Blob indexer E2E timing"),
@@ -571,7 +571,7 @@ class FailureReporter:
 
     def _write_markdown(self) -> None:
         lines: list[str] = []
-        lines.append("# Serverless Bug Bash — Failure Summary\n")
+        lines.append("# Azure AI Search — Failure Summary\n")
         lines.append(f"**Generated:** {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}\n")
         lines.append(f"**Total:** {self.total_tests} | **Passed:** {self.passed} | "
                       f"**Failed:** {len(self.failures)} | **Skipped:** {self.skipped}\n")
@@ -640,7 +640,7 @@ class FailureReporter:
         skipped = sum(1 for e in data.values() if e.get("result") == "SKIP")
 
         lines: list[str] = []
-        lines.append("# Serverless Bug Bash — Test Results\n\n")
+        lines.append("# Azure AI Search — Test Results\n\n")
         lines.append(f"**Last updated:** {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}\n\n")
         lines.append(f"| | Count |\n")
         lines.append(f"|---|---|\n")

@@ -136,7 +136,7 @@ class TestDocumentUpload:
     def test_doc_03_document_count(self, rest, primary_index_name):
         """DOC-03: Document count matches uploaded count."""
         import time
-        # Serverless indexing can take a few seconds to propagate
+        # Indexing can take a few seconds to propagate
         for attempt in range(10):
             resp = rest.get(f"/indexes/{primary_index_name}/docs/$count")
             assert_status(resp, 200)

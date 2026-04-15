@@ -1,8 +1,8 @@
 """
-test_13_serverless_behavior.py — Serverless-Specific Behavioral Tests
+test_13_service_behavior.py — Service Behavioral Tests
 
 Tests: SLS-01 through SLS-12
-Focus: What could break specifically because the service runs on a new serverless backend.
+Focus: Behavioral tests that validate latency, concurrency, throttling, and API compatibility.
 """
 
 import concurrent.futures
@@ -13,7 +13,7 @@ import pytest
 from conftest import ensure_fresh
 from helpers.assertions import assert_status
 
-pytestmark = [pytest.mark.serverless]
+pytestmark = [pytest.mark.service_behavior]
 
 
 # ---------------------------------------------------------------------------
@@ -21,7 +21,7 @@ pytestmark = [pytest.mark.serverless]
 # ---------------------------------------------------------------------------
 
 
-class TestServerlessLatency:
+class TestServiceLatency:
 
     def test_sls_01_cold_start_latency(self, rest, primary_index_name):
         """SLS-01: Query latency — measure response time for first query."""
@@ -39,7 +39,7 @@ class TestServerlessLatency:
         assert elapsed_ms < 30_000, f"Cold start query took {elapsed_ms:.0f}ms (>30s threshold)"
 
     def test_sls_02_index_creation_latency(self, rest):
-        """SLS-02: Index creation latency on serverless."""
+        """SLS-02: Index creation latency."""
         name = "smoke-sls02-latency"
         body = {
             "name": name,
@@ -81,7 +81,7 @@ class TestServerlessLatency:
 # ---------------------------------------------------------------------------
 
 
-class TestServerlessConcurrency:
+class TestServiceConcurrency:
 
     def test_sls_04_concurrent_queries(self, rest, primary_index_name):
         """SLS-04: Fire 20 parallel search queries — no 500s."""
@@ -144,10 +144,10 @@ class TestServerlessConcurrency:
 # ---------------------------------------------------------------------------
 
 
-class TestServerlessLimits:
+class TestServiceLimits:
 
     def test_sls_06_service_stats_limits(self, rest):
-        """SLS-06: Verify /servicestats limits are appropriate for serverless."""
+        """SLS-06: Verify /servicestats limits are appropriate."""
         resp = rest.get("/servicestats")
         assert_status(resp, 200)
         data = resp.json()
@@ -202,10 +202,10 @@ class TestServerlessLimits:
 # ---------------------------------------------------------------------------
 
 
-class TestServerlessAPIBehavior:
+class TestServiceAPIBehavior:
 
     def test_sls_09_api_version_fallback(self, rest, primary_index_name):
-        """SLS-09: Older data-plane API version on serverless — succeeds or clear error."""
+        """SLS-09: Older data-plane API version — succeeds or clear error."""
         older_versions = ["2024-07-01", "2024-05-01-Preview", "2023-11-01"]
         for version in older_versions:
             resp = rest.get(f"/indexes/{primary_index_name}", api_version=version)
@@ -222,7 +222,7 @@ class TestServerlessAPIBehavior:
         error = body.get("error", {})
         if error:
             assert error.get("message"), "Error response has no message"
-            # Note: serverless may return empty string for error code — that's acceptable
+            # Note: some SKUs may return empty string for error code — that's acceptable
             # as long as the message is descriptive
 
         # Trigger a 400 via invalid filter syntax

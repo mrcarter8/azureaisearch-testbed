@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 setup_resources.py — Automated provisioning of all external resources for the
-serverless bug-bash smoke test suite.
+Azure AI Search test suite.
 
 Usage:
     python setup_resources.py setup      # Create + populate all resources
@@ -12,12 +12,13 @@ Idempotent — safe to run repeatedly.  Creates only what is missing.
 
 What gets created:
     1. Resource groups (search + supporting)
-    2. Azure AI Search service (serverless SKU, system-assigned MSI)
+    2. Azure AI Search service (SKU-parameterized, system-assigned MSI)
     3. Storage account + blob container + 10 hotel JSON files
     4. Cosmos DB account (serverless NoSQL) + database + container + 10 hotels
     5. Azure SQL server (+ serverless DB + Hotels table w/ change tracking + 10 hotels)
     6. Azure Function app + custom skill deployment
     7. Key Vault RBAC grant for CMK
+    8. Azure OpenAI account + embeddings + chat deployments
 
 Writes all connection strings / keys to .env automatically.
 
@@ -67,6 +68,7 @@ SEARCH_RG        = _d("AZURE_RESOURCE_GROUP", "Serverless-bugbash")
 SUPPORT_RG       = _d("SUPPORT_RESOURCE_GROUP", "SSS3PT_mcarter_azs")
 SEARCH_LOCATION  = _d("SEARCH_LOCATION", "centraluseuap")
 SUPPORT_LOCATION = _d("SUPPORT_LOCATION", "eastus2")
+SEARCH_SKU       = _d("SEARCH_SKU", "serverless")
 
 SEARCH_NAME      = _d("SEARCH_SERVICE_NAME", "mcarter-serverless")
 SEARCH_API_VER   = "2025-11-01-preview"
@@ -93,66 +95,21 @@ CMK_KEY_NAME     = _d("CMK_KEY_NAME", "cmkprereqs-cmk")
 _m = re.search(r"https://([^.]+)\.", CMK_VAULT_URI)
 CMK_VAULT_NAME   = _m.group(1) if _m else ""
 
-AOAI_ENDPOINT    = _d("AZURE_OPENAI_ENDPOINT", "https://mcarter-4925-resource.cognitiveservices.azure.com")
-AOAI_API_KEY     = _d("AZURE_OPENAI_API_KEY")
+AOAI_ACCOUNT     = _d("AZURE_OPENAI_ACCOUNT_NAME", "smoke-aoai")
+AOAI_RG          = SUPPORT_RG  # deploy AOAI in the support resource group
+AOAI_LOCATION    = _d("AZURE_OPENAI_LOCATION", "eastus2")
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# HOTEL DATA — shared across all data sources
+# HOTEL DATA — loaded from sample_data/hotels.json
 # ═══════════════════════════════════════════════════════════════════════════════
 
-HOTELS = [
-    {"id": "1", "HotelId": "1", "HotelName": "Stay-Kay City Hotel",
-     "Description": "The hotel is ideally located on the main commercial artery of the city in the heart of New York.",
-     "Category": "Boutique", "Tags": ["pool", "air conditioning", "concierge"],
-     "ParkingIncluded": False, "Rating": 3.6, "LastRenovationDate": "2015-06-27T00:00:00Z",
-     "Address": {"StreetAddress": "677 5th Ave", "City": "New York", "StateProvince": "NY"}},
-    {"id": "2", "HotelId": "2", "HotelName": "Old Century Hotel",
-     "Description": "The hotel is situated in a nineteenth century plaza, which has been expanded and renovated to the highest architectural standards.",
-     "Category": "Boutique", "Tags": ["pool", "free wifi", "concierge"],
-     "ParkingIncluded": False, "Rating": 3.6, "LastRenovationDate": "2019-02-18T00:00:00Z",
-     "Address": {"StreetAddress": "140 University Town Center Dr", "City": "Sarasota", "StateProvince": "FL"}},
-    {"id": "3", "HotelId": "3", "HotelName": "Gastronomic Landscape Hotel",
-     "Description": "The hotel stands out for its gastronomic excellence under the management of William Dede.",
-     "Category": "Resort and Spa", "Tags": ["air conditioning", "bar", "continental breakfast"],
-     "ParkingIncluded": True, "Rating": 4.8, "LastRenovationDate": "2018-09-01T00:00:00Z",
-     "Address": {"StreetAddress": "3393 Peachtree Rd", "City": "Atlanta", "StateProvince": "GA"}},
-    {"id": "4", "HotelId": "4", "HotelName": "Sublime Palace Hotel",
-     "Description": "Sublime Palace Hotel is a perfect blend of luxury accommodation and convenient location.",
-     "Category": "Boutique", "Tags": ["concierge", "view", "24-hour front desk service"],
-     "ParkingIncluded": True, "Rating": 4.6, "LastRenovationDate": "2020-11-12T00:00:00Z",
-     "Address": {"StreetAddress": "7400 San Pedro Ave", "City": "San Antonio", "StateProvince": "TX"}},
-    {"id": "5", "HotelId": "5", "HotelName": "Perfect Resort and Spa",
-     "Description": "Best resort and spa just south of Seattle overlooking the magnificent mountains.",
-     "Category": "Resort and Spa", "Tags": ["laundry service", "free wifi", "free parking"],
-     "ParkingIncluded": True, "Rating": 4.9, "LastRenovationDate": "2021-05-20T00:00:00Z",
-     "Address": {"StreetAddress": "22 Survey Rd", "City": "Bellevue", "StateProvince": "WA"}},
-    {"id": "6", "HotelId": "6", "HotelName": "Fancy Stay",
-     "Description": "This lovely hotel in the countryside is perfect for an extended stay.",
-     "Category": "Budget", "Tags": ["free wifi", "coffee in lobby"],
-     "ParkingIncluded": True, "Rating": 3.2, "LastRenovationDate": "2017-03-15T00:00:00Z",
-     "Address": {"StreetAddress": "100 Country Ln", "City": "Woodstock", "StateProvince": "VT"}},
-    {"id": "7", "HotelId": "7", "HotelName": "Modern Stay Hotel",
-     "Description": "A mid-century modern hotel with all the amenities you need for a comfortable stay.",
-     "Category": "Suite", "Tags": ["pool", "bar", "view"],
-     "ParkingIncluded": False, "Rating": 4.1, "LastRenovationDate": "2022-01-10T00:00:00Z",
-     "Address": {"StreetAddress": "250 Broadway", "City": "Portland", "StateProvince": "OR"}},
-    {"id": "8", "HotelId": "8", "HotelName": "Riverside Inn",
-     "Description": "Charming riverside inn with scenic views and quiet rooms for a peaceful retreat.",
-     "Category": "Budget", "Tags": ["free parking", "continental breakfast"],
-     "ParkingIncluded": True, "Rating": 3.8, "LastRenovationDate": "2016-08-22T00:00:00Z",
-     "Address": {"StreetAddress": "44 River Rd", "City": "Asheville", "StateProvince": "NC"}},
-    {"id": "9", "HotelId": "9", "HotelName": "Hilltop Heritage Hotel",
-     "Description": "Historic hilltop hotel renovated with modern comforts while preserving its heritage charm.",
-     "Category": "Boutique", "Tags": ["concierge", "spa", "view"],
-     "ParkingIncluded": False, "Rating": 4.4, "LastRenovationDate": "2023-04-05T00:00:00Z",
-     "Address": {"StreetAddress": "1 Heritage Dr", "City": "Savannah", "StateProvince": "GA"}},
-    {"id": "10", "HotelId": "10", "HotelName": "Alpine Lodge",
-     "Description": "Mountain lodge offering ski-in/ski-out access and breathtaking alpine panoramas.",
-     "Category": "Resort and Spa", "Tags": ["free parking", "pool", "spa"],
-     "ParkingIncluded": True, "Rating": 4.7, "LastRenovationDate": "2024-01-30T00:00:00Z",
-     "Address": {"StreetAddress": "888 Summit Rd", "City": "Vail", "StateProvince": "CO"}},
-]
+_hotels_path = SCRIPT_DIR / "sample_data" / "hotels.json"
+if _hotels_path.exists():
+    HOTELS = json.loads(_hotels_path.read_text(encoding="utf-8"))
+else:
+    print(f"WARNING: {_hotels_path} not found — hotel data will be empty")
+    HOTELS = []
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -245,7 +202,7 @@ def _get_my_ip() -> str:
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def check_prerequisites() -> None:
-    print("\n[0/8] Checking prerequisites...")
+    print("\n[0/9] Checking prerequisites...")
     # az CLI
     r = _run(["az", "version"])
     if r.returncode != 0:
@@ -269,7 +226,7 @@ def check_prerequisites() -> None:
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def setup_resource_groups() -> None:
-    print("\n[1/8] Resource groups...")
+    print("\n[1/9] Resource groups...")
     for rg, loc in [(SEARCH_RG, SEARCH_LOCATION), (SUPPORT_RG, SUPPORT_LOCATION)]:
         r = _az("group", "show", "-n", rg)
         if r.returncode == 0:
@@ -295,7 +252,7 @@ def _search_mgmt_url(path: str = "") -> str:
 
 def setup_search_service() -> dict:
     """Returns dict with admin_key, query_key, endpoint, principal_id."""
-    print(f"\n[2/8] Search service ({SEARCH_NAME})...")
+    print(f"\n[2/9] Search service ({SEARCH_NAME})...")
 
     # Check if exists
     svc = _az_rest("GET", _search_mgmt_url())
@@ -303,10 +260,10 @@ def setup_search_service() -> dict:
         print(f"  Service exists, status: running")
     else:
         # Create
-        print(f"  Creating serverless service in {SEARCH_LOCATION}... (2-5 min)")
+        print(f"  Creating {SEARCH_SKU} service in {SEARCH_LOCATION}... (2-5 min)")
         body = {
             "location": SEARCH_LOCATION,
-            "sku": {"name": "serverless"},
+            "sku": {"name": SEARCH_SKU},
             "identity": {"type": "SystemAssigned"},
             "properties": {
                 "authOptions": {"aadOrApiKey": {"aadAuthFailureMode": "http403"}},
@@ -371,7 +328,7 @@ def setup_search_service() -> dict:
 
 def setup_storage() -> str:
     """Returns blob connection string."""
-    print(f"\n[3/8] Storage account ({STORAGE_ACCOUNT})...")
+    print(f"\n[3/9] Storage account ({STORAGE_ACCOUNT})...")
 
     # Create account (idempotent)
     r = _az("storage", "account", "show", "-g", SUPPORT_RG, "-n", STORAGE_ACCOUNT)
@@ -419,7 +376,7 @@ def setup_storage() -> str:
 
 def setup_cosmos() -> str:
     """Returns Cosmos connection string."""
-    print(f"\n[4/8] Cosmos DB ({COSMOS_ACCOUNT})...")
+    print(f"\n[4/9] Cosmos DB ({COSMOS_ACCOUNT})...")
 
     # Create account (serverless NoSQL) — this is the slowest step (~5 min)
     r = _az("cosmosdb", "show", "-g", SUPPORT_RG, "-n", COSMOS_ACCOUNT)
@@ -470,7 +427,7 @@ def setup_cosmos() -> str:
 
 def setup_sql() -> tuple[str, str]:
     """Returns (ADO.NET connection string, password)."""
-    print(f"\n[5/8] Azure SQL ({SQL_SERVER})...")
+    print(f"\n[5/9] Azure SQL ({SQL_SERVER})...")
 
     # Password: reuse from .env or generate fresh
     password = _d("AZURE_SQL_ADMIN_PASSWORD", "")
@@ -637,7 +594,7 @@ def _seed_sql(conn_str_ado: str) -> None:
 
 def setup_function() -> str:
     """Deploy custom skill function, return URL with code param."""
-    print(f"\n[6/8] Custom skill function ({FUNCTION_APP})...")
+    print(f"\n[6/9] Custom skill function ({FUNCTION_APP})...")
 
     # Create function app (idempotent)
     r = _az("functionapp", "show", "-g", SUPPORT_RG, "-n", FUNCTION_APP)
@@ -718,7 +675,7 @@ def setup_function() -> str:
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def setup_cmk(principal_id: str) -> None:
-    print(f"\n[7/8] CMK permissions...")
+    print(f"\n[7/9] CMK permissions...")
     if not CMK_VAULT_NAME or not principal_id:
         print(f"  SKIP: vault={CMK_VAULT_NAME}, principal={principal_id[:8] if principal_id else 'none'}")
         return
@@ -750,17 +707,87 @@ def setup_cmk(principal_id: str) -> None:
         print(f"  WARNING: RBAC assignment may have failed: {r.stderr[:200]}")
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
-# .env WRITER
+# ═══════════════════════════════════════════════════════════════════════════════# PHASE 8 — Azure OpenAI
+# ═════════════════════════════════════════════════════════════════════════════
+
+def setup_aoai() -> dict:
+    """Returns dict with endpoint, api_key, embedding_deployment, chat_deployment."""
+    print(f"\n[8/9] Azure OpenAI ({AOAI_ACCOUNT})...")
+
+    # Create account if not exists
+    r = _az("cognitiveservices", "account", "show", "-g", AOAI_RG, "-n", AOAI_ACCOUNT)
+    if r.returncode == 0:
+        print("  Account exists")
+    else:
+        print(f"  Creating OpenAI account in {AOAI_LOCATION}...")
+        _az("cognitiveservices", "account", "create",
+            "-g", AOAI_RG, "-n", AOAI_ACCOUNT, "-l", AOAI_LOCATION,
+            "--kind", "OpenAI", "--sku", "S0",
+            "--custom-domain", AOAI_ACCOUNT, check=True)
+
+    # Get endpoint + key
+    endpoint = _az_text("cognitiveservices", "account", "show",
+                        "-g", AOAI_RG, "-n", AOAI_ACCOUNT,
+                        "--query", "properties.endpoint")
+    api_key = _az_text("cognitiveservices", "account", "keys", "list",
+                       "-g", AOAI_RG, "-n", AOAI_ACCOUNT,
+                       "--query", "key1")
+
+    # Deploy embeddings model if not exists
+    embed_deploy = "text-embedding-3-small"
+    r = _az("cognitiveservices", "account", "deployment", "show",
+            "-g", AOAI_RG, "-n", AOAI_ACCOUNT, "--deployment-name", embed_deploy)
+    if r.returncode == 0:
+        print(f"  Embedding deployment '{embed_deploy}': exists")
+    else:
+        print(f"  Deploying {embed_deploy}...")
+        _az("cognitiveservices", "account", "deployment", "create",
+            "-g", AOAI_RG, "-n", AOAI_ACCOUNT,
+            "--deployment-name", embed_deploy,
+            "--model-name", "text-embedding-3-small",
+            "--model-version", "1",
+            "--model-format", "OpenAI",
+            "--sku-capacity", "120", "--sku-name", "Standard", check=True)
+
+    # Deploy chat model if not exists
+    chat_deploy = "gpt-4.1-mini"
+    r = _az("cognitiveservices", "account", "deployment", "show",
+            "-g", AOAI_RG, "-n", AOAI_ACCOUNT, "--deployment-name", chat_deploy)
+    if r.returncode == 0:
+        print(f"  Chat deployment '{chat_deploy}': exists")
+    else:
+        print(f"  Deploying {chat_deploy}...")
+        _az("cognitiveservices", "account", "deployment", "create",
+            "-g", AOAI_RG, "-n", AOAI_ACCOUNT,
+            "--deployment-name", chat_deploy,
+            "--model-name", "gpt-4.1-mini",
+            "--model-version", "2025-04-14",
+            "--model-format", "OpenAI",
+            "--sku-capacity", "80", "--sku-name", "Standard", check=True)
+
+    print(f"  Endpoint: {endpoint}")
+    print(f"  API key: {_mask(api_key)}")
+
+    return {
+        "endpoint": endpoint,
+        "api_key": api_key,
+        "embedding_deployment": embed_deploy,
+        "chat_deployment": chat_deploy,
+    }
+
+
+# ═════════════════════════════════════════════════════════════════════════════# .env WRITER
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def write_env(search_info: dict, blob_conn: str, cosmos_conn: str,
-              sql_conn: str, sql_password: str, func_url: str) -> None:
-    print(f"\n[8/8] Writing .env...")
+              sql_conn: str, sql_password: str, func_url: str,
+              aoai_info: dict | None = None) -> None:
+    print(f"\n[9/9] Writing .env...")
     env_path = SCRIPT_DIR / ".env"
+    aoai = aoai_info or {}
 
     content = f"""# =============================================================================
-# Azure AI Search — Serverless Bug Bash Test Suite
+# Azure AI Search Test Suite
 # AUTO-GENERATED by setup_resources.py — {time.strftime('%Y-%m-%d %H:%M:%S')}
 # =============================================================================
 
@@ -768,6 +795,7 @@ def write_env(search_info: dict, blob_conn: str, cosmos_conn: str,
 SEARCH_ENDPOINT={search_info['endpoint']}
 SEARCH_ADMIN_KEY={search_info['admin_key']}
 SEARCH_QUERY_KEY={search_info['query_key']}
+SEARCH_SKU={SEARCH_SKU}
 
 # API versions
 SEARCH_API_VERSION={SEARCH_API_VER}
@@ -780,11 +808,12 @@ SEARCH_SERVICE_NAME={SEARCH_NAME}
 SEARCH_LOCATION={SEARCH_LOCATION}
 
 # ── Azure OpenAI ────────────────────────────────────────────────────────────
-AZURE_OPENAI_ENDPOINT={AOAI_ENDPOINT}
-AZURE_OPENAI_API_KEY={AOAI_API_KEY}
-AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
+AZURE_OPENAI_ENDPOINT={aoai.get('endpoint', '')}
+AZURE_OPENAI_API_KEY={aoai.get('api_key', '')}
+AZURE_OPENAI_ACCOUNT_NAME={AOAI_ACCOUNT}
+AZURE_OPENAI_CHAT_DEPLOYMENT={aoai.get('chat_deployment', 'gpt-4.1-mini')}
 AZURE_OPENAI_CHAT_MODEL=gpt-4.1-mini
-AZURE_OPENAI_EMBEDDING_DEPLOYMENT=text-embedding-3-small
+AZURE_OPENAI_EMBEDDING_DEPLOYMENT={aoai.get('embedding_deployment', 'text-embedding-3-small')}
 AZURE_OPENAI_EMBEDDING_MODEL=text-embedding-3-small
 AZURE_OPENAI_EMBEDDING_DIMENSIONS=1536
 AZURE_OPENAI_API_VERSION=2024-06-01
@@ -828,7 +857,7 @@ CUSTOM_SKILL_URL={func_url}
 def setup() -> None:
     start = time.time()
     print("=" * 60)
-    print(" Serverless Bug-Bash — Resource Setup")
+    print(" Azure AI Search — Resource Setup")
     print("=" * 60)
 
     check_prerequisites()
@@ -840,8 +869,10 @@ def setup() -> None:
     sql_conn, sql_password = setup_sql()
     func_url = setup_function()
     setup_cmk(search_info["principal_id"])
+    aoai_info = setup_aoai()
 
-    write_env(search_info, blob_conn, cosmos_conn, sql_conn, sql_password, func_url)
+    write_env(search_info, blob_conn, cosmos_conn, sql_conn, sql_password, func_url,
+              aoai_info=aoai_info)
 
     elapsed = int(time.time() - start)
     print(f"\n{'=' * 60}")
@@ -856,41 +887,55 @@ def setup() -> None:
 
 def teardown(delete_search: bool = False) -> None:
     print("=" * 60)
-    print(" Serverless Bug-Bash — Resource Teardown")
+    print(" Azure AI Search — Resource Teardown")
     print("=" * 60)
 
     check_prerequisites()
 
-    # Cosmos DB account
-    print(f"\n  Deleting Cosmos DB account '{COSMOS_ACCOUNT}'...")
-    r = _az("cosmosdb", "delete", "-g", SUPPORT_RG, "-n", COSMOS_ACCOUNT, "--yes")
-    print(f"    {'Deleted' if r.returncode == 0 else 'Not found / already deleted'}")
+    # Get search service endpoint + admin key
+    svc = _az_rest("GET", _search_mgmt_url())
+    if not svc:
+        print("  Search service not found — nothing to clean up")
+        return
 
-    # Azure SQL server (cascades to DB + firewall)
-    print(f"\n  Deleting SQL server '{SQL_SERVER}'...")
-    r = _az("sql", "server", "delete", "-g", SUPPORT_RG, "-n", SQL_SERVER, "--yes")
-    print(f"    {'Deleted' if r.returncode == 0 else 'Not found / already deleted'}")
+    keys = _az_rest("POST", _search_mgmt_url("/listAdminKeys"))
+    admin_key = (keys or {}).get("primaryKey", "")
+    endpoint = f"https://{SEARCH_NAME}.{PPE_SUFFIX}"
+    headers = {"api-key": admin_key, "Content-Type": "application/json"}
 
-    # Blob data (delete blobs, keep container and account)
-    print(f"\n  Clearing blob container '{BLOB_CONTAINER}'...")
-    conn_str = _az_text("storage", "account", "show-connection-string",
-                        "-g", SUPPORT_RG, "-n", STORAGE_ACCOUNT,
-                        "--query", "connectionString")
-    if conn_str:
-        _az("storage", "blob", "delete-batch",
-            "--connection-string", conn_str,
-            "--source", BLOB_CONTAINER)
-        print(f"    Cleared")
-    else:
-        print(f"    Storage account not found")
+    # Delete all smoke-* resources on the data plane
+    import requests
+    api_ver = SEARCH_API_VER
+    for resource_type in ["indexes", "synonym-maps", "indexers", "datasources", "skillsets"]:
+        url = f"{endpoint}/{resource_type}?api-version={api_ver}"
+        resp = requests.get(url, headers=headers, timeout=30)
+        if resp.status_code == 200:
+            items = resp.json().get("value", [])
+            smoke_items = [i["name"] for i in items if i.get("name", "").startswith("smoke-")]
+            for name in smoke_items:
+                del_url = f"{endpoint}/{resource_type}/{name}?api-version={api_ver}"
+                requests.delete(del_url, headers=headers, timeout=30)
+                print(f"  Deleted {resource_type}/{name}")
 
-    # Search service — only deleted when explicitly requested
+    # For agentic retrieval resources
+    for resource_type in ["knowledge-stores", "knowledge-bases"]:
+        url = f"{endpoint}/{resource_type}?api-version={api_ver}"
+        resp = requests.get(url, headers=headers, timeout=30)
+        if resp.status_code == 200:
+            items = resp.json().get("value", [])
+            smoke_items = [i["name"] for i in items if i.get("name", "").startswith("smoke-")]
+            for name in smoke_items:
+                del_url = f"{endpoint}/{resource_type}/{name}?api-version={api_ver}"
+                requests.delete(del_url, headers=headers, timeout=30)
+                print(f"  Deleted {resource_type}/{name}")
+
     if delete_search:
         print(f"\n  Deleting search service '{SEARCH_NAME}'...")
         _az_rest("DELETE", _search_mgmt_url())
         print(f"    Delete initiated (async)")
     else:
-        print(f"\n  Keeping search service '{SEARCH_NAME}' (default — use --delete-search to remove)")
+        print(f"\n  Keeping search service '{SEARCH_NAME}'")
+        print(f"  External resources (Cosmos, SQL, Storage, AOAI) are never removed by teardown.")
 
     print(f"\n{'=' * 60}")
     print(f" Teardown complete")
@@ -903,7 +948,7 @@ def teardown(delete_search: bool = False) -> None:
 
 def status() -> None:
     print("=" * 60)
-    print(" Serverless Bug-Bash — Resource Status")
+    print(" Azure AI Search — Resource Status")
     print("=" * 60)
 
     check_prerequisites()
@@ -919,6 +964,8 @@ def status() -> None:
             "-g", SUPPORT_RG, "-n", SQL_SERVER).returncode == 0),
         ("Function app", lambda: _az("functionapp", "show",
             "-g", SUPPORT_RG, "-n", FUNCTION_APP).returncode == 0),
+        ("Azure OpenAI account", lambda: _az("cognitiveservices", "account", "show",
+            "-g", AOAI_RG, "-n", AOAI_ACCOUNT).returncode == 0),
         (".env file", lambda: (SCRIPT_DIR / ".env").exists()),
     ]
 
@@ -939,7 +986,7 @@ def status() -> None:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Provision / tear down all resources for the serverless smoke tests.",
+        description="Provision / tear down all resources for the Azure AI Search test suite.",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 

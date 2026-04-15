@@ -70,7 +70,7 @@ class TestEntraAuth:
             ],
         }
         resp = rest_entra.put(f"/indexes/{idx_name}", body)
-        # 200=updated, 201=created, 204=created-no-content (observed on serverless)
+        # 200=updated, 201=created, 204=created-no-content (observed on some SKUs)
         assert_status(resp, (200, 201, 204))
         # Cleanup
         rest_entra.delete(f"/indexes/{idx_name}")

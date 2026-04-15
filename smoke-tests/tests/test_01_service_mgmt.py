@@ -18,12 +18,12 @@ pytestmark = [pytest.mark.service_mgmt]
 
 
 # ---------------------------------------------------------------------------
-# SVC-01: Create serverless service (minimal — sku + location only)
+# SVC-01: Create service (minimal — sku + location only)
 # ---------------------------------------------------------------------------
 class TestServiceProvisioning:
 
-    def test_svc_01_create_serverless_minimal(self, rest, disposable_service_name, search_location):
-        """SVC-01: Create serverless service with minimal payload."""
+    def test_svc_01_create_serverless_minimal(self, rest, disposable_service_name, search_location, search_sku):
+        """SVC-01: Create search service with minimal payload."""
         url = (
             f"https://management.azure.com/subscriptions/{rest.subscription_id}"
             f"/resourceGroups/{rest.resource_group}"
@@ -31,33 +31,33 @@ class TestServiceProvisioning:
         )
         body = {
             "location": search_location,
-            "sku": {"name": "serverless"},
+            "sku": {"name": search_sku},
         }
         resp = rest.mgmt_request("PUT", url, body)
         assert_status(resp, (200, 201))
         data = resp.json()
-        assert_field_equals(data, "sku.name", "serverless")
+        assert_field_equals(data, "sku.name", search_sku)
         state = data.get("properties", {}).get("provisioningState", "")
         assert state in ("Provisioning", "Succeeded"), f"Unexpected provisioningState: {state}"
 
-    def test_svc_02_create_serverless_with_options(self, rest, search_location):
-        """SVC-02: Create serverless with auth options and semantic search."""
+    def test_svc_02_create_serverless_with_options(self, rest, search_location, search_sku):
+        """SVC-02: Create service with auth options and semantic search."""
         # Uses the primary service — this is an update/validate rather than a new create
         resp = rest.mgmt_get()
         assert_status(resp, 200)
         data = resp.json()
-        # Validate it's serverless
-        assert_field_equals(data, "sku.name", "serverless")
+        # Validate the SKU matches
+        assert_field_equals(data, "sku.name", search_sku)
 
 
 class TestServiceRead:
 
-    def test_svc_03_get_service(self, rest):
-        """SVC-03: GET service returns serverless sku and running status."""
+    def test_svc_03_get_service(self, rest, search_sku):
+        """SVC-03: GET service returns correct SKU and running status."""
         resp = rest.mgmt_get()
         assert_status(resp, 200)
         data = resp.json()
-        assert_field_equals(data, "sku.name", "serverless")
+        assert_field_equals(data, "sku.name", search_sku)
         status = data.get("properties", {}).get("status")
         assert status == "running", f"Expected status 'running', got '{status}'"
 

@@ -1,11 +1,12 @@
 <#
 .SYNOPSIS
-    Run the Serverless bug-bash smoke test suite.
+    Run the Azure AI Search smoke test suite.
 
 .DESCRIPTION
     Validates environment, activates venv if present, installs deps, and runs pytest
-    with JUnit XML output.  Use -Setup to provision all external resources first,
-    or -Teardown to destroy them after.
+    with JUnit XML output.  Results are written to results/{SKU}/ based on the
+    SEARCH_SKU environment variable.  Use -Setup to provision all external resources
+    first, or -Teardown to clean up search resources after.
 
 .PARAMETER TestFile
     Optional: run only a specific test file (e.g. "tests/test_07_queries.py").
@@ -62,7 +63,27 @@ if ($Setup) {
         Write-Error "Setup failed."; Pop-Location; exit 1
     }
 }
+# ── Read SKU from .env or environment ───────────────────────────────────────────
+if (-not $env:SEARCH_SKU) {
+    # Try to read from .env
+    if (Test-Path ".env") {
+        $skuLine = Get-Content ".env" | Where-Object { $_ -match "^SEARCH_SKU=" } | Select-Object -First 1
+        if ($skuLine) {
+            $env:SEARCH_SKU = ($skuLine -split "=", 2)[1].Trim()
+        }
+    }
+}
+if (-not $env:SEARCH_SKU) {
+    Write-Error "SEARCH_SKU not set. Add it to .env (e.g. SEARCH_SKU=serverless)."
+    Pop-Location; exit 1
+}
+$sku = $env:SEARCH_SKU
 
+# Ensure per-SKU results directory exists
+$skuResultsDir = Join-Path "results" $sku
+if (-not (Test-Path $skuResultsDir)) {
+    New-Item -ItemType Directory -Path $skuResultsDir -Force | Out-Null
+}
 # ── Check .env ──────────────────────────────────────────────────────────────
 if (-not (Test-Path ".env")) {
     Write-Error "No .env file found. Run with -Setup or copy .env.template to .env."
@@ -73,7 +94,7 @@ if (-not (Test-Path ".env")) {
 $pytestArgs = @(
     "-v",
     "--tb=short",
-    "--junitxml=results/junit.xml"
+    "--junitxml=results/$sku/junit.xml"
 )
 
 if ($Markers) {
@@ -87,25 +108,26 @@ if ($TestFile) {
 }
 
 # ── Run ─────────────────────────────────────────────────────────────────────
-Write-Host "`n=== Serverless Bug Bash — Smoke Tests ===" -ForegroundColor Cyan
-Write-Host "Endpoint: $env:SEARCH_ENDPOINT"
-Write-Host "API Version: $env:SEARCH_API_VERSION"
-Write-Host "Mgmt API Version: $env:SEARCH_MGMT_API_VERSION"
-Write-Host "Session output: results/`n"
+Write-Host "`n=== Azure AI Search — Smoke Tests ==" -ForegroundColor Cyan
+Write-Host "SKU:           $sku"
+Write-Host "Endpoint:      $env:SEARCH_ENDPOINT"
+Write-Host "API Version:   $env:SEARCH_API_VERSION"
+Write-Host "Results:       results/$sku/`n"
 
 python -m pytest @pytestArgs
 
 $exitCode = $LASTEXITCODE
 
 # ── Summary ─────────────────────────────────────────────────────────────────
-if (Test-Path "results/failure_summary.md") {
-    Write-Host "`n=== Failure Summary ===" -ForegroundColor Yellow
-    Get-Content "results/failure_summary.md" | Select-Object -First 30
-    Write-Host "`nFull report: results/failure_summary.md"
-    Write-Host "JSON report: results/failure_report.json"
+if (Test-Path "results/$sku/failure_summary.md") {
+    Write-Host "`n=== Failure Summary ($sku) ===" -ForegroundColor Yellow
+    Get-Content "results/$sku/failure_summary.md" | Select-Object -First 30
+    Write-Host "`nFull report: results/$sku/failure_summary.md"
+    Write-Host "JSON report: results/$sku/failure_report.json"
 }
 
-Write-Host "JUnit XML:   results/junit.xml`n"
+Write-Host "Dashboard:   results/$sku/test_log.md"
+Write-Host "JUnit XML:   results/$sku/junit.xml`n"
 
 # ── Teardown phase ──────────────────────────────────────────────────────────
 if ($Teardown) {

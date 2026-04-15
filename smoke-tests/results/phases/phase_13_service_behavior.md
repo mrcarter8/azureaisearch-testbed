@@ -1,4 +1,4 @@
-# Phase 13 — Serverless Behavior
+# Phase 13 — Service Behavior
 
 **API:** Data plane `2025-11-01-preview`  
 **Result:** 7/12 passed, 5 skipped

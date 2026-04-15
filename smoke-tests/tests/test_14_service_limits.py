@@ -1,20 +1,20 @@
 """
-test_14_serverless_limits.py — Serverless Limit Validation
+test_14_service_limits.py — Service Limit Validation
 
 Tests: LIM-01 through LIM-14
 
 Validates that the service-level quotas, per-index limits, and throttling
-rate limits reported by the Azure AI Search serverless SKU match the
+rate limits reported by the Azure AI Search configured SKU match the
 documented specifications.  Uses GET /servicestats, GET /indexes/{name}/stats,
 and rapid-fire API calls to exercise throttling boundaries.
 
-Expected serverless limits (target for Build — S3 HD parity):
+Expected limits (may vary by SKU):
   - Indexes per service: up to 3000
   - Indexers per service: up to 3000
   - Data sources per service: up to 3000
   - Skillsets per service: up to 3000
   - Synonym maps: 20
-  - Aliases: 0 (not supported in serverless)
+  - Aliases: 0 (not supported on some SKUs)
   - Max storage per index: 20 GB (per spec; actual may be higher in preview)
   - Max fields per index: up to 3000
   - Max vector index size: 30% of total storage
@@ -30,10 +30,10 @@ import requests as _http
 from conftest import ensure_fresh
 from helpers.assertions import assert_status
 
-pytestmark = [pytest.mark.serverless_limits]
+pytestmark = [pytest.mark.service_limits]
 
 
-# ── Expected serverless quota ranges ─────────────────────────────────────────
+# ── Expected quota ranges ────────────────────────────────────────────────────
 # These define the *minimum acceptable* quota values.  The real quotas may
 # exceed these (e.g. PPE may ship with 200 during preview, GA target is 3000).
 
@@ -42,14 +42,14 @@ _MIN_INDEXER_QUOTA = 200
 _MIN_DATASOURCE_QUOTA = 200
 _MIN_SKILLSET_QUOTA = 200
 _SYNONYM_MAP_QUOTA = 20      # exact match expected
-_ALIAS_QUOTA = 0             # serverless does not support aliases
+_ALIAS_QUOTA = 0             # some SKUs do not support aliases
 
 
 class TestServiceQuotas:
     """LIM-01 through LIM-06: Validate service-level quotas in GET /servicestats."""
 
     def test_lim_01_servicestats_index_quota(self, rest):
-        """LIM-01: indexesCount quota is present and >= minimum serverless limit."""
+        """LIM-01: indexesCount quota is present and >= expected minimum."""
         resp = rest.get("/servicestats")
         assert_status(resp, 200)
         counters = resp.json()["counters"]
@@ -64,7 +64,7 @@ class TestServiceQuotas:
         assert idx["usage"] >= -1, f"usage should be >= -1, got {idx['usage']}"
 
     def test_lim_02_servicestats_indexer_quota(self, rest):
-        """LIM-02: indexersCount quota is present and >= minimum serverless limit."""
+        """LIM-02: indexersCount quota is present and >= expected minimum."""
         resp = rest.get("/servicestats")
         assert_status(resp, 200)
         counters = resp.json()["counters"]
@@ -75,7 +75,7 @@ class TestServiceQuotas:
         )
 
     def test_lim_03_servicestats_datasource_quota(self, rest):
-        """LIM-03: dataSourcesCount quota is present and >= minimum serverless limit."""
+        """LIM-03: dataSourcesCount quota is present and >= expected minimum."""
         resp = rest.get("/servicestats")
         assert_status(resp, 200)
         counters = resp.json()["counters"]
@@ -86,7 +86,7 @@ class TestServiceQuotas:
         )
 
     def test_lim_04_servicestats_skillset_quota(self, rest):
-        """LIM-04: skillsetCount quota is present and >= minimum serverless limit."""
+        """LIM-04: skillsetCount quota is present and >= expected minimum."""
         resp = rest.get("/servicestats")
         assert_status(resp, 200)
         counters = resp.json()["counters"]
@@ -97,7 +97,7 @@ class TestServiceQuotas:
         )
 
     def test_lim_05_servicestats_synonym_map_quota(self, rest):
-        """LIM-05: synonymMaps quota equals expected serverless limit (20)."""
+        """LIM-05: synonymMaps quota equals expected limit (20)."""
         resp = rest.get("/servicestats")
         assert_status(resp, 200)
         counters = resp.json()["counters"]
@@ -108,7 +108,7 @@ class TestServiceQuotas:
         )
 
     def test_lim_06_servicestats_alias_quota_zero(self, rest):
-        """LIM-06: aliasesCount quota is 0 — aliases not supported on serverless."""
+        """LIM-06: aliasesCount quota is 0 — aliases not supported on this SKU."""
         resp = rest.get("/servicestats")
         assert_status(resp, 200)
         counters = resp.json()["counters"]

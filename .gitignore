@@ -20,11 +20,17 @@ env/
 # ── Pytest ──────────────────────────────────────────────────────────────────
 .pytest_cache/
 
-# ── Test runtime outputs ────────────────────────────────────────────────────
+# ── Test runtime outputs (per-SKU results directories) ──────────────────────
+# Each SKU run writes to results/{sku}/ — all are runtime-generated
+smoke-tests/results/*/
+!smoke-tests/results/phases/
+# Top-level runtime files
 smoke-tests/results/junit.xml
 smoke-tests/results/test_results.json
 smoke-tests/results/failure_report.json
 smoke-tests/results/failure_summary.md
+smoke-tests/results/test_log.md
+smoke-tests/results/known_bugs.json
 
 # ── IDE / Editor ────────────────────────────────────────────────────────────
 .vscode/

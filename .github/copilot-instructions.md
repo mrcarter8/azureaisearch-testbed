@@ -1,4 +1,4 @@
-# Serverless Bug Bash — Project Configuration
+# Azure AI Search Test Suite — Project Configuration
 
 **Default Context:**
 - Organization: msdata
@@ -9,14 +9,15 @@
 For all new bugs logged in this project, set the following fields:
 - Area: Azure Search\vTeam\Unlimited
 - Iteration: Before filing a bug, query ADO for the iterations under `Azure Search\Krypton` and select the iteration whose date range contains the current date. If no iteration covers today, pick the most recent one.
-- Title: Serverless: [Add specific title here]
-- Tags: #Serverless
+- Title: [Add specific title here]
+- Tags: (set based on the SEARCH_SKU environment variable, e.g. #Serverless, #Basic, #Standard)
 
 When searching for duplicates, filter to project `Azure Search`.
 
 ## Required Configuration Info
 
 Always include configuration information at the top of the Repro Steps:
+- SKU: [Add SKU from SEARCH_SKU env var]
 - Service name: [Add service name here]
 - Subscription ID: [Add subscription ID here]
 - Region: [Add region here]

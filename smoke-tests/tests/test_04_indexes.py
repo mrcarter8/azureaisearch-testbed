@@ -311,14 +311,14 @@ class TestIndexVariants:
 class TestIndexAliases:
 
     def test_idx_15_alias_quota_is_zero(self, rest):
-        """IDX-15: Serverless has 0 alias quota — GET aliases returns empty list."""
+        """IDX-15: Service has 0 alias quota — GET aliases returns empty list."""
         resp = rest.get("/aliases")
         assert_status(resp, 200)
         aliases = resp.json().get("value", [])
-        assert len(aliases) == 0, f"Expected 0 aliases on serverless, got {len(aliases)}"
+        assert len(aliases) == 0, f"Expected 0 aliases, got {len(aliases)}"
 
     def test_idx_16_alias_create_rejected_quota(self, rest, alias_name, primary_index_name):
-        """IDX-16: Creating an alias on serverless is rejected with quota error."""
+        """IDX-16: Creating an alias is rejected with quota error."""
         body = {"name": alias_name, "indexes": [primary_index_name]}
         resp = rest.put(f"/aliases/{alias_name}", body)
         assert_status(resp, 429)
